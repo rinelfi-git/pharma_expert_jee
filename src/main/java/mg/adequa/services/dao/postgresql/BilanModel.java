@@ -1,4 +1,4 @@
-package mg.adequa.services.dao.models;
+package mg.adequa.services.dao.postgresql;
 
 import mg.adequa.services.dao.DaoFactory;
 import mg.adequa.services.dao.interfaces.BilanDao;

@@ -3,13 +3,12 @@ package mg.adequa.servlets;
 import com.google.gson.Gson;
 import mg.adequa.payloadserialization.AchatPL;
 import mg.adequa.services.dao.DaoFactory;
-import mg.adequa.services.dao.PsqlDao;
+import mg.adequa.services.dao.PostgreSQL;
 import mg.adequa.services.Transaction;
 import mg.adequa.services.dao.interfaces.AchatDao;
 import mg.adequa.utils.*;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,7 +27,7 @@ public class AchatServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		this.daoFactory = PsqlDao.getInstance();
+		this.daoFactory = PostgreSQL.getInstance();
 		this.achatDao = this.daoFactory.getAchatDao();
 	}
 	

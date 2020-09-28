@@ -4,30 +4,30 @@ import mg.adequa.services.dao.interfaces.AchatDao;
 import mg.adequa.services.dao.interfaces.BilanDao;
 import mg.adequa.services.dao.interfaces.DocteurDao;
 import mg.adequa.services.dao.interfaces.JournalEntreeSortieDao;
-import mg.adequa.services.dao.models.AchatModel;
-import mg.adequa.services.dao.models.BilanModel;
-import mg.adequa.services.dao.models.DocteurModel;
-import mg.adequa.services.dao.models.JournalEntreeSortieModel;
+import mg.adequa.services.dao.postgresql.AchatModel;
+import mg.adequa.services.dao.postgresql.BilanModel;
+import mg.adequa.services.dao.postgresql.DocteurModel;
+import mg.adequa.services.dao.postgresql.JournalEntreeSortieModel;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class PsqlDao implements DaoFactory {
+public class PostgreSQL implements DaoFactory {
 	private String username, password, host, database;
 	private Connection connection;
 	
-	private PsqlDao(String username, String password, String host, String database) {
+	private PostgreSQL(String username, String password, String host, String database) {
 		this.username = username;
 		this.password = password;
 		this.host = host;
 		this.database = database;
 	}
 	
-	public static PsqlDao getInstance() {
+	public static PostgreSQL getInstance() {
 		try {
 			Class.forName("org.postgresql.Driver");
-			return new PsqlDao("adequa", "adequa", "localhost", "adequa");
+			return new PostgreSQL("adequa", "adequa", "localhost", "adequa");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}

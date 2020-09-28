@@ -1,4 +1,4 @@
-package mg.adequa.services.dao.models;
+package mg.adequa.services.dao.postgresql;
 
 import mg.adequa.payloadserialization.AutreEntreePL;
 import mg.adequa.services.dao.DaoFactory;

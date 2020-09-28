@@ -10,15 +10,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14fd4e27-a837-4fe7-b2d3-86afbdd55789" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/beans/BilanTableauDeBord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/BilanDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/JournalEntreeSortieDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/models/BilanModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/models/JournalEntreeSortieModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/utils/NumberFormat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/utils/MyDate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/DaoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/DaoFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/PsqlDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/PsqlDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/PsqlDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/PostgreSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/JournalEntreeSortieDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/JournalEntreeSortieDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/models/AchatModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/AchatModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/models/AutreEntreeModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/AutreEntreeModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/models/BilanModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/BilanModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/models/DocteurModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/DocteurModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/models/JournalEntreeSortieModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/JournalEntreeSortieModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/AchatServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/AchatServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/DocteurServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/DocteurServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/TableauDeBordServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/TableauDeBordServlet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -189,7 +191,7 @@
       <workItem from="1600959918327" duration="3434000" />
       <workItem from="1601100061555" duration="1624000" />
       <workItem from="1601103701504" duration="5265000" />
-      <workItem from="1601282744303" duration="2110000" />
+      <workItem from="1601282744303" duration="8201000" />
     </task>
     <servers />
   </component>
@@ -209,10 +211,10 @@
       <screen x="0" y="0" width="1366" height="735" />
     </state>
     <state x="141" y="0" width="1084" height="735" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.735@0.0.1366.735" timestamp="1600967764392" />
-    <state x="491" y="56" width="380" height="623" key="#com.intellij.ide.util.MemberChooser" timestamp="1601284749732">
+    <state x="491" y="56" width="380" height="623" key="#com.intellij.ide.util.MemberChooser" timestamp="1601292220893">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state x="491" y="56" width="380" height="623" key="#com.intellij.ide.util.MemberChooser/0.0.1366.735@0.0.1366.735" timestamp="1601284749732" />
+    <state x="491" y="56" width="380" height="623" key="#com.intellij.ide.util.MemberChooser/0.0.1366.735@0.0.1366.735" timestamp="1601292220893" />
     <state x="366" y="108" width="630" height="519" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1600855612570">
       <screen x="0" y="0" width="1366" height="735" />
     </state>

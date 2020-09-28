@@ -1,7 +1,7 @@
 package mg.adequa.servlets;
 
 import mg.adequa.services.dao.DaoFactory;
-import mg.adequa.services.dao.PsqlDao;
+import mg.adequa.services.dao.PostgreSQL;
 import mg.adequa.services.dao.interfaces.DocteurDao;
 import mg.adequa.utils.*;
 
@@ -19,7 +19,7 @@ public class DocteurServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		this.daoFactory = PsqlDao.getInstance();
+		this.daoFactory = PostgreSQL.getInstance();
 		this.docteurDao = this.daoFactory.getDocteurDao();
 	}
 	
