@@ -1,9 +1,13 @@
 package mg.adequa.services.dao;
 
 import mg.adequa.services.dao.interfaces.AchatDao;
+import mg.adequa.services.dao.interfaces.BilanDao;
 import mg.adequa.services.dao.interfaces.DocteurDao;
+import mg.adequa.services.dao.interfaces.JournalEntreeSortieDao;
 import mg.adequa.services.dao.models.AchatModel;
+import mg.adequa.services.dao.models.BilanModel;
 import mg.adequa.services.dao.models.DocteurModel;
+import mg.adequa.services.dao.models.JournalEntreeSortieModel;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -43,4 +47,10 @@ public class PsqlDao implements DaoFactory {
 	
 	@Override
 	public DocteurDao getDocteurDao() {return new DocteurModel(this);}
+	
+	@Override
+	public BilanDao getBilanDao() {return new BilanModel(this);}
+	
+	@Override
+	public JournalEntreeSortieDao getJournalEntreeSortieDao() {return new JournalEntreeSortieModel(this);}
 }

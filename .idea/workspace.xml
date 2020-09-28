@@ -10,73 +10,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14fd4e27-a837-4fe7-b2d3-86afbdd55789" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/adequa_war.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/adequa_war_exploded.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_8_6.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_servlet_javax_servlet_api_4_0_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_6_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_6_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_6_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_6_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_postgresql_postgresql_42_2_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/jquery_builder_1_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/adequa.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/Transaction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/DaoFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/PsqlDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/AchatDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DocteurDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/models/AchatModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/models/DocteurModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/AchatServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/AutorisationServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/AutreEntreeServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/AutreSortieServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/BonDeCommandeServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/ContratUrgenceServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/DocteurServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/FactureServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/FournisseurServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/JournalDeSessionServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/JournalDeSortieServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/JournalEntreeServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/ListeDeStockServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/MenuServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/OngServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/PersonnelOngServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/PrixDeVenteServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/RapportRumerServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/RegularisationOngServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/ServerDateServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/ServiceHospitalierServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SuiviBonDeServiceServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/TableauDeBordServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/TypeDeSortieServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/TypeEntreeServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/UserSessionServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/VirementServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/tableviews/AutreEntreeTV.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/utils/DatatableColumn.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/utils/DatatableParameter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/utils/DatatablePresentation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/utils/DatatableSearch.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/utils/MethodResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/utils/ModeDePayement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/utils/RequestPayload.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/utils/SQLParser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/utils/UriUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/beans/BilanTableauDeBord.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/BilanDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/JournalEntreeSortieDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/models/BilanModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/models/JournalEntreeSortieModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/utils/NumberFormat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/DaoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/DaoFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/PsqlDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/PsqlDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/TableauDeBordServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/TableauDeBordServlet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +73,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.3091954" />
   </component>
@@ -141,6 +84,19 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Tomcat 8.5.58" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.58" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="SHOW_DIALOG_ON_UPDATE" value="false" />
       <option name="UPDATING_POLICY" value="redeploy-artifacts" />
@@ -233,6 +189,7 @@
       <workItem from="1600959918327" duration="3434000" />
       <workItem from="1601100061555" duration="1624000" />
       <workItem from="1601103701504" duration="5265000" />
+      <workItem from="1601282744303" duration="2110000" />
     </task>
     <servers />
   </component>
@@ -240,6 +197,10 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="166" y="0" width="1030" height="732" key="#Project_Structure" timestamp="1601283576855">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state x="166" y="0" width="1030" height="732" key="#Project_Structure/0.0.1366.735@0.0.1366.735" timestamp="1601283576855" />
     <state x="471" y="160" width="419" height="412" key="#Web_Browsers" timestamp="1600967756439">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
@@ -248,10 +209,10 @@
       <screen x="0" y="0" width="1366" height="735" />
     </state>
     <state x="141" y="0" width="1084" height="735" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.735@0.0.1366.735" timestamp="1600967764392" />
-    <state x="491" y="56" width="380" height="623" key="#com.intellij.ide.util.MemberChooser" timestamp="1601113202716">
+    <state x="491" y="56" width="380" height="623" key="#com.intellij.ide.util.MemberChooser" timestamp="1601284749732">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state x="491" y="56" width="380" height="623" key="#com.intellij.ide.util.MemberChooser/0.0.1366.735@0.0.1366.735" timestamp="1601113202716" />
+    <state x="491" y="56" width="380" height="623" key="#com.intellij.ide.util.MemberChooser/0.0.1366.735@0.0.1366.735" timestamp="1601284749732" />
     <state x="366" y="108" width="630" height="519" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1600855612570">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
