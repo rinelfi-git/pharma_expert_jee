@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="adequa:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>adequa</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="adequa-1.0.0.war">
+      <element id="artifact" artifact-name="adequa:war exploded" />
+    </root>
+  </artifact>
+</component>

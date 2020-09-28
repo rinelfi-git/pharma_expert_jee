@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="adequa:war" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="14fd4e27-a837-4fe7-b2d3-86afbdd55789" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/adequa_war.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/adequa_war_exploded.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_8_6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_servlet_javax_servlet_api_4_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_6_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_6_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_6_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_6_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_postgresql_postgresql_42_2_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/jquery_builder_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/adequa.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/Transaction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/DaoFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/PsqlDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/AchatDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DocteurDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/models/AchatModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/models/DocteurModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/AchatServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/AutorisationServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/AutreEntreeServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/AutreSortieServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/BonDeCommandeServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/ContratUrgenceServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/DocteurServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/FactureServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/FournisseurServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/JournalDeSessionServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/JournalDeSortieServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/JournalEntreeServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/ListeDeStockServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/MenuServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/OngServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/PersonnelOngServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/PrixDeVenteServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/RapportRumerServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/RegularisationOngServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/ServerDateServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/ServiceHospitalierServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SuiviBonDeServiceServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/TableauDeBordServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/TypeDeSortieServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/TypeEntreeServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/UserSessionServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/VirementServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/tableviews/AutreEntreeTV.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/utils/DatatableColumn.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/utils/DatatableParameter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/utils/DatatablePresentation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/utils/DatatableSearch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/utils/MethodResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/utils/ModeDePayement.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/utils/RequestPayload.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/utils/SQLParser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/utils/UriUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Jsp File" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1hrv5vCqJY1J0rMwM6oAaFZiSsA" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.3091954" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/external_libs" />
+      <recent name="$PROJECT_DIR$/libs" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Tomcat 8.5.58" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.58" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+      <option name="SHOW_DIALOG_ON_UPDATE" value="false" />
+      <option name="UPDATING_POLICY" value="redeploy-artifacts" />
+      <deployment>
+        <artifact name="adequa:war">
+          <settings>
+            <option name="CONTEXT_PATH" value="/adequa" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="Unnamed_adequa" />
+        <option name="PRESERVE_SESSIONS" value="true" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="39385" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="adequa:war" />
+        </option>
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="14fd4e27-a837-4fe7-b2d3-86afbdd55789" name="Default Changelist" comment="" />
+      <created>1600781847217</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1600781847217</updated>
+      <workItem from="1600781848377" duration="9000000" />
+      <workItem from="1600799309735" duration="858000" />
+      <workItem from="1600842502806" duration="10335000" />
+      <workItem from="1600855420384" duration="17670000" />
+      <workItem from="1600933754802" duration="6168000" />
+      <workItem from="1600945407152" duration="1737000" />
+      <workItem from="1600959918327" duration="3434000" />
+      <workItem from="1601100061555" duration="1624000" />
+      <workItem from="1601103701504" duration="5265000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="471" y="160" width="419" height="412" key="#Web_Browsers" timestamp="1600967756439">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state x="471" y="160" width="419" height="412" key="#Web_Browsers/0.0.1366.735@0.0.1366.735" timestamp="1600967756439" />
+    <state x="141" y="0" width="1084" height="735" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1600967764392">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state x="141" y="0" width="1084" height="735" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.735@0.0.1366.735" timestamp="1600967764392" />
+    <state x="491" y="56" width="380" height="623" key="#com.intellij.ide.util.MemberChooser" timestamp="1601113202716">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state x="491" y="56" width="380" height="623" key="#com.intellij.ide.util.MemberChooser/0.0.1366.735@0.0.1366.735" timestamp="1601113202716" />
+    <state x="366" y="108" width="630" height="519" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1600855612570">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state x="366" y="108" width="630" height="519" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1366.735@0.0.1366.735" timestamp="1600855612570" />
+    <state x="9" y="0" width="1339" height="732" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1600860998479">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state x="9" y="0" width="1339" height="732" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.735@0.0.1366.735" timestamp="1600860998479" />
+    <state x="357" y="110" width="643" height="508" key="FileChooserDialogImpl" timestamp="1600967733216">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state x="357" y="110" width="643" height="508" key="FileChooserDialogImpl/0.0.1366.735@0.0.1366.735" timestamp="1600967733216" />
+    <state width="984" height="235" key="GridCell.Tab.0.bottom" timestamp="1600967771073">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state width="984" height="235" key="GridCell.Tab.0.bottom/0.0.1366.735@0.0.1366.735" timestamp="1600967771073" />
+    <state width="984" height="235" key="GridCell.Tab.0.center" timestamp="1600967771072">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state width="984" height="235" key="GridCell.Tab.0.center/0.0.1366.735@0.0.1366.735" timestamp="1600967771072" />
+    <state width="984" height="235" key="GridCell.Tab.0.left" timestamp="1600967771072">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state width="984" height="235" key="GridCell.Tab.0.left/0.0.1366.735@0.0.1366.735" timestamp="1600967771072" />
+    <state width="984" height="235" key="GridCell.Tab.0.right" timestamp="1600967771073">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state width="984" height="235" key="GridCell.Tab.0.right/0.0.1366.735@0.0.1366.735" timestamp="1600967771073" />
+    <state width="984" height="235" key="GridCell.Tab.1.bottom" timestamp="1600967771075">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state width="984" height="235" key="GridCell.Tab.1.bottom/0.0.1366.735@0.0.1366.735" timestamp="1600967771075" />
+    <state width="984" height="235" key="GridCell.Tab.1.center" timestamp="1600967771074">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state width="984" height="235" key="GridCell.Tab.1.center/0.0.1366.735@0.0.1366.735" timestamp="1600967771074" />
+    <state width="984" height="235" key="GridCell.Tab.1.left" timestamp="1600967771074">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state width="984" height="235" key="GridCell.Tab.1.left/0.0.1366.735@0.0.1366.735" timestamp="1600967771074" />
+    <state width="984" height="235" key="GridCell.Tab.1.right" timestamp="1600967771074">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state width="984" height="235" key="GridCell.Tab.1.right/0.0.1366.735@0.0.1366.735" timestamp="1600967771074" />
+    <state width="984" height="235" key="GridCell.Tab.2.bottom" timestamp="1600967771074">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state width="984" height="235" key="GridCell.Tab.2.bottom/0.0.1366.735@0.0.1366.735" timestamp="1600967771074" />
+    <state width="984" height="235" key="GridCell.Tab.2.center" timestamp="1600967771073">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state width="984" height="235" key="GridCell.Tab.2.center/0.0.1366.735@0.0.1366.735" timestamp="1600967771073" />
+    <state width="984" height="235" key="GridCell.Tab.2.left" timestamp="1600967771073">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state width="984" height="235" key="GridCell.Tab.2.left/0.0.1366.735@0.0.1366.735" timestamp="1600967771073" />
+    <state width="984" height="235" key="GridCell.Tab.2.right" timestamp="1600967771074">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state width="984" height="235" key="GridCell.Tab.2.right/0.0.1366.735@0.0.1366.735" timestamp="1600967771074" />
+    <state x="216" y="27" width="930" height="681" key="Maven.ArtifactSearchDialog" timestamp="1600844271370">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state x="216" y="27" width="930" height="681" key="Maven.ArtifactSearchDialog/0.0.1366.735@0.0.1366.735" timestamp="1600844271370" />
+    <state x="166" y="0" width="1030" height="732" key="SettingsEditor" timestamp="1600844299023">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state x="166" y="0" width="1030" height="732" key="SettingsEditor/0.0.1366.735@0.0.1366.735" timestamp="1600844299023" />
+  </component>
+</project>
