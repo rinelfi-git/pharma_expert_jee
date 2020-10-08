@@ -88,8 +88,6 @@ public class SDocteur extends HttpServlet {
 	private DatatablePresentation makeDatatable(HttpServletRequest request) {
 		DatatableParameter constraints = new DatatableParameter();
 		DatatablePresentation presentation = new DatatablePresentation();
-		// ArrayList<DatatableColumn> columns = this.getColumnsFromRequest(request);
-		// constraints.setColumns(columns.toArray(new DatatableColumn[0]));
 		constraints.setDraw(Integer.valueOf(request.getParameter("draw")));
 		constraints.setLimitLength(Integer.valueOf(request.getParameter("length") != null ? request.getParameter("length") : "-1"));
 		constraints.setLimitStart(Integer.valueOf(request.getParameter("start") != null ? request.getParameter("start") : "-1"));

@@ -42,7 +42,7 @@ public interface QueryBuilder {
 	
 	boolean update(String table) throws InvalidExpressionException, SQLException;
 	
-	boolean delete(String table) throws InvalidExpressionException;
+	boolean delete(String table) throws InvalidExpressionException, SQLException;
 	
 	/*
 	 *
@@ -184,6 +184,4 @@ public interface QueryBuilder {
 	int count() throws SQLException;
 	
 	int count(String table) throws SQLException;
-	
-	void checkClauses();
 }

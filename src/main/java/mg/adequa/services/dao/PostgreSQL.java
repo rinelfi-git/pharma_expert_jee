@@ -56,4 +56,7 @@ public class PostgreSQL implements DaoFactory {
 	
 	@Override
 	public DLogin getLogin() {return new MLogin(this);}
+	
+	@Override
+	public DJournalDeSession getJournalDeSession() {return new MJournalDeSession(this);}
 }

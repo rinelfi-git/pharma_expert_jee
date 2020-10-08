@@ -29,7 +29,11 @@ public class MDocteur implements DDocteur {
 	@Override
 	public QueryBuilder makeQuery(DatatableParameter constraints) throws SQLException {
 		PostgreSQLQueryBuilder qeryBuilder = new PostgreSQLQueryBuilder(this.daoFactory.getConnection());
-		String[] colonne = new String[]{"nom, prenom", this.tables.getServiceHospitalier() + ".libelle"};
+		String[] colonne = new String[]{
+			"nom",
+			"prenom",
+			this.tables.getServiceHospitalier() + ".libelle"
+		};
 		qeryBuilder
 			.select(new String[]{this.tables.getDocteur() + ".id", "nom", "prenom"})
 			.select(this.tables.getServiceHospitalier() + ".libelle", "service ")
