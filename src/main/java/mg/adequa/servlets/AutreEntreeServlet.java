@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import mg.adequa.payloads.PlAutreEntree;
 import mg.adequa.services.Transaction;
 import mg.adequa.services.dao.DaoFactory;
-import mg.adequa.services.dao.interfaces.DaoAutreEntree;
+import mg.adequa.services.dao.interfaces.DAutreEntree;
 import mg.adequa.tableviews.AutreEntreeTV;
 import mg.adequa.utils.*;
 
@@ -19,7 +19,7 @@ import java.util.Date;
 
 public class AutreEntreeServlet extends HttpServlet {
 	private DaoFactory daoFactory;
-	private DaoAutreEntree daoAutreEntree;
+	private DAutreEntree dAutreEntree;
 	
 	@Override
 	public void init() throws ServletException {
@@ -83,8 +83,8 @@ public class AutreEntreeServlet extends HttpServlet {
 		constraints.setOrderDirection(request.getParameter("order[0][dir]"));
 		constraints.setSearch(new DatatableSearch(request.getParameter("search[value]"), Boolean.valueOf(request.getParameter("search[regex]"))));
 		
-		String queries = daoAutreEntree.makeQuery(constraints);
-		ArrayList<AutreEntreeTV> incomingData = daoAutreEntree.makeDatatable(queries, constraints);
+		String queries = dAutreEntree.makeQuery(constraints);
+		ArrayList<AutreEntreeTV> incomingData = dAutreEntree.makeDatatable(queries, constraints);
 		ArrayList<String[]> data = new ArrayList<>();
 		for (AutreEntreeTV retrievedData : incomingData) {
 			data.add(new String[]{
@@ -97,7 +97,7 @@ public class AutreEntreeServlet extends HttpServlet {
 			});
 		}
 		presentation.setDraw(constraints.getDraw());
-		presentation.setRecordsTotal(this.daoAutreEntree.dataRecordsTotal());
+		presentation.setRecordsTotal(this.dAutreEntree.dataRecordsTotal());
 		presentation.setRecordsFiltered(data.size());
 		presentation.setData(data);
 		return presentation;
@@ -114,7 +114,7 @@ public class AutreEntreeServlet extends HttpServlet {
 		boolean querySucceded = false;
 		Transaction transaction = new Transaction(this.daoFactory);
 		transaction.begin();
-		if (post.getModeDePayment() != null) querySucceded = this.daoAutreEntree.insert(post);
+		if (post.getModeDePayment() != null) querySucceded = this.dAutreEntree.insert(post);
 		if (!querySucceded) {
 			methodResponse.setRequestState(false).appendTable("autre_entree").appendTable("journal_entree");
 			transaction.rollback();

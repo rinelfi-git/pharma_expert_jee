@@ -2,7 +2,7 @@ package mg.adequa.services.dao.postgresql;
 
 import mg.adequa.payloads.PAchat;
 import mg.adequa.services.dao.DaoFactory;
-import mg.adequa.services.dao.interfaces.DaoAchat;
+import mg.adequa.services.dao.interfaces.DAchat;
 import mg.adequa.utils.DatatableParameter;
 
 import java.sql.*;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ModelAchat implements DaoAchat {
+public class ModelAchat implements DAchat {
 	private DaoFactory daoFactory;
 	
 	public ModelAchat(DaoFactory daoFactory) { this.daoFactory = daoFactory;}

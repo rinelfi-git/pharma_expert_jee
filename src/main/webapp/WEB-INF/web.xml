@@ -9,7 +9,7 @@
 	</servlet>
 	<servlet>
 		<servlet-name>Docteur</servlet-name>
-		<servlet-class>mg.adequa.servlets.ServletDocteur</servlet-class>
+		<servlet-class>mg.adequa.servlets.SDocteur</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>TableauDeBord</servlet-name>

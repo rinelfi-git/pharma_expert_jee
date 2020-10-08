@@ -6,7 +6,7 @@ import mg.adequa.utils.DatatableParameter;
 
 import java.util.ArrayList;
 
-public interface DaoAutreEntree {
+public interface DAutreEntree {
 	// Datatables
 	String makeQuery(DatatableParameter constraints);
 	ArrayList<AutreEntreeTV> makeDatatable(String query, DatatableParameter constraints);

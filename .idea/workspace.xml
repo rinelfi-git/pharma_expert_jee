@@ -10,59 +10,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14fd4e27-a837-4fe7-b2d3-86afbdd55789" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_annotations_20_1_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mindrot_jbcrypt_0_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/lib/querybuilder/QueryBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/lib/querybuilder/clauses/Join.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/lib/querybuilder/clauses/Limit.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/lib/querybuilder/clauses/OrderBy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/lib/querybuilder/clauses/Pair.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/lib/querybuilder/exceptions/NoConnectionException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/lib/querybuilder/exceptions/NoSpecifiedTableException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/lib/querybuilder/implementations/PostgreSQLQueryBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/lib/querybuilder/utils/PreparedStatementDataset.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/beans/BDocteur.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/beans/BPersonne.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/beans/Utilisateur.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/dbentity/DbTables.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/dbentity/DbViews.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/payloads/PlEvolutionDeCompteFinancierConstraint.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DaoBilan.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DaoPersonne.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DaoSession.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/ModelBilan.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/ModelJournalEntreeSortie.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/ModelPersonne.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/SessionManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SLogin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/tableviews/JournalEntreeSortieTV.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/tableviews/TvDocteur.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/utils/SQLFormatter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/utils/jwt/Session.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/adequa_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/adequa_war_exploded.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MSession.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/adequa.iml" beforeDir="false" afterPath="$PROJECT_DIR$/adequa.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/payloadserialization/AchatPL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/payloads/PAchat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/payloadserialization/AutreEntreePL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/payloads/PlAutreEntree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/payloadserialization/DocteurPL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/payloads/PDocteur.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/payloadserialization/PersonnePL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/payloads/PlPersonne.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/DaoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/DaoFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/PostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/PostgreSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/AchatDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DaoAchat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/AutreEntreeDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DaoAutreEntree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/BilanDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DocteurDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DaoDocteur.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/JournalEntreeSortieDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/JournalEntreeSortieDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/AchatModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/ModelAchat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/AutreEntreeModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/ModelAutreEntree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/BilanModel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/DocteurModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/ModelDocteur.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/JournalEntreeSortieModel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/AchatServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/AchatServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/AutreEntreeServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/AutreEntreeServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/DocteurServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/ServletDocteur.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/TableauDeBordServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/TableauDeBordServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DaoDocteur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DDocteur.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DaoSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DSession.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/ModelDocteur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/ModelDocteur.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/ServletDocteur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SDocteur.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -129,15 +85,13 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -241,7 +195,8 @@
       <workItem from="1602122495775" duration="12723000" />
       <workItem from="1602147258536" duration="3202000" />
       <workItem from="1602157492069" duration="5338000" />
-      <workItem from="1602163987647" duration="366000" />
+      <workItem from="1602163987647" duration="1202000" />
+      <workItem from="1602167788025" duration="230000" />
     </task>
     <servers />
   </component>
@@ -273,10 +228,10 @@
       <screen x="0" y="0" width="1366" height="735" />
     </state>
     <state x="265" y="296" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1366.735@0.0.1366.735" timestamp="1601305019790" />
-    <state x="9" y="0" width="1339" height="732" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1602147640187">
+    <state x="9" y="0" width="1339" height="732" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1602168060520">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state x="9" y="0" width="1339" height="732" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.735@0.0.1366.735" timestamp="1602147640187" />
+    <state x="9" y="0" width="1339" height="732" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.735@0.0.1366.735" timestamp="1602168060520" />
     <state x="357" y="110" width="643" height="508" key="FileChooserDialogImpl" timestamp="1601818018765">
       <screen x="0" y="0" width="1366" height="735" />
     </state>

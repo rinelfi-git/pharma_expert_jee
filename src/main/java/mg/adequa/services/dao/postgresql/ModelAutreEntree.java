@@ -2,7 +2,7 @@ package mg.adequa.services.dao.postgresql;
 
 import mg.adequa.payloads.PlAutreEntree;
 import mg.adequa.services.dao.DaoFactory;
-import mg.adequa.services.dao.interfaces.DaoAutreEntree;
+import mg.adequa.services.dao.interfaces.DAutreEntree;
 import mg.adequa.tableviews.AutreEntreeTV;
 import mg.adequa.utils.DatatableParameter;
 
@@ -11,7 +11,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-public class ModelAutreEntree implements DaoAutreEntree {
+public class ModelAutreEntree implements DAutreEntree {
 	private DaoFactory daoFactory;
 	
 	public ModelAutreEntree(DaoFactory daoFactory) { this.daoFactory = daoFactory; }

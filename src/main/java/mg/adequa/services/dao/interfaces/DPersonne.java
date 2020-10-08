@@ -6,7 +6,7 @@ import mg.adequa.beans.BPersonne;
 
 import java.sql.SQLException;
 
-public interface DaoPersonne {
+public interface DPersonne {
 	boolean insert(BPersonne personne) throws Exception;
 	int lastId() throws SQLException, NoSpecifiedTableException, NoConnectionException;
 	

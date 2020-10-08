@@ -1,7 +1,6 @@
 package mg.adequa.servlets;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import lib.querybuilder.exceptions.NoConnectionException;
 import lib.querybuilder.exceptions.NoSpecifiedTableException;
 import mg.adequa.beans.BDocteur;
@@ -10,8 +9,8 @@ import mg.adequa.payloads.PDocteur;
 import mg.adequa.services.Transaction;
 import mg.adequa.services.dao.DaoFactory;
 import mg.adequa.services.dao.PostgreSQL;
-import mg.adequa.services.dao.interfaces.DaoDocteur;
-import mg.adequa.services.dao.interfaces.DaoPersonne;
+import mg.adequa.services.dao.interfaces.DDocteur;
+import mg.adequa.services.dao.interfaces.DPersonne;
 import mg.adequa.tableviews.TvDocteur;
 import mg.adequa.utils.*;
 
@@ -20,21 +19,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ServletDocteur extends HttpServlet {
-	private DaoDocteur daoDocteur;
-	private DaoPersonne daoPersonne;
+public class SDocteur extends HttpServlet {
+	private DDocteur dDocteur;
+	private DPersonne dPersonne;
 	private DaoFactory daoFactory;
 	
 	@Override
 	public void init() throws ServletException {
 		super.init();
 		this.daoFactory = PostgreSQL.getInstance();
-		this.daoDocteur = this.daoFactory.getDocteur();
-		this.daoPersonne = this.daoFactory.getPersonne();
+		this.dDocteur = this.daoFactory.getDocteur();
+		this.dPersonne = this.daoFactory.getPersonne();
 	}
 	
 	@Override
@@ -101,7 +99,7 @@ public class ServletDocteur extends HttpServlet {
 		
 		ArrayList<TvDocteur> incomingData = new ArrayList<>();
 		try {
-			incomingData = daoDocteur.makeDatatable(daoDocteur.makeQuery(constraints), constraints);
+			incomingData = dDocteur.makeDatatable(dDocteur.makeQuery(constraints), constraints);
 		} catch (SQLException | NoSpecifiedTableException | NoConnectionException throwables) {
 			throwables.printStackTrace();
 		}
@@ -115,7 +113,7 @@ public class ServletDocteur extends HttpServlet {
 		}
 		presentation.setDraw(constraints.getDraw());
 		try {
-			presentation.setRecordsTotal(this.daoDocteur.dataRecordsTotal());
+			presentation.setRecordsTotal(this.dDocteur.dataRecordsTotal());
 		} catch (NoSpecifiedTableException | SQLException | NoConnectionException throwables) {
 			throwables.printStackTrace();
 		}
@@ -127,7 +125,7 @@ public class ServletDocteur extends HttpServlet {
 	private PDocteur select(int id) {
 		PDocteur select = null;
 		try {
-			select = daoDocteur.select(id);
+			select = dDocteur.select(id);
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
 		} catch (NoSpecifiedTableException e) {
@@ -147,15 +145,15 @@ public class ServletDocteur extends HttpServlet {
 		personne.setNom(pDocteur.getNom());
 		personne.setPrenom(pDocteur.getPrenom());
 		try {
-			if (this.daoPersonne.insert(personne)) {
+			if (this.dPersonne.insert(personne)) {
 				
 				BDocteur docteur = new BDocteur();
-				docteur.setId(this.daoPersonne.lastId());
+				docteur.setId(this.dPersonne.lastId());
 				docteur.setNom(pDocteur.getNom());
 				docteur.setPrenom(pDocteur.getPrenom());
 				docteur.setServiceHospitalier(pDocteur.getServiceHospitalier());
 				
-				if (this.daoDocteur.insert(docteur)) {
+				if (this.dDocteur.insert(docteur)) {
 					transaction.commit();
 				} else {
 					transaction.rollback();
@@ -180,15 +178,15 @@ public class ServletDocteur extends HttpServlet {
 		personne.setNom(pDocteur.getNom());
 		personne.setPrenom(pDocteur.getPrenom());
 		try {
-			if (this.daoPersonne.update(personne, id)) {
+			if (this.dPersonne.update(personne, id)) {
 				
 				BDocteur docteur = new BDocteur();
-				docteur.setId(this.daoPersonne.lastId());
+				docteur.setId(this.dPersonne.lastId());
 				docteur.setNom(pDocteur.getNom());
 				docteur.setPrenom(pDocteur.getPrenom());
 				docteur.setServiceHospitalier(pDocteur.getServiceHospitalier());
 				
-				if (this.daoDocteur.update(docteur, id))
+				if (this.dDocteur.update(docteur, id))
 					transaction.commit();
 				else {
 					transaction.rollback();

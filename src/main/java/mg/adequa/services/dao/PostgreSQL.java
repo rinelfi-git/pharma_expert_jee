@@ -35,19 +35,19 @@ public class PostgreSQL implements DaoFactory {
 	}
 	
 	@Override
-	public DaoAchat getAchat() {
+	public DAchat getAchat() {
 		return new ModelAchat(this);
 	}
 	
 	@Override
-	public DaoDocteur getDocteur() {return new ModelDocteur(this);}
+	public DDocteur getDocteur() {return new ModelDocteur(this);}
 	
 	@Override
-	public DaoBilan getBilan() {return new ModelBilan(this);}
+	public DBilan getBilan() {return new ModelBilan(this);}
 	
 	@Override
 	public JournalEntreeSortieDao getJournalEntreeSortie() {return new ModelJournalEntreeSortie(this);}
 	
 	@Override
-	public DaoPersonne getPersonne() {return new ModelPersonne(this);}
+	public DPersonne getPersonne() {return new ModelPersonne(this);}
 }

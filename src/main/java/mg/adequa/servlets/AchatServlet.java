@@ -6,7 +6,7 @@ import mg.adequa.payloads.PAchat;
 import mg.adequa.services.dao.DaoFactory;
 import mg.adequa.services.dao.PostgreSQL;
 import mg.adequa.services.Transaction;
-import mg.adequa.services.dao.interfaces.DaoAchat;
+import mg.adequa.services.dao.interfaces.DAchat;
 import mg.adequa.utils.*;
 
 import javax.servlet.ServletException;
@@ -20,7 +20,7 @@ import java.util.Map;
 
 public class AchatServlet extends HttpServlet {
 	private DaoFactory daoFactory;
-	private DaoAchat daoAchat;
+	private DAchat dAchat;
 	
 	public AchatServlet() {super();}
 	
@@ -28,7 +28,7 @@ public class AchatServlet extends HttpServlet {
 	public void init() throws ServletException {
 		super.init();
 		this.daoFactory = PostgreSQL.getInstance();
-		this.daoAchat = this.daoFactory.getAchat();
+		this.dAchat = this.daoFactory.getAchat();
 	}
 	
 	public void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -104,8 +104,8 @@ public class AchatServlet extends HttpServlet {
 		constraints.setOrderDirection(request.getParameter("order[0][dir]"));
 		constraints.setSearch(new DatatableSearch(request.getParameter("search[value]"), Boolean.valueOf(request.getParameter("search[regex]"))));
 		
-		String queries = daoAchat.makeQuery(constraints);
-		ArrayList<Map> incomingData = daoAchat.makeDatatable(queries, constraints);
+		String queries = dAchat.makeQuery(constraints);
+		ArrayList<Map> incomingData = dAchat.makeDatatable(queries, constraints);
 		ArrayList<String[]> data = new ArrayList<>();
 		for (Map<String, Object> retrievedData : incomingData) {
 			data.add(new String[]{
@@ -123,18 +123,18 @@ public class AchatServlet extends HttpServlet {
 			});
 		}
 		presentation.setDraw(constraints.getDraw());
-		presentation.setRecordsTotal(this.daoAchat.dataRecordsTotal());
+		presentation.setRecordsTotal(this.dAchat.dataRecordsTotal());
 		presentation.setRecordsFiltered(data.size());
 		presentation.setData(data);
 		return presentation;
 	}
 	
 	private PAchat select(String uriSegment) {
-		return this.daoAchat.select(Integer.valueOf(uriSegment));
+		return this.dAchat.select(Integer.valueOf(uriSegment));
 	}
 	
 	private ArrayList<PAchat> select() {
-		return this.daoAchat.select();
+		return this.dAchat.select();
 	}
 	
 	private MethodResponse insert(HttpServletRequest request) throws IOException {
@@ -144,8 +144,8 @@ public class AchatServlet extends HttpServlet {
 		boolean querySucceded;
 		Transaction transaction = new Transaction(this.daoFactory);
 		transaction.begin();
-		if (pAchat.isEnAttente()) querySucceded = this.daoAchat.insertOnly(pAchat);
-		else querySucceded = this.daoAchat.insertAndLog(pAchat);
+		if (pAchat.isEnAttente()) querySucceded = this.dAchat.insertOnly(pAchat);
+		else querySucceded = this.dAchat.insertAndLog(pAchat);
 		if (!querySucceded) {
 			methodResponse.setRequestState(false).appendTable("achat");
 			transaction.rollback();
@@ -161,8 +161,8 @@ public class AchatServlet extends HttpServlet {
 		boolean querySucceded;
 		Transaction transaction = new Transaction(this.daoFactory);
 		transaction.begin();
-		if (pAchat[0].isEnAttente()) querySucceded = this.daoAchat.insertOnly(pAchat[0]);
-		else querySucceded = this.daoAchat.insertAndLog(pAchat[0]);
+		if (pAchat[0].isEnAttente()) querySucceded = this.dAchat.insertOnly(pAchat[0]);
+		else querySucceded = this.dAchat.insertAndLog(pAchat[0]);
 		if (!querySucceded) {
 			methodResponse.setRequestState(false).appendTable("achat");
 			transaction.rollback();

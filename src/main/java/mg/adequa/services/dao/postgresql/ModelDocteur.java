@@ -4,7 +4,7 @@ import mg.adequa.beans.BDocteur;
 import mg.adequa.dbentity.DbTables;
 import mg.adequa.payloads.PDocteur;
 import mg.adequa.services.dao.DaoFactory;
-import mg.adequa.services.dao.interfaces.DaoDocteur;
+import mg.adequa.services.dao.interfaces.DDocteur;
 import lib.querybuilder.implementations.PostgreSQLQueryBuilder;
 import lib.querybuilder.QueryBuilder;
 import lib.querybuilder.clauses.OrderBy;
@@ -17,7 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ModelDocteur implements DaoDocteur {
+public class ModelDocteur implements DDocteur {
 	private DbTables tables;
 	private DaoFactory daoFactory;
 	

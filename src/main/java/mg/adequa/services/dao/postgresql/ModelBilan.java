@@ -1,11 +1,11 @@
 package mg.adequa.services.dao.postgresql;
 
 import mg.adequa.services.dao.DaoFactory;
-import mg.adequa.services.dao.interfaces.DaoBilan;
+import mg.adequa.services.dao.interfaces.DBilan;
 
 import java.sql.*;
 
-public class ModelBilan implements DaoBilan {
+public class ModelBilan implements DBilan {
 	private DaoFactory daoFactory;
 	
 	public ModelBilan(DaoFactory daoFactory) {this.daoFactory = daoFactory;}

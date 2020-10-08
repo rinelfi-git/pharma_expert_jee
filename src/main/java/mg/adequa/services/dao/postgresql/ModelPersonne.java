@@ -6,14 +6,14 @@ import lib.querybuilder.exceptions.NoSpecifiedTableException;
 import mg.adequa.beans.BPersonne;
 import mg.adequa.dbentity.DbTables;
 import mg.adequa.services.dao.DaoFactory;
-import mg.adequa.services.dao.interfaces.DaoPersonne;
+import mg.adequa.services.dao.interfaces.DPersonne;
 import lib.querybuilder.implementations.PostgreSQLQueryBuilder;
 import lib.querybuilder.QueryBuilder;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ModelPersonne implements DaoPersonne {
+public class ModelPersonne implements DPersonne {
 	private DaoFactory dao;
 	private DbTables tables;
 	

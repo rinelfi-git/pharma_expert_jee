@@ -1,6 +1,6 @@
 package mg.adequa.services.dao.interfaces;
 
-public interface DaoBilan {
+public interface DBilan {
 	int getProduit();
 	int getCaisse();
 	int getBanque();

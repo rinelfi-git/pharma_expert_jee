@@ -7,9 +7,10 @@ import java.sql.SQLException;
 
 public interface DaoFactory {
 	Connection getConnection() throws SQLException;
-	DaoAchat getAchat();
-	DaoDocteur getDocteur();
-	DaoBilan getBilan();
+	DAchat getAchat();
+	DDocteur getDocteur();
+	DBilan getBilan();
 	JournalEntreeSortieDao getJournalEntreeSortie();
-	DaoPersonne getPersonne();
+	DPersonne getPersonne();
+	DSession getSession();
 }

@@ -6,7 +6,7 @@ import mg.adequa.services.dao.postgresql.SessionManager;
 import mg.adequa.payloads.PlEvolutionDeCompteFinancierConstraint;
 import mg.adequa.services.dao.DaoFactory;
 import mg.adequa.services.dao.PostgreSQL;
-import mg.adequa.services.dao.interfaces.DaoBilan;
+import mg.adequa.services.dao.interfaces.DBilan;
 import mg.adequa.services.dao.interfaces.JournalEntreeSortieDao;
 import mg.adequa.utils.UriUtils;
 
@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TableauDeBordServlet extends HttpServlet {
-	private DaoBilan daoBilan;
+	private DBilan dBilan;
 	private JournalEntreeSortieDao journalEntreeSortieDao;
 	private DaoFactory daoFactory;
 	
@@ -29,7 +29,7 @@ public class TableauDeBordServlet extends HttpServlet {
 	public void init() throws ServletException {
 		super.init();
 		this.daoFactory = PostgreSQL.getInstance();
-		this.daoBilan = this.daoFactory.getBilan();
+		this.dBilan = this.daoFactory.getBilan();
 		this.journalEntreeSortieDao = this.daoFactory.getJournalEntreeSortie();
 		new SessionManager();
 	}
@@ -81,10 +81,10 @@ public class TableauDeBordServlet extends HttpServlet {
 	
 	private BilanTableauDeBord dernierBilan(HttpServletRequest request) {
 		BilanTableauDeBord bilan = new BilanTableauDeBord();
-		bilan.setTotalProduitEnStock(this.daoBilan.getProduit());
-		bilan.setCompteCaisse(this.daoBilan.getCaisse());
-		bilan.setCompteEnBanque(this.daoBilan.getBanque());
-		bilan.setCapital(this.daoBilan.getProduit() + this.daoBilan.getCaisse() + this.daoBilan.getBanque());
+		bilan.setTotalProduitEnStock(this.dBilan.getProduit());
+		bilan.setCompteCaisse(this.dBilan.getCaisse());
+		bilan.setCompteEnBanque(this.dBilan.getBanque());
+		bilan.setCapital(this.dBilan.getProduit() + this.dBilan.getCaisse() + this.dBilan.getBanque());
 		return bilan;
 	}
 	

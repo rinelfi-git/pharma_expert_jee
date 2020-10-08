@@ -11,7 +11,7 @@ import mg.adequa.utils.DatatableParameter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public interface DaoDocteur {
+public interface DDocteur {
 	// Datatables
 	QueryBuilder makeQuery(DatatableParameter constraints) throws SQLException;
 	

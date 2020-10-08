@@ -6,7 +6,7 @@ import mg.adequa.utils.DatatableParameter;
 import java.util.ArrayList;
 import java.util.Map;
 
-public interface DaoAchat {
+public interface DAchat {
 	// Datatables
 	String makeQuery(DatatableParameter constraints);
 	ArrayList<Map> makeDatatable(String query, DatatableParameter constraints);
