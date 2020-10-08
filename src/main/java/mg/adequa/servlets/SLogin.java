@@ -38,6 +38,17 @@ public class SLogin extends HttpServlet {
 	}
 	
 	@Override
+	public void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
+		response.addHeader("Access-Control-Allow-Origin", "*");
+		response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
+		response.addHeader("Access-Control-Allow-Headers", "X-Requested-With,Cache-Control,content-type,Accept,DNT,X-CustomHeader,Keep-Alive,User-Agent");
+		response.addHeader("Access-Control-Allow-Credentials", "true");
+		response.addHeader("Access-Control-Max-Age", "1728000");
+		response.setStatus(HttpServletResponse.SC_OK);
+	}
+	
+	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");

@@ -16,8 +16,8 @@
 		<servlet-class>mg.adequa.servlets.STableauDeBord</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>UserSession</servlet-name>
-		<servlet-class>mg.adequa.servlets.UserSessionServlet</servlet-class>
+		<servlet-name>Login</servlet-name>
+		<servlet-class>mg.adequa.servlets.SLogin</servlet-class>
 	</servlet>
 	
 	
@@ -40,8 +40,8 @@
 	</servlet-mapping>
 	
 	<servlet-mapping>
-		<servlet-name>UserSession</servlet-name>
-		<url-pattern>/user-session</url-pattern>
-		<url-pattern>/user-session/*</url-pattern>
+		<servlet-name>Login</servlet-name>
+		<url-pattern>/login</url-pattern>
+		<url-pattern>/login/*</url-pattern>
 	</servlet-mapping>
 </web-app>
