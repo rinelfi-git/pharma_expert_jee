@@ -50,4 +50,10 @@ public class PostgreSQL implements DaoFactory {
 	
 	@Override
 	public DPersonne getPersonne() {return new MPersonne(this);}
+	
+	@Override
+	public DSession getSession() {return new MSession(this);}
+	
+	@Override
+	public DLogin getLogin() {return new MLogin(this);}
 }

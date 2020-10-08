@@ -1,7 +1,7 @@
 package mg.adequa.beans;
 
 public class BUtilisateur extends BPersonne{
-	private int id, personnel;
+	private int id, personnel, poste;
 	private String login, password, role;
 	private boolean administrateur;
 	
@@ -51,5 +51,13 @@ public class BUtilisateur extends BPersonne{
 	
 	public void setAdministrateur(boolean administrateur) {
 		this.administrateur = administrateur;
+	}
+	
+	public int getPoste() {
+		return poste;
+	}
+	
+	public void setPoste(int poste) {
+		this.poste = poste;
 	}
 }

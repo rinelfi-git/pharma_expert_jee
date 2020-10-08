@@ -787,6 +787,24 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 	}
 	
 	@Override
+	public int count() throws SQLException {
+		int count = 0;
+		this.query = "SELECT COUNT(*) AS count FROM " + this.table;
+		ResultSet resultSet = this.connection.createStatement().executeQuery(this.query);
+		if(resultSet.next()) count = resultSet.getInt(0);
+		return count;
+	}
+	
+	@Override
+	public int count(String table) throws SQLException {
+		int count = 0;
+		this.query = "SELECT COUNT(*) AS count FROM " + table;
+		ResultSet resultSet = this.connection.createStatement().executeQuery(this.query);
+		if(resultSet.next()) count = resultSet.getInt(0);
+		return count;
+	}
+	
+	@Override
 	public void checkClauses() {
 		if (this.whereClauses.size() > 0 || this.orWhereClauses.size() > 0 || this.likeClauses.size() > 0 || this.orLikeClauses.size() > 0 || this.orILikeClauses.size() > 0 || this.iLikeClauses.size() > 0) this.query += " WHERE";
 		if (this.whereClauses.size() > 0) this.compileWhereClause();

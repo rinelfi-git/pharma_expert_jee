@@ -245,5 +245,9 @@ public interface QueryBuilder {
 	
 	int rowCount() throws SQLException;
 	
+	int count() throws SQLException;
+	
+	int count(String table) throws SQLException;
+	
 	void checkClauses();
 }

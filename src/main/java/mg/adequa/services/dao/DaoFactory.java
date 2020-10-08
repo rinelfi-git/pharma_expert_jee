@@ -13,4 +13,5 @@ public interface DaoFactory {
 	JournalEntreeSortieDao getJournalEntreeSortie();
 	DPersonne getPersonne();
 	DSession getSession();
+	DLogin getLogin();
 }
