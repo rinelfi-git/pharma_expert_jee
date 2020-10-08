@@ -68,9 +68,9 @@ public class MDocteur implements DDocteur {
 	}
 	
 	@Override
-	public int dataRecordsTotal() throws NoSpecifiedTableException, SQLException, NoConnectionException {
+	public int dataRecordsTotal() throws SQLException {
 		QueryBuilder queryBuilder = new PostgreSQLQueryBuilder(this.daoFactory.getConnection());
-		return queryBuilder.select().from(this.tables.getDocteur()).get().rowCount();
+		return queryBuilder.count(this.tables.getDocteur());
 	}
 	
 	@Override

@@ -129,9 +129,9 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 	public boolean delete(String table) throws InvalidExpressionException, SQLException {
 		this.query = "DELETE FROM " + table;
 		if (!(this.whereClauses.size() == 0 && this.orWhereClauses.size() == 0 && this.likeClauses.size() == 0 && this.orLikeClauses.size() == 0 && this.iLikeClauses.size() == 0 && this.orILikeClauses.size() == 0)) {
-			this.checkAndCompileClauses();
+			this.checkAndPrepareClauses();
 			this.preparedStatement = this.connection.prepareStatement(this.query);
-			this.combineLikeAndWhereClauses();
+			this.combineAndCompileClauses();
 		} else this.preparedStatement = this.connection.prepareStatement(this.query);
 		return this.preparedStatement.executeUpdate() > 0;
 	}
@@ -337,7 +337,7 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 	}
 	
 	@Override
-	public void combineLikeAndWhereClauses() throws SQLException {
+	public void combineAndCompileClauses() throws SQLException {
 		for (PreparedStatementDataset a : this.whereDataSet) {
 			if (a.getValue() instanceof String) this.preparedStatement.setString(++index, (String) a.getValue());
 			else if (a.getValue() instanceof Integer) this.preparedStatement.setInt(++index, (Integer) a.getValue());
@@ -454,24 +454,15 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 	}
 	
 	@Override
-	public int rowCount() throws SQLException, NoSpecifiedTableException, NoConnectionException {
-		ResultSet resultSet = this
-			                      .get()
-			                      .result();
+	public int rowCount(String table) throws SQLException, NoSpecifiedTableException, NoConnectionException {
+		this.query = "SELECT COUNT(*) as count FROM " + table;
+		this.checkAndPrepareClauses();
+		this.preparedStatement = this.connection.prepareStatement(this.query);
+		this.combineAndCompileClauses();
+		ResultSet resultSet = this.preparedStatement.executeQuery();
 		int rowCount = 0;
-		while (resultSet.next()) rowCount++;
+		while (resultSet.next()) rowCount = resultSet.getInt("count");
 		return rowCount;
-	}
-	
-	@Override
-	public int count() throws SQLException {
-		int count = 0;
-		this.query = "SELECT COUNT(*) AS count FROM " + this.table;
-		ResultSet resultSet = this.connection
-			                      .createStatement()
-			                      .executeQuery(this.query);
-		if (resultSet.next()) count = resultSet.getInt(0);
-		return count;
 	}
 	
 	@Override
@@ -485,7 +476,7 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 		return count;
 	}
 	
-	private void checkAndCompileClauses() {
+	private void checkAndPrepareClauses() {
 		if (this.whereClauses.size() > 0 || this.orWhereClauses.size() > 0 || this.likeClauses.size() > 0 || this.orLikeClauses.size() > 0 || this.orILikeClauses.size() > 0 || this.iLikeClauses.size() > 0) this.query += " WHERE";
 		if (this.whereClauses.size() > 0) this.compileWhereClause();
 		if (this.orWhereClauses.size() > 0) this.compileOrWhereClause();
@@ -509,7 +500,7 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 		this.query += " FROM ";
 		this.query += this.table;
 		if (this.joins.size() > 0) for (Join join : this.joins) this.query += " " + join;
-		this.checkAndCompileClauses();
+		this.checkAndPrepareClauses();
 		if (this.orderBy.size() > 0) {
 			this.query += " ORDER BY ";
 			for (OrderBy orderBy : this.orderBy) this.query += orderBy.getField() + " " + orderBy.getOrdering() + ", ";
@@ -560,7 +551,7 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 		if (this.connection == null) throw new NoConnectionException();
 		this.compileSelect();
 		this.preparedStatement = connection.prepareStatement(this.query);
-		this.combineLikeAndWhereClauses();
+		this.combineAndCompileClauses();
 		return this;
 	}
 	

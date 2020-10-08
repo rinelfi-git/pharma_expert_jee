@@ -181,15 +181,20 @@ public class SLogin extends HttpServlet {
 	private boolean isTokenAlive(HttpServletRequest request) throws IOException {
 		HashMap post = new Gson().fromJson(request.getReader(), HashMap.class);
 		try {
-			BSession<BUtilisateur> session = this.dSession.get(post
-				                                                   .get("token")
-				                                                   .toString());
+			BSession<BUtilisateur> session = this.dSession.get(post.get("token").toString());
 			if (session != null) {
 				long currentTimestamp = System.currentTimeMillis();
-				if (session
-					    .getDateExpiration()
-					    .getTime() <= currentTimestamp) this.dSession.delete(session.getId());
-				else this.dSession.addTimer(session.getId());
+				if (session.getDateExpiration().getTime() <= currentTimestamp) {
+					Transaction transaction = new Transaction(this.daoFactory);
+					transaction.begin();
+					if (this.dSession.delete(session.getId())) transaction.commit();
+					else transaction.rollback();
+				} else {
+					Transaction transaction = new Transaction(this.daoFactory);
+					transaction.begin();
+					if (this.dSession.addTimer(session.getId())) transaction.commit();
+					else transaction.rollback();
+				}
 				return this.dSession.exists(session.getId());
 			}
 		} catch (SQLException throwables) {

@@ -28,8 +28,7 @@ public class MLogin implements DLogin {
 		QueryBuilder query = new PostgreSQLQueryBuilder(this.dao.getConnection());
 		return query
 			       .where("login", login)
-			       .from(this.tables.getUtilisateur())
-			       .rowCount() > 0;
+			       .rowCount(this.tables.getUtilisateur()) > 0;
 	}
 	
 	@Override

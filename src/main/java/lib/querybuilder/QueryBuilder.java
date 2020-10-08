@@ -7,7 +7,6 @@ import lib.querybuilder.exceptions.NoSpecifiedTableException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -161,7 +160,7 @@ public interface QueryBuilder {
 	
 	QueryBuilder get() throws NoConnectionException, SQLException, NoSpecifiedTableException;
 	
-	void combineLikeAndWhereClauses() throws SQLException;
+	void combineAndCompileClauses() throws SQLException;
 	
 	String compiledQuery() throws NoSpecifiedTableException;
 	
@@ -179,9 +178,7 @@ public interface QueryBuilder {
 	
 	ResultSet result() throws SQLException;
 	
-	int rowCount() throws SQLException, NoSpecifiedTableException, NoConnectionException;
-	
-	int count() throws SQLException;
+	int rowCount(String table) throws SQLException, NoSpecifiedTableException, NoConnectionException;
 	
 	int count(String table) throws SQLException;
 }

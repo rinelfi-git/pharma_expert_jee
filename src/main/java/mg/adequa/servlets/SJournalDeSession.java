@@ -120,6 +120,8 @@ public class SJournalDeSession extends HttpServlet {
 				insert.setRequestState(false).appendTable("journal_de_session");
 			}
 		} catch (Exception e) {
+			transaction.rollback();
+			insert.setRequestState(false).appendTable("journal_de_session");
 			e.printStackTrace();
 		}
 		return insert.validate();
