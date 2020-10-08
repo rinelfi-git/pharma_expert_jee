@@ -11,9 +11,9 @@ import mg.adequa.dbentity.DbTables;
 import mg.adequa.services.dao.DaoFactory;
 import mg.adequa.services.dao.interfaces.DSession;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,10 +32,10 @@ public class MSession implements DSession {
 		return query
 			       .set("id", session.getId())
 			       .set("type", session.getType())
-			       .set("date_creation", new Date(session.getDateCreation().getTime()))
-			       .set("date_expiration", new Date(session.getDateExpiration().getTime()))
-			       .set("utilisateur", session.getContenu().getId())
-			       .insert(this.tables.getUtilisateur());
+			       .set("date_creation", new Timestamp(session.getDateCreation().getTime()))
+			       .set("date_expiration", new Timestamp(session.getDateExpiration().getTime()))
+			       .set("utilisateur", session.getContenu().getIdUtilisateur())
+			       .insert(this.tables.getSession());
 	}
 	
 	@Override
@@ -43,7 +43,7 @@ public class MSession implements DSession {
 		QueryBuilder query = new PostgreSQLQueryBuilder(this.dao.getConnection());
 		return query
 			       .where("id", id)
-			       .delete(this.tables.getUtilisateur());
+			       .delete(this.tables.getSession());
 	}
 	
 	@Override
@@ -51,7 +51,10 @@ public class MSession implements DSession {
 		QueryBuilder query = new PostgreSQLQueryBuilder(this.dao.getConnection());
 		return query
 			       .where("id", id)
-			       .select("id").get().rowCount() > 0;
+			       .from(this.tables.getSession())
+			       .select("id")
+			       .get()
+			       .rowCount() > 0;
 	}
 	
 	@Override
@@ -59,7 +62,7 @@ public class MSession implements DSession {
 		QueryBuilder query = new PostgreSQLQueryBuilder(this.dao.getConnection());
 		return query
 			       .where("id", id)
-			       .set("date_expiration", new Date(System.currentTimeMillis() + BSession.DEFAULT_TIMER * 1000))
+			       .set("date_expiration", new Timestamp(System.currentTimeMillis() + BSession.DEFAULT_TIMER * 1000))
 			       .update(this.tables.getSession());
 	}
 	
@@ -71,28 +74,35 @@ public class MSession implements DSession {
 		transformation.put(this.tables.getUtilisateur() + ".id", "id_utilisateur");
 		transformation.put(this.tables.getSession() + ".id", "id_session");
 		transformation.put(this.tables.getPoste() + ".nom", "poste");
-		ResultSet resultSet = query.select(new String[]{
-			"type",
-			"date_creation",
-			"date_expiration",
-			"nom",
-			"prenom",
-			"administrateur",
-			"role"
-		}).select(transformation).from(this.tables.getSession())
-			                      .join(this.tables.getSession() + ".utilisateur", this.tables.getUtilisateur() + ".id")
-			                      .join(this.tables.getUtilisateur() + ".personnel", this.tables.getPersonnel() + ".id")
-			                      .join(this.tables.getPersonnel() + ".poste", this.tables.getPoste() + ".id").get().result();
-		if(resultSet.next()) {
+		ResultSet resultSet = query
+			                      .select(new String[]{
+				                      "type",
+				                      "date_creation",
+				                      "date_expiration",
+				                      "nom",
+				                      "prenom",
+				                      "administrateur",
+				                      "role",
+				                      "email"
+			                      })
+			                      .select(transformation)
+			                      .from(this.tables.getSession())
+			                      .join(this.tables.getUtilisateur() + ".id", this.tables.getSession() + ".utilisateur")
+			                      .join(this.tables.getPersonnel() + ".id", this.tables.getPersonnel() + ".personnel")
+			                      .join(this.tables.getPoste() + ".id", this.tables.getPersonnel() + ".poste")
+			                      .get()
+			                      .result();
+		if (resultSet.next()) {
 			get = new BSession<>();
 			BUtilisateur utilisateur = new BUtilisateur();
 			
-			utilisateur.setId(resultSet.getInt("id_utilisateur"));
+			utilisateur.setIdUtilisateur(resultSet.getInt("id_utilisateur"));
 			utilisateur.setLogin(resultSet.getString("login"));
 			utilisateur.setAdministrateur(resultSet.getBoolean("administrateur"));
 			utilisateur.setRole(resultSet.getString("role"));
 			utilisateur.setNom(resultSet.getString("nom"));
 			utilisateur.setPrenom(resultSet.getString("prenom"));
+			utilisateur.setEmail(resultSet.getString("email"));
 			
 			get.setId(resultSet.getString("id_session"));
 			get.setContenu(utilisateur);

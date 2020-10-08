@@ -1,16 +1,16 @@
 package mg.adequa.beans;
 
-public class BUtilisateur extends BPersonne{
-	private int id, personnel, poste;
+public class BUtilisateur extends BPersonnel{
+	private int idUtilisateur;
 	private String login, password, role;
 	private boolean administrateur;
 	
-	public int getId() {
-		return id;
+	public int getIdUtilisateur() {
+		return idUtilisateur;
 	}
 	
-	public void setId(int id) {
-		this.id = id;
+	public void setIdUtilisateur(int idUtilisateur) {
+		this.idUtilisateur = idUtilisateur;
 	}
 	
 	public String getLogin() {
@@ -35,14 +35,6 @@ public class BUtilisateur extends BPersonne{
 	
 	public void setRole(String role) {
 		this.role = role;
-	}
-	
-	public int getPersonnel() {
-		return personnel;
-	}
-	
-	public void setPersonnel(int personnel) {
-		this.personnel = personnel;
 	}
 	
 	public boolean isAdministrateur() {

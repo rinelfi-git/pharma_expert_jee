@@ -7,6 +7,7 @@ import lib.querybuilder.exceptions.NoSpecifiedTableException;
 import mg.adequa.beans.BSession;
 import mg.adequa.beans.BUtilisateur;
 import mg.adequa.payloads.PUser;
+import mg.adequa.services.Transaction;
 import mg.adequa.services.dao.DaoFactory;
 import mg.adequa.services.dao.PostgreSQL;
 import mg.adequa.services.dao.interfaces.DLogin;
@@ -61,19 +62,29 @@ public class SLogin extends HttpServlet {
 		String[] arrayUri = uriUtils.toArray();
 		switch (arrayUri[2]) {
 			case "check_user":
-				response.getWriter().print(new Gson().toJson(this.checkUser(request)));
+				response
+					.getWriter()
+					.print(new Gson().toJson(this.checkUser(request)));
 				break;
 			case "match_password":
-				response.getWriter().print(new Gson().toJson(this.matchPassword(request)));
+				response
+					.getWriter()
+					.print(new Gson().toJson(this.matchPassword(request)));
 				break;
 			case "check_token":
-				response.getWriter().print(new Gson().toJson(this.isTokenAlive(request)));
+				response
+					.getWriter()
+					.print(new Gson().toJson(this.isTokenAlive(request)));
 				break;
 			case "create_session":
-				response.getWriter().print(new Gson().toJson(this.createSession(request)));
+				response
+					.getWriter()
+					.print(new Gson().toJson(this.createSession(request)));
 				break;
 			case "sign_out":
-				response.getWriter().print(new Gson().toJson(this.signOut(request)));
+				response
+					.getWriter()
+					.print(new Gson().toJson(this.signOut(request)));
 				break;
 		}
 	}
@@ -81,7 +92,9 @@ public class SLogin extends HttpServlet {
 	private boolean signOut(HttpServletRequest request) throws IOException {
 		Map parameter = new Gson().fromJson(request.getReader(), HashMap.class);
 		try {
-			return this.dSession.delete(parameter.get("token").toString());
+			return this.dSession.delete(parameter
+				                            .get("token")
+				                            .toString());
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
 		} catch (InvalidExpressionException e) {
@@ -96,6 +109,10 @@ public class SLogin extends HttpServlet {
 			return this.dLogin.urtilisateurExiste(pUser.getLogin());
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
+		} catch (NoSpecifiedTableException e) {
+			e.printStackTrace();
+		} catch (NoConnectionException e) {
+			e.printStackTrace();
 		}
 		return false;
 	}
@@ -132,6 +149,8 @@ public class SLogin extends HttpServlet {
 		PUser user = new Gson().fromJson(request.getReader(), PUser.class);
 		BUtilisateur utilisateur = null;
 		BSession<BUtilisateur> session = null;
+		Transaction transaction = new Transaction(this.daoFactory);
+		transaction.begin();
 		try {
 			utilisateur = this.dLogin.getData(user.getLogin());
 			long currentTimestamp = System.currentTimeMillis();
@@ -141,14 +160,19 @@ public class SLogin extends HttpServlet {
 			session.setDateCreation(new Date(currentTimestamp));
 			session.setDateExpiration(new Date(currentTimestamp + BSession.DEFAULT_TIMER * 1000));
 			session.setContenu(utilisateur);
-			this.dSession.insert(session);
+			if (this.dSession.insert(session)) transaction.commit();
+			else transaction.rollback();
 		} catch (SQLException throwables) {
+			transaction.rollback();
 			throwables.printStackTrace();
 		} catch (NoSpecifiedTableException e) {
+			transaction.rollback();
 			e.printStackTrace();
 		} catch (NoConnectionException e) {
+			transaction.rollback();
 			e.printStackTrace();
 		} catch (Exception e) {
+			transaction.rollback();
 			e.printStackTrace();
 		}
 		return session;
@@ -157,10 +181,14 @@ public class SLogin extends HttpServlet {
 	private boolean isTokenAlive(HttpServletRequest request) throws IOException {
 		HashMap post = new Gson().fromJson(request.getReader(), HashMap.class);
 		try {
-			BSession<BUtilisateur> session = this.dSession.get(post.get("token").toString());
-			if(session != null) {
+			BSession<BUtilisateur> session = this.dSession.get(post
+				                                                   .get("token")
+				                                                   .toString());
+			if (session != null) {
 				long currentTimestamp = System.currentTimeMillis();
-				if(session.getDateExpiration().getTime() <= currentTimestamp) this.dSession.delete(session.getId());
+				if (session
+					    .getDateExpiration()
+					    .getTime() <= currentTimestamp) this.dSession.delete(session.getId());
 				else this.dSession.addTimer(session.getId());
 				return this.dSession.exists(session.getId());
 			}

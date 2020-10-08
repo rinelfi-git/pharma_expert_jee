@@ -10,10 +10,7 @@ import lib.querybuilder.clauses.Pair;
 import lib.querybuilder.exceptions.NoConnectionException;
 import lib.querybuilder.exceptions.NoSpecifiedTableException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -95,7 +92,10 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 		this.query = "INSERT INTO";
 		this.query += " " + table + "(";
 		for (int i = 0; i < valueSize; i++) {
-			this.query += this.setValues.get(i).getKey().toString() + ", ";
+			this.query += this.setValues
+				              .get(i)
+				              .getKey()
+				              .toString() + ", ";
 		}
 		this.query = this.query.substring(0, this.query.length() - 2) + ")";
 		this.query += " VALUES(";
@@ -112,7 +112,8 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 			else if (keyValue.getValue() instanceof Long) this.preparedStatement.setLong(++index, (Long) keyValue.getValue());
 			else if (keyValue.getValue() instanceof Character) this.preparedStatement.setString(++index, (String) keyValue.getValue());
 			else if (keyValue.getValue() instanceof Boolean) this.preparedStatement.setBoolean(++index, (Boolean) keyValue.getValue());
-			else if (keyValue.getValue() instanceof Date) this.preparedStatement.setDate(++index, (java.sql.Date) java.sql.Date.from(((Date) keyValue.getValue()).toInstant()));
+			else if (keyValue.getValue() instanceof Timestamp) this.preparedStatement.setTimestamp(++index, (Timestamp) keyValue.getValue());
+			else if (keyValue.getValue() instanceof Date) this.preparedStatement.setDate(++index, new java.sql.Date(((Date)keyValue.getValue()).getTime()));
 		}
 		return this.preparedStatement.executeUpdate() > 0;
 	}
@@ -123,31 +124,23 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 		int valueSize = this.setValues.size();
 		this.query = "UPDATE " + table + " SET ";
 		for (int i = 0; i < valueSize; i++) {
-			this.query += this.setValues.get(i).getKey().toString() + " = ?, ";
+			this.query += this.setValues
+				              .get(i)
+				              .getKey()
+				              .toString() + " = ?, ";
 		}
 		this.query = this.query.substring(0, this.query.length() - 2);
 		
 		this.preparedStatement = this.connection.prepareStatement(this.query);
 		
 		this.checkClauses();
-		
-		for (Pair keyValue : this.setValues) {
-			if (keyValue.getValue() instanceof String) this.preparedStatement.setString(++index, (String) keyValue.getValue());
-			else if (keyValue.getValue() instanceof Integer) this.preparedStatement.setInt(++index, (Integer) keyValue.getValue());
-			else if (keyValue.getValue() instanceof Float) this.preparedStatement.setFloat(++index, (Float) keyValue.getValue());
-			else if (keyValue.getValue() instanceof Double) this.preparedStatement.setDouble(++index, (Double) keyValue.getValue());
-			else if (keyValue.getValue() instanceof Long) this.preparedStatement.setLong(++index, (Long) keyValue.getValue());
-			else if (keyValue.getValue() instanceof Character) this.preparedStatement.setString(++index, (String) keyValue.getValue());
-			else if (keyValue.getValue() instanceof Boolean) this.preparedStatement.setBoolean(++index, (Boolean) keyValue.getValue());
-			else if (keyValue.getValue() instanceof Date) this.preparedStatement.setDate(++index, (java.sql.Date) java.sql.Date.from(((Date) keyValue.getValue()).toInstant()));
-		}
 		this.combineLikeAndWhereClauses();
 		return this.preparedStatement.executeUpdate() > 0;
 	}
 	
 	@Override
 	public boolean delete(String table) throws InvalidExpressionException {
-		if(this.whereClauses.size() == 0 && this.orWhereClauses.size() == 0 && this.likeClauses.size() == 0 && this.orLikeClauses.size() == 0 && this.iLikeClauses.size() == 0 && this.orILikeClauses.size() == 0) throw new InvalidExpressionException();
+		if (this.whereClauses.size() == 0 && this.orWhereClauses.size() == 0 && this.likeClauses.size() == 0 && this.orLikeClauses.size() == 0 && this.iLikeClauses.size() == 0 && this.orILikeClauses.size() == 0) throw new InvalidExpressionException();
 		this.query = "DELETE FROM " + table;
 		this.checkClauses();
 		return false;
@@ -161,14 +154,20 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 	
 	@Override
 	public QueryBuilder select(String query) {
-		String[] formattedQuery = query.trim().replaceAll(", ", ",").split(",");
+		String[] formattedQuery = query
+			                          .trim()
+			                          .replaceAll(", ", ",")
+			                          .split(",");
 		for (String tmp : formattedQuery) this.selectClauses.add(tmp);
 		return this;
 	}
 	
 	@Override
 	public QueryBuilder select(int index, String query) {
-		String[] formattedQuery = query.trim().replaceAll(", ", ",").split(",");
+		String[] formattedQuery = query
+			                          .trim()
+			                          .replaceAll(", ", ",")
+			                          .split(",");
 		for (String tmp : formattedQuery) this.selectClauses.add(this.tables[index] + "." + tmp);
 		return this;
 	}
@@ -198,65 +197,9 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 	}
 	
 	@Override
-	public QueryBuilder where(String field, String value) {
+	public <V> QueryBuilder where(String field, V value) {
 		this.whereClauses.add(field + " = ?");
-		this.whereDataSet.add(new PreparedStatementDataset<String>(value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder where(int index, String field, String value) {
-		this.whereClauses.add(field + " = ?");
-		this.whereDataSet.add(new PreparedStatementDataset<String>(this.tables[index] + "." + value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder where(String field, int value) {
-		this.whereClauses.add(field + " = ?");
-		this.whereDataSet.add(new PreparedStatementDataset<Integer>(value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder where(String field, float value) {
-		this.whereClauses.add(field + " = ?");
-		this.whereDataSet.add(new PreparedStatementDataset<Float>(value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder where(String field, double value) {
-		this.whereClauses.add(field + " = ?");
-		this.whereDataSet.add(new PreparedStatementDataset<Double>(value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder where(String field, long value) {
-		this.whereClauses.add(field + " = ?");
-		this.whereDataSet.add(new PreparedStatementDataset<Long>(value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder where(String field, char value) {
-		this.whereClauses.add(field + " = ?");
-		this.whereDataSet.add(new PreparedStatementDataset<Character>(value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder where(String field, boolean value) {
-		this.whereClauses.add(field + " = ?");
-		this.whereDataSet.add(new PreparedStatementDataset<Boolean>(value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder where(String field, Date value) {
-		this.whereClauses.add(field + " = ?");
-		this.whereDataSet.add(new PreparedStatementDataset<Date>(value));
+		this.whereDataSet.add(new PreparedStatementDataset<V>(value));
 		return this;
 	}
 	
@@ -270,65 +213,9 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 	}
 	
 	@Override
-	public QueryBuilder orWhere(String field, String value) {
+	public <V> QueryBuilder orWhere(String field, V value) {
 		this.orWhereClauses.add(field + " = ?");
-		this.orWhereDataSet.add(new PreparedStatementDataset<String>(value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder orWhere(int index, String field, String value) {
-		this.orWhereClauses.add(field + " = ?");
-		this.orWhereDataSet.add(new PreparedStatementDataset<String>(this.tables[index] + "." + value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder orWhere(String field, int value) {
-		this.orWhereClauses.add(field + " = ?");
-		this.orWhereDataSet.add(new PreparedStatementDataset<Integer>(value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder orWhere(String field, float value) {
-		this.orWhereClauses.add(field + " = ?");
-		this.orWhereDataSet.add(new PreparedStatementDataset<Float>(value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder orWhere(String field, double value) {
-		this.orWhereClauses.add(field + " = ?");
-		this.orWhereDataSet.add(new PreparedStatementDataset<Double>(value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder orWhere(String field, long value) {
-		this.orWhereClauses.add(field + " = ?");
-		this.orWhereDataSet.add(new PreparedStatementDataset<Long>(value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder orWhere(String field, char value) {
-		this.orWhereClauses.add(field + " = ?");
-		this.orWhereDataSet.add(new PreparedStatementDataset<Character>(value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder orWhere(String field, boolean value) {
-		this.orWhereClauses.add(field + " = ?");
-		this.orWhereDataSet.add(new PreparedStatementDataset<Boolean>(value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder orWhere(String field, Date value) {
-		this.orWhereClauses.add(field + " = ?");
-		this.orWhereDataSet.add(new PreparedStatementDataset<Date>(value));
+		this.orWhereDataSet.add(new PreparedStatementDataset<V>(value));
 		return this;
 	}
 	
@@ -378,65 +265,9 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 	}
 	
 	@Override
-	public QueryBuilder like(String field, String value) {
+	public<V> QueryBuilder like(String field, V value) {
 		this.likeClauses.add(field + " LIKE ?");
-		this.likeDataSet.add(new PreparedStatementDataset<String>(value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder like(int index, String field, String value) {
-		this.likeClauses.add(field + " LIKE ?");
-		this.likeDataSet.add(new PreparedStatementDataset<String>(this.tables[index] + "." + value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder like(String field, int value) {
-		this.likeClauses.add(field + " LIKE ?");
-		this.likeDataSet.add(new PreparedStatementDataset<Integer>(value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder like(String field, float value) {
-		this.likeClauses.add(field + " LIKE ?");
-		this.likeDataSet.add(new PreparedStatementDataset<Float>(value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder like(String field, double value) {
-		this.likeClauses.add(field + " LIKE ?");
-		this.likeDataSet.add(new PreparedStatementDataset<Double>(value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder like(String field, long value) {
-		this.likeClauses.add(field + " LIKE ?");
-		this.likeDataSet.add(new PreparedStatementDataset<Long>(value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder like(String field, char value) {
-		this.likeClauses.add(field + " LIKE ?");
-		this.likeDataSet.add(new PreparedStatementDataset<Character>(value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder like(String field, boolean value) {
-		this.likeClauses.add(field + " LIKE ?");
-		this.likeDataSet.add(new PreparedStatementDataset<Boolean>(value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder like(String field, Date value) {
-		this.likeClauses.add(field + " LIKE ?");
-		this.likeDataSet.add(new PreparedStatementDataset<Date>(value));
+		this.likeDataSet.add(new PreparedStatementDataset<V>(value));
 		return this;
 	}
 	
@@ -450,65 +281,9 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 	}
 	
 	@Override
-	public QueryBuilder orLike(String field, String value) {
+	public <V> QueryBuilder orLike(String field, V value) {
 		this.orLikeClauses.add(field + " LIKE ?");
-		this.orLikeDataSet.add(new PreparedStatementDataset<String>(value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder orLike(int index, String field, String value) {
-		this.orLikeClauses.add(field + " LIKE ?");
-		this.orLikeDataSet.add(new PreparedStatementDataset<String>(this.tables[index] + "." + value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder orLike(String field, int value) {
-		this.orLikeClauses.add(field + " LIKE ?");
-		this.orLikeDataSet.add(new PreparedStatementDataset<Integer>(value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder orLike(String field, float value) {
-		this.orLikeClauses.add(field + " LIKE ?");
-		this.orLikeDataSet.add(new PreparedStatementDataset<Float>(value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder orLike(String field, double value) {
-		this.orLikeClauses.add(field + " LIKE ?");
-		this.orLikeDataSet.add(new PreparedStatementDataset<Double>(value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder orLike(String field, long value) {
-		this.orLikeClauses.add(field + " LIKE ?");
-		this.orLikeDataSet.add(new PreparedStatementDataset<Long>(value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder orLike(String field, char value) {
-		this.orLikeClauses.add(field + " LIKE ?");
-		this.orLikeDataSet.add(new PreparedStatementDataset<Character>(value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder orLike(String field, boolean value) {
-		this.orLikeClauses.add(field + " LIKE ?");
-		this.orLikeDataSet.add(new PreparedStatementDataset<Boolean>(value));
-		return this;
-	}
-	
-	@Override
-	public QueryBuilder orLike(String field, Date value) {
-		this.orLikeClauses.add(field + " LIKE ?");
-		this.orLikeDataSet.add(new PreparedStatementDataset<Date>(value));
+		this.orLikeDataSet.add(new PreparedStatementDataset<V>(value));
 		return this;
 	}
 	
@@ -532,57 +307,9 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 	 * */
 	
 	// AND
-	public QueryBuilder iLike(String field, String value) {
+	public <V> QueryBuilder iLike(String field, V value) {
 		this.iLikeClauses.add("AND " + field + " ILIKE ?");
-		this.iLikeDataSet.add(new PreparedStatementDataset<String>(value));
-		return this;
-	}
-	
-	public QueryBuilder iLike(int index, String field, String value) {
-		this.iLikeClauses.add("AND " + field + " ILIKE ?");
-		this.iLikeDataSet.add(new PreparedStatementDataset<String>(this.tables[index] + "." + value));
-		return this;
-	}
-	
-	public QueryBuilder iLike(String field, int value) {
-		this.iLikeClauses.add("AND " + field + " ILIKE ?");
-		this.iLikeDataSet.add(new PreparedStatementDataset<Integer>(value));
-		return this;
-	}
-	
-	public QueryBuilder iLike(String field, float value) {
-		this.iLikeClauses.add("AND " + field + " ILIKE ?");
-		this.iLikeDataSet.add(new PreparedStatementDataset<Float>(value));
-		return this;
-	}
-	
-	public QueryBuilder iLike(String field, double value) {
-		this.iLikeClauses.add("AND " + field + " ILIKE ?");
-		this.iLikeDataSet.add(new PreparedStatementDataset<Double>(value));
-		return this;
-	}
-	
-	public QueryBuilder iLike(String field, long value) {
-		this.iLikeClauses.add("AND " + field + " ILIKE ?");
-		this.iLikeDataSet.add(new PreparedStatementDataset<Long>(value));
-		return this;
-	}
-	
-	public QueryBuilder iLike(String field, char value) {
-		this.iLikeClauses.add("AND " + field + " ILIKE ?");
-		this.iLikeDataSet.add(new PreparedStatementDataset<Character>(value));
-		return this;
-	}
-	
-	public QueryBuilder iLike(String field, boolean value) {
-		this.iLikeClauses.add("AND " + field + " ILIKE ?");
-		this.iLikeDataSet.add(new PreparedStatementDataset<Boolean>(value));
-		return this;
-	}
-	
-	public QueryBuilder iLike(String field, Date value) {
-		this.iLikeClauses.add("AND " + field + " ILIKE ?");
-		this.iLikeDataSet.add(new PreparedStatementDataset<Date>(value));
+		this.iLikeDataSet.add(new PreparedStatementDataset<V>(value));
 		return this;
 	}
 	
@@ -595,57 +322,9 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 	}
 	
 	// OR
-	public QueryBuilder orILike(String field, String value) {
+	public <V> QueryBuilder orILike(String field, V value) {
 		this.orILikeClauses.add(field + " ILIKE ?");
-		this.orILikeDataSet.add(new PreparedStatementDataset<String>(value));
-		return this;
-	}
-	
-	public QueryBuilder orILike(int index, String field, String value) {
-		this.orILikeClauses.add(field + " ILIKE ?");
-		this.orILikeDataSet.add(new PreparedStatementDataset<String>(this.tables[index] + "." + value));
-		return this;
-	}
-	
-	public QueryBuilder orILike(String field, int value) {
-		this.orILikeClauses.add(field + " ILIKE ?");
-		this.orILikeDataSet.add(new PreparedStatementDataset<Integer>(value));
-		return this;
-	}
-	
-	public QueryBuilder orILike(String field, float value) {
-		this.orILikeClauses.add(field + " ILIKE ?");
-		this.orILikeDataSet.add(new PreparedStatementDataset<Float>(value));
-		return this;
-	}
-	
-	public QueryBuilder orILike(String field, double value) {
-		this.orILikeClauses.add(field + " ILIKE ?");
-		this.orILikeDataSet.add(new PreparedStatementDataset<Double>(value));
-		return this;
-	}
-	
-	public QueryBuilder orILike(String field, long value) {
-		this.orILikeClauses.add(field + " ILIKE ?");
-		this.orILikeDataSet.add(new PreparedStatementDataset<Long>(value));
-		return this;
-	}
-	
-	public QueryBuilder orILike(String field, char value) {
-		this.orILikeClauses.add(field + " ILIKE ?");
-		this.orILikeDataSet.add(new PreparedStatementDataset<Character>(value));
-		return this;
-	}
-	
-	public QueryBuilder orILike(String field, boolean value) {
-		this.orILikeClauses.add(field + " ILIKE ?");
-		this.orILikeDataSet.add(new PreparedStatementDataset<Boolean>(value));
-		return this;
-	}
-	
-	public QueryBuilder orILike(String field, Date value) {
-		this.orILikeClauses.add(field + " ILIKE ?");
-		this.orILikeDataSet.add(new PreparedStatementDataset<Date>(value));
+		this.orILikeDataSet.add(new PreparedStatementDataset<V>(value));
 		return this;
 	}
 	
@@ -677,7 +356,8 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 			else if (a.getValue() instanceof Long) this.preparedStatement.setLong(++index, (Long) a.getValue());
 			else if (a.getValue() instanceof Character) this.preparedStatement.setString(++index, (String) a.getValue());
 			else if (a.getValue() instanceof Boolean) this.preparedStatement.setBoolean(++index, (Boolean) a.getValue());
-			else if (a.getValue() instanceof Date) this.preparedStatement.setDate(++index, (java.sql.Date) java.sql.Date.from(((Date) a.getValue()).toInstant()));
+			else if (a.getValue() instanceof Timestamp) this.preparedStatement.setTimestamp(++index, (Timestamp) a.getValue());
+			else if (a.getValue() instanceof Date) this.preparedStatement.setDate(++index, new java.sql.Date(((Date)a.getValue()).getTime()));
 		}
 		for (PreparedStatementDataset b : this.orWhereDataSet) {
 			if (b.getValue() instanceof String) this.preparedStatement.setString(++index, (String) b.getValue());
@@ -687,7 +367,8 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 			else if (b.getValue() instanceof Long) this.preparedStatement.setLong(++index, (Long) b.getValue());
 			else if (b.getValue() instanceof Character) this.preparedStatement.setString(++index, (String) b.getValue());
 			else if (b.getValue() instanceof Boolean) this.preparedStatement.setBoolean(++index, (Boolean) b.getValue());
-			else if (b.getValue() instanceof Date) this.preparedStatement.setDate(++index, (java.sql.Date) java.sql.Date.from(((Date) b.getValue()).toInstant()));
+			else if (b.getValue() instanceof Timestamp) this.preparedStatement.setTimestamp(++index, (Timestamp) b.getValue());
+			else if (b.getValue() instanceof Date) this.preparedStatement.setDate(++index, new java.sql.Date(((Date)b.getValue()).getTime()));
 		}
 		for (PreparedStatementDataset c : this.likeDataSet) {
 			if (c.getValue() instanceof String) this.preparedStatement.setString(++index, (String) c.getValue());
@@ -697,7 +378,8 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 			else if (c.getValue() instanceof Long) this.preparedStatement.setLong(++index, (Long) c.getValue());
 			else if (c.getValue() instanceof Character) this.preparedStatement.setString(++index, (String) c.getValue());
 			else if (c.getValue() instanceof Boolean) this.preparedStatement.setBoolean(++index, (Boolean) c.getValue());
-			else if (c.getValue() instanceof Date) this.preparedStatement.setDate(++index, (java.sql.Date) java.sql.Date.from(((Date) c.getValue()).toInstant()));
+			else if (c.getValue() instanceof Timestamp) this.preparedStatement.setTimestamp(++index, (Timestamp) c.getValue());
+			else if (c.getValue() instanceof Date) this.preparedStatement.setDate(++index, new java.sql.Date(((Date)c.getValue()).getTime()));
 		}
 		for (PreparedStatementDataset d : this.orLikeDataSet) {
 			if (d.getValue() instanceof String) this.preparedStatement.setString(++index, (String) d.getValue());
@@ -707,7 +389,8 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 			else if (d.getValue() instanceof Long) this.preparedStatement.setLong(++index, (Long) d.getValue());
 			else if (d.getValue() instanceof Character) this.preparedStatement.setString(++index, (String) d.getValue());
 			else if (d.getValue() instanceof Boolean) this.preparedStatement.setBoolean(++index, (Boolean) d.getValue());
-			else if (d.getValue() instanceof Date) this.preparedStatement.setDate(++index, (java.sql.Date) java.sql.Date.from(((Date) d.getValue()).toInstant()));
+			else if (d.getValue() instanceof Timestamp) this.preparedStatement.setTimestamp(++index, (Timestamp) d.getValue());
+			else if (d.getValue() instanceof Date) this.preparedStatement.setDate(++index, new java.sql.Date(((Date)d.getValue()).getTime()));
 		}
 		for (PreparedStatementDataset e : this.iLikeDataSet) {
 			if (e.getValue() instanceof String) this.preparedStatement.setString(++index, (String) e.getValue());
@@ -717,7 +400,8 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 			else if (e.getValue() instanceof Long) this.preparedStatement.setLong(++index, (Long) e.getValue());
 			else if (e.getValue() instanceof Character) this.preparedStatement.setString(++index, (String) e.getValue());
 			else if (e.getValue() instanceof Boolean) this.preparedStatement.setBoolean(++index, (Boolean) e.getValue());
-			else if (e.getValue() instanceof Date) this.preparedStatement.setDate(++index, (java.sql.Date) java.sql.Date.from(((Date) e.getValue()).toInstant()));
+			else if (e.getValue() instanceof Timestamp) this.preparedStatement.setTimestamp(++index, (Timestamp) e.getValue());
+			else if (e.getValue() instanceof Date) this.preparedStatement.setDate(++index, new java.sql.Date(((Date)e.getValue()).getTime()));
 		}
 		for (PreparedStatementDataset f : this.orILikeDataSet) {
 			if (f.getValue() instanceof String) this.preparedStatement.setString(++index, (String) f.getValue());
@@ -727,7 +411,8 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 			else if (f.getValue() instanceof Long) this.preparedStatement.setLong(++index, (Long) f.getValue());
 			else if (f.getValue() instanceof Character) this.preparedStatement.setString(++index, (String) f.getValue());
 			else if (f.getValue() instanceof Boolean) this.preparedStatement.setBoolean(++index, (Boolean) f.getValue());
-			else if (f.getValue() instanceof Date) this.preparedStatement.setDate(++index, (java.sql.Date) java.sql.Date.from(((Date) f.getValue()).toInstant()));
+			else if (f.getValue() instanceof Timestamp) this.preparedStatement.setTimestamp(++index, (Timestamp) f.getValue());
+			else if (f.getValue() instanceof Date) this.preparedStatement.setDate(++index, new java.sql.Date(((Date)f.getValue()).getTime()));
 		}
 	}
 	
@@ -779,10 +464,12 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 	}
 	
 	@Override
-	public int rowCount() throws SQLException {
-		ResultSet resultSet = this.result();
+	public int rowCount() throws SQLException, NoSpecifiedTableException, NoConnectionException {
+		ResultSet resultSet = this
+			                      .get()
+			                      .result();
 		int rowCount = 0;
-		while(resultSet.next()) rowCount++;
+		while (resultSet.next()) rowCount++;
 		return rowCount;
 	}
 	
@@ -790,8 +477,10 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 	public int count() throws SQLException {
 		int count = 0;
 		this.query = "SELECT COUNT(*) AS count FROM " + this.table;
-		ResultSet resultSet = this.connection.createStatement().executeQuery(this.query);
-		if(resultSet.next()) count = resultSet.getInt(0);
+		ResultSet resultSet = this.connection
+			                      .createStatement()
+			                      .executeQuery(this.query);
+		if (resultSet.next()) count = resultSet.getInt(0);
 		return count;
 	}
 	
@@ -799,8 +488,10 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 	public int count(String table) throws SQLException {
 		int count = 0;
 		this.query = "SELECT COUNT(*) AS count FROM " + table;
-		ResultSet resultSet = this.connection.createStatement().executeQuery(this.query);
-		if(resultSet.next()) count = resultSet.getInt(0);
+		ResultSet resultSet = this.connection
+			                      .createStatement()
+			                      .executeQuery(this.query);
+		if (resultSet.next()) count = resultSet.getInt(0);
 		return count;
 	}
 	
@@ -826,16 +517,23 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 		this.query += this.table;
 		if (this.joins.size() > 0) for (Join join : this.joins) this.query += " " + join;
 		this.checkClauses();
-		this.query = this.query.replaceAll("  ", " ").replaceAll("WHERE OR", "WHERE").replaceAll("WHERE AND", "WHERE");
+		this.query = this.query
+			             .replaceAll("  ", " ")
+			             .replaceAll("WHERE OR", "WHERE")
+			             .replaceAll("WHERE AND", "WHERE");
 		if (this.orderBy.size() > 0) {
 			this.query += " ORDER BY ";
 			for (OrderBy orderBy : this.orderBy) this.query += orderBy.getField() + " " + orderBy.getOrdering() + ", ";
-			this.query = this.query.substring(0, this.query.length() - 2).replaceAll("  ", " ");
+			this.query = this.query
+				             .substring(0, this.query.length() - 2)
+				             .replaceAll("  ", " ");
 		}
 		if (this.groupBy.size() > 0) {
 			this.query += " GROUP BY ";
 			for (String groupBy : this.groupBy) this.query += groupBy + ", ";
-			this.query = this.query.substring(0, this.query.length() - 2).replaceAll("  ", " ");
+			this.query = this.query
+				             .substring(0, this.query.length() - 2)
+				             .replaceAll("  ", " ");
 		}
 		if (this.limit != null) {
 			this.query += " LIMIT " + this.limit.getLimit() + " OFFSET " + this.limit.getOffset();

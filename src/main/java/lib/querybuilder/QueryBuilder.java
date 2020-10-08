@@ -79,44 +79,12 @@ public interface QueryBuilder {
 	 * */
 	
 	// AND
-	QueryBuilder where(String field, String value);
-	
-	QueryBuilder where(int index, String field, String value);
-	
-	QueryBuilder where(String field, int value);
-	
-	QueryBuilder where(String field, float value);
-	
-	QueryBuilder where(String field, double value);
-	
-	QueryBuilder where(String field, long value);
-	
-	QueryBuilder where(String field, char value);
-	
-	QueryBuilder where(String field, boolean value);
-	
-	QueryBuilder where(String field, Date value);
+	<V> QueryBuilder where(String field, V value);
 	
 	<V> QueryBuilder where(Map<String, V> where);
 	
 	// OR
-	QueryBuilder orWhere(String field, String value);
-	
-	QueryBuilder orWhere(int index, String field, String value);
-	
-	QueryBuilder orWhere(String field, int value);
-	
-	QueryBuilder orWhere(String field, float value);
-	
-	QueryBuilder orWhere(String field, double value);
-	
-	QueryBuilder orWhere(String field, long value);
-	
-	QueryBuilder orWhere(String field, char value);
-	
-	QueryBuilder orWhere(String field, boolean value);
-	
-	QueryBuilder orWhere(String field, Date value);
+	<V> QueryBuilder orWhere(String field, V value);
 	
 	<V> QueryBuilder orWhere(Map<String, V> orWhere);
 	
@@ -163,44 +131,12 @@ public interface QueryBuilder {
 	 * */
 	
 	// AND
-	QueryBuilder like(String field, String value);
-	
-	QueryBuilder like(int index, String field, String value);
-	
-	QueryBuilder like(String field, int value);
-	
-	QueryBuilder like(String field, float value);
-	
-	QueryBuilder like(String field, double value);
-	
-	QueryBuilder like(String field, long value);
-	
-	QueryBuilder like(String field, char value);
-	
-	QueryBuilder like(String field, boolean value);
-	
-	QueryBuilder like(String field, Date value);
+	<V> QueryBuilder like(String field, V value);
 	
 	<V> QueryBuilder like(Map<String, V> where);
 	
 	// OR
-	QueryBuilder orLike(String field, String value);
-	
-	QueryBuilder orLike(int index, String field, String value);
-	
-	QueryBuilder orLike(String field, int value);
-	
-	QueryBuilder orLike(String field, float value);
-	
-	QueryBuilder orLike(String field, double value);
-	
-	QueryBuilder orLike(String field, long value);
-	
-	QueryBuilder orLike(String field, char value);
-	
-	QueryBuilder orLike(String field, boolean value);
-	
-	QueryBuilder orLike(String field, Date value);
+	<V> QueryBuilder orLike(String field, V value);
 	
 	<V> QueryBuilder orLike(Map<String, V> orLike);
 	
@@ -243,7 +179,7 @@ public interface QueryBuilder {
 	
 	ResultSet result() throws SQLException;
 	
-	int rowCount() throws SQLException;
+	int rowCount() throws SQLException, NoSpecifiedTableException, NoConnectionException;
 	
 	int count() throws SQLException;
 	

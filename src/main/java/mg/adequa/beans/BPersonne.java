@@ -1,15 +1,15 @@
 package mg.adequa.beans;
 
 public class BPersonne {
-	protected int id;
+	protected int idPersonne;
 	protected String nom, prenom;
 	
-	public int getId() {
-		return id;
+	public int getIdPersonne() {
+		return idPersonne;
 	}
 	
-	public void setId(int id) {
-		this.id = id;
+	public void setIdPersonne(int idPersonne) {
+		this.idPersonne = idPersonne;
 	}
 	
 	public String getNom() {

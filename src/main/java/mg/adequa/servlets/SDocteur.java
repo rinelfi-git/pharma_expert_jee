@@ -148,7 +148,7 @@ public class SDocteur extends HttpServlet {
 			if (this.dPersonne.insert(personne)) {
 				
 				BDocteur docteur = new BDocteur();
-				docteur.setId(this.dPersonne.lastId());
+				docteur.setIdPersonne(this.dPersonne.lastId());
 				docteur.setNom(pDocteur.getNom());
 				docteur.setPrenom(pDocteur.getPrenom());
 				docteur.setServiceHospitalier(pDocteur.getServiceHospitalier());
@@ -181,7 +181,7 @@ public class SDocteur extends HttpServlet {
 			if (this.dPersonne.update(personne, id)) {
 				
 				BDocteur docteur = new BDocteur();
-				docteur.setId(this.dPersonne.lastId());
+				docteur.setIdPersonne(this.dPersonne.lastId());
 				docteur.setNom(pDocteur.getNom());
 				docteur.setPrenom(pDocteur.getPrenom());
 				docteur.setServiceHospitalier(pDocteur.getServiceHospitalier());

@@ -7,7 +7,7 @@ import mg.adequa.beans.BUtilisateur;
 import java.sql.SQLException;
 
 public interface DLogin {
-	boolean urtilisateurExiste(String login) throws SQLException;
+	boolean urtilisateurExiste(String login) throws SQLException, NoConnectionException, NoSpecifiedTableException;
 	String getPassword(String login) throws SQLException, NoSpecifiedTableException, NoConnectionException;
 	BUtilisateur getData(String login) throws SQLException, NoSpecifiedTableException, NoConnectionException;
 }

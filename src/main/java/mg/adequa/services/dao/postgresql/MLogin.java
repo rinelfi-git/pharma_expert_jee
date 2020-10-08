@@ -24,7 +24,7 @@ public class MLogin implements DLogin {
 	}
 	
 	@Override
-	public boolean urtilisateurExiste(String login) throws SQLException {
+	public boolean urtilisateurExiste(String login) throws SQLException, NoConnectionException, NoSpecifiedTableException {
 		QueryBuilder query = new PostgreSQLQueryBuilder(this.dao.getConnection());
 		return query
 			       .where("login", login)
@@ -64,13 +64,14 @@ public class MLogin implements DLogin {
 				})
 				.select(transposition)
 				.from(this.tables.getUtilisateur())
-				.join(this.tables.getPersonnel() + ".id", this.tables.getUtilisateur() + ".personnel")
+				.join(this.tables.getPersonnel() + ".numero", this.tables.getUtilisateur() + ".personnel")
+				.join(this.tables.getPersonne() + ".id", this.tables.getPersonnel() + ".personne")
 				.where("login", login)
 				.get()
 				.result();
 		if (resultSet.next()) {
 			getData = new BUtilisateur();
-			getData.setId(resultSet.getInt("id"));
+			getData.setIdUtilisateur(resultSet.getInt("id"));
 			getData.setLogin(resultSet.getString("login"));
 			getData.setAdministrateur(resultSet.getBoolean("administrateur"));
 			getData.setRole(resultSet.getString("role"));

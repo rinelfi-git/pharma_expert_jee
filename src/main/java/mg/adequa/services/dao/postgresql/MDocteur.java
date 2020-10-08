@@ -95,7 +95,7 @@ public class MDocteur implements DDocteur {
 		QueryBuilder query = new PostgreSQLQueryBuilder(this.daoFactory.getConnection());
 		return query
 			       .set("nom", docteur.getNom())
-			       .set("id", docteur.getId())
+			       .set("id", docteur.getIdPersonne())
 			       .set("prenom", docteur.getPrenom())
 			       .insert(this.tables.getPersonne());
 	}
@@ -104,7 +104,7 @@ public class MDocteur implements DDocteur {
 	public boolean update(BDocteur docteur, int reference) throws Exception {
 		QueryBuilder query = new PostgreSQLQueryBuilder(this.daoFactory.getConnection());
 		return query
-			       .set("id", docteur.getId())
+			       .set("id", docteur.getIdPersonne())
 			       .set("service_hospitalier", docteur.getServiceHospitalier())
 			       .update(this.tables.getPersonne());
 	}

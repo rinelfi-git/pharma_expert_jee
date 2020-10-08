@@ -13,7 +13,7 @@ public class Transaction {
 	
 	public void begin() {
 		try {
-			this.daoFactory.getConnection().createStatement().executeQuery("BEGIN;");
+			this.daoFactory.getConnection().createStatement().executeUpdate("BEGIN;");
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
 		}
@@ -24,7 +24,7 @@ public class Transaction {
 		Statement statement = null;
 		try {
 			connection = this.daoFactory.getConnection();
-			connection.createStatement().executeQuery("ROLLBACK;");
+			connection.createStatement().executeUpdate("ROLLBACK;");
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
 		} finally {
@@ -40,7 +40,7 @@ public class Transaction {
 		Connection connection = null;
 		try {
 			connection = this.daoFactory.getConnection();
-			connection.createStatement().executeQuery("COMMIT;");
+			connection.createStatement().executeUpdate("COMMIT;");
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
 		} finally {
