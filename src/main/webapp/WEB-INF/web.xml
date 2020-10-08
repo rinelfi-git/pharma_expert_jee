@@ -5,7 +5,7 @@
          version="4.0">
 	<servlet>
 		<servlet-name>Achat</servlet-name>
-		<servlet-class>mg.adequa.servlets.AchatServlet</servlet-class>
+		<servlet-class>mg.adequa.servlets.SAchat</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>Docteur</servlet-name>
@@ -13,7 +13,7 @@
 	</servlet>
 	<servlet>
 		<servlet-name>TableauDeBord</servlet-name>
-		<servlet-class>mg.adequa.servlets.TableauDeBordServlet</servlet-class>
+		<servlet-class>mg.adequa.servlets.STableauDeBord</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>UserSession</servlet-name>

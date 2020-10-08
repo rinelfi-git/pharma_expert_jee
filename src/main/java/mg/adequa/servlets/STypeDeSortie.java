@@ -3,7 +3,7 @@ package mg.adequa.servlets;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
-public class PersonnelOngServlet extends HttpServlet {
+public class STypeDeSortie extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();

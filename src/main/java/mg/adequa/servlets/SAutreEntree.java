@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class AutreEntreeServlet extends HttpServlet {
+public class SAutreEntree extends HttpServlet {
 	private DaoFactory daoFactory;
 	private DAutreEntree dAutreEntree;
 	

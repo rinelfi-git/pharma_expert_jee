@@ -20,7 +20,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TableauDeBordServlet extends HttpServlet {
+public class STableauDeBord extends HttpServlet {
 	private DBilan dBilan;
 	private JournalEntreeSortieDao journalEntreeSortieDao;
 	private DaoFactory daoFactory;

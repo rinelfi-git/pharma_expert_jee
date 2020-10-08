@@ -18,11 +18,11 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class AchatServlet extends HttpServlet {
+public class SAchat extends HttpServlet {
 	private DaoFactory daoFactory;
 	private DAchat dAchat;
 	
-	public AchatServlet() {super();}
+	public SAchat() {super();}
 	
 	@Override
 	public void init() throws ServletException {
