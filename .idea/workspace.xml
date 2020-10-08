@@ -10,16 +10,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14fd4e27-a837-4fe7-b2d3-86afbdd55789" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MSession.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lib/querybuilder/exceptions/InvalidExpressionException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/beans/BSession.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/DaoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/DaoFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/querybuilder/QueryBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lib/querybuilder/QueryBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/querybuilder/implementations/PostgreSQLQueryBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lib/querybuilder/implementations/PostgreSQLQueryBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/beans/Utilisateur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/beans/BUtilisateur.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/PostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/PostgreSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DaoDocteur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DDocteur.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DaoSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DSession.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/ModelDocteur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/ModelDocteur.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SLogin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/ServletDocteur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SDocteur.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DSession.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MSession.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/ModelAchat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MAchat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/ModelAutreEntree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MAutreEntree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/ModelBilan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MBilan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/ModelDocteur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MDocteur.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/ModelJournalEntreeSortie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MJournalES.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/ModelPersonne.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MPersonne.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/SessionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/SessionManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,7 +202,7 @@
       <workItem from="1602147258536" duration="3202000" />
       <workItem from="1602157492069" duration="5338000" />
       <workItem from="1602163987647" duration="1202000" />
-      <workItem from="1602167788025" duration="230000" />
+      <workItem from="1602167788025" duration="3586000" />
     </task>
     <servers />
   </component>
@@ -216,10 +222,10 @@
       <screen x="0" y="0" width="1366" height="735" />
     </state>
     <state x="141" y="0" width="1084" height="735" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.735@0.0.1366.735" timestamp="1600967764392" />
-    <state x="491" y="56" width="380" height="623" key="#com.intellij.ide.util.MemberChooser" timestamp="1602162255881">
+    <state x="491" y="56" width="380" height="623" key="#com.intellij.ide.util.MemberChooser" timestamp="1602169393316">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state x="491" y="56" width="380" height="623" key="#com.intellij.ide.util.MemberChooser/0.0.1366.735@0.0.1366.735" timestamp="1602162255881" />
+    <state x="491" y="56" width="380" height="623" key="#com.intellij.ide.util.MemberChooser/0.0.1366.735@0.0.1366.735" timestamp="1602169393316" />
     <state x="366" y="108" width="630" height="519" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1600855612570">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
@@ -228,10 +234,10 @@
       <screen x="0" y="0" width="1366" height="735" />
     </state>
     <state x="265" y="296" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1366.735@0.0.1366.735" timestamp="1601305019790" />
-    <state x="9" y="0" width="1339" height="732" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1602168060520">
+    <state x="9" y="0" width="1339" height="732" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1602168779601">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state x="9" y="0" width="1339" height="732" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.735@0.0.1366.735" timestamp="1602168060520" />
+    <state x="9" y="0" width="1339" height="732" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.735@0.0.1366.735" timestamp="1602168779601" />
     <state x="357" y="110" width="643" height="508" key="FileChooserDialogImpl" timestamp="1601818018765">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
@@ -300,6 +306,10 @@
       <screen x="0" y="0" width="1366" height="735" />
     </state>
     <state x="416" y="131" width="534" height="476" key="extract.method.dialog/0.0.1366.735@0.0.1366.735" timestamp="1602125123139" />
+    <state x="277" y="0" key="new project wizard" timestamp="1602170227815">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state x="277" y="0" key="new project wizard/0.0.1366.735@0.0.1366.735" timestamp="1602170227815" />
     <state x="344" y="162" key="run.anything.popup" timestamp="1602131223766">
       <screen x="0" y="0" width="1366" height="735" />
     </state>

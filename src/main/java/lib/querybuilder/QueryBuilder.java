@@ -1,5 +1,6 @@
 package lib.querybuilder;
 
+import lib.querybuilder.exceptions.InvalidExpressionException;
 import lib.querybuilder.exceptions.NoConnectionException;
 import lib.querybuilder.exceptions.NoSpecifiedTableException;
 
@@ -31,15 +32,17 @@ public interface QueryBuilder {
 	 *
 	 *
 	 *
-	 * INSERT
+	 * INSERT/UPDATE/DELETE
 	 *
 	 *
 	 *
 	 * */
 	
-	boolean insert(String table) throws Exception;
+	boolean insert(String table) throws InvalidExpressionException, SQLException;
 	
-	boolean update(String table) throws Exception;
+	boolean update(String table) throws InvalidExpressionException, SQLException;
+	
+	boolean delete(String table) throws InvalidExpressionException;
 	
 	/*
 	 *
@@ -224,7 +227,7 @@ public interface QueryBuilder {
 	
 	void combineLikeAndWhereClauses() throws SQLException;
 	
-	String compiledQuery() throws NoSpecifiedTableException ;
+	String compiledQuery() throws NoSpecifiedTableException;
 	
 	void close() throws SQLException;
 	
@@ -241,4 +244,6 @@ public interface QueryBuilder {
 	ResultSet result() throws SQLException;
 	
 	int rowCount() throws SQLException;
+	
+	void checkClauses();
 }

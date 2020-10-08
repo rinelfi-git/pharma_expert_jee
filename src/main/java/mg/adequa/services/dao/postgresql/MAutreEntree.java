@@ -11,10 +11,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-public class ModelAutreEntree implements DAutreEntree {
+public class MAutreEntree implements DAutreEntree {
 	private DaoFactory daoFactory;
 	
-	public ModelAutreEntree(DaoFactory daoFactory) { this.daoFactory = daoFactory; }
+	public MAutreEntree(DaoFactory daoFactory) { this.daoFactory = daoFactory; }
 	
 	@Override
 	public String makeQuery(DatatableParameter constraints) {

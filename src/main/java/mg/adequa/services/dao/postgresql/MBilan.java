@@ -5,10 +5,10 @@ import mg.adequa.services.dao.interfaces.DBilan;
 
 import java.sql.*;
 
-public class ModelBilan implements DBilan {
+public class MBilan implements DBilan {
 	private DaoFactory daoFactory;
 	
-	public ModelBilan(DaoFactory daoFactory) {this.daoFactory = daoFactory;}
+	public MBilan(DaoFactory daoFactory) {this.daoFactory = daoFactory;}
 	
 	@Override
 	public int getProduit() {

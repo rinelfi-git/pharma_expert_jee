@@ -13,11 +13,11 @@ import lib.querybuilder.QueryBuilder;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ModelPersonne implements DPersonne {
+public class MPersonne implements DPersonne {
 	private DaoFactory dao;
 	private DbTables tables;
 	
-	public ModelPersonne(DaoFactory dao) {
+	public MPersonne(DaoFactory dao) {
 		this.dao = dao;
 		this.tables = new DbTables();
 	}

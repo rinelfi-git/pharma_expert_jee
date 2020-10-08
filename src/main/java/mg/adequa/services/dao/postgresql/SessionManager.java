@@ -2,7 +2,7 @@ package mg.adequa.services.dao.postgresql;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import mg.adequa.beans.Utilisateur;
+import mg.adequa.beans.BUtilisateur;
 import mg.adequa.utils.jwt.Session;
 
 import java.io.BufferedWriter;
@@ -19,7 +19,7 @@ import java.util.List;
 public class SessionManager {
 	public static String SESSION = "session", COOKIE = "cookie";
 	private static int DEFAULT_TIMER = 1200;
-	private Session<Utilisateur>[] tokens;
+	private Session<BUtilisateur>[] tokens;
 	private String fileLocation;
 	
 	public SessionManager() {
@@ -53,12 +53,12 @@ public class SessionManager {
 		List<String> reader = Files.readAllLines(Paths.get(this.fileLocation));
 		for (String read : reader) builder.append(read);
 		String compiledJson = builder.toString().trim();
-		Type jwtCollection = new TypeToken<Session<Utilisateur>[]>() {}.getType();
+		Type jwtCollection = new TypeToken<Session<BUtilisateur>[]>() {}.getType();
 		this.tokens = new Gson().fromJson(compiledJson, jwtCollection);
 	}
 	
 	public SessionManager removeAt(int index) {
-		Session<Utilisateur>[] temporaire = new Session[this.tokens.length - 1];
+		Session<BUtilisateur>[] temporaire = new Session[this.tokens.length - 1];
 		for (int inputCounter = 0, outputCounter = 0; inputCounter < this.tokens.length; inputCounter++) {
 			if (inputCounter != index) {
 				temporaire[outputCounter] = this.tokens[inputCounter];
@@ -69,8 +69,8 @@ public class SessionManager {
 		return this;
 	}
 	
-	public SessionManager add(int index, Session<Utilisateur> token) {
-		Session<Utilisateur>[] temporaire = new Session[this.tokens.length + 1];
+	public SessionManager add(int index, Session<BUtilisateur> token) {
+		Session<BUtilisateur>[] temporaire = new Session[this.tokens.length + 1];
 		for (int inputCounter = 0, outputCounter = 0; inputCounter < this.tokens.length + 1; inputCounter++, outputCounter++) {
 			if (inputCounter == index) {
 				temporaire[outputCounter] = token;
@@ -81,8 +81,8 @@ public class SessionManager {
 		return this;
 	}
 	
-	public SessionManager add(Session<Utilisateur> token) {
-		Session<Utilisateur>[] temporaire = new Session[this.tokens.length + 1];
+	public SessionManager add(Session<BUtilisateur> token) {
+		Session<BUtilisateur>[] temporaire = new Session[this.tokens.length + 1];
 		for (int inputCounter = 0; inputCounter < this.tokens.length; inputCounter++) temporaire[inputCounter] = this.tokens[inputCounter];
 		temporaire[this.tokens.length] = token;
 		this.tokens = temporaire;
@@ -102,12 +102,12 @@ public class SessionManager {
 	}
 	
 	public boolean exists(String id) {
-		for (Session<Utilisateur> token : this.tokens) if (id.equals(token.getId())) return true;
+		for (Session<BUtilisateur> token : this.tokens) if (id.equals(token.getId())) return true;
 		return false;
 	}
 	
 	public SessionManager addTimer(String id) {
-		for (Session<Utilisateur> token : this.tokens) {
+		for (Session<BUtilisateur> token : this.tokens) {
 			if (id.equals(token.getId())){
 				token.setDateExpiration(System.currentTimeMillis() + SessionManager.DEFAULT_TIMER);
 				token.setDateDeCreationString(new SimpleDateFormat("dd MMMM yyyy HH:mm:ss").format(new Date(token.getDateDeCreation())));

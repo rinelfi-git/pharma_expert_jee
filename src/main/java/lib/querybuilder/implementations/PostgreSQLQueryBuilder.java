@@ -1,5 +1,6 @@
 package lib.querybuilder.implementations;
 
+import lib.querybuilder.exceptions.InvalidExpressionException;
 import lib.querybuilder.utils.PreparedStatementDataset;
 import lib.querybuilder.QueryBuilder;
 import lib.querybuilder.clauses.Join;
@@ -88,8 +89,8 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 	}
 	
 	@Override
-	public boolean insert(String table) throws Exception {
-		if (this.setValues.size() == 0) throw new Exception("Aucun champ n'est specifié");
+	public boolean insert(String table) throws InvalidExpressionException, SQLException {
+		if (this.setValues.size() == 0) throw new InvalidExpressionException();
 		int valueSize = this.setValues.size();
 		this.query = "INSERT INTO";
 		this.query += " " + table + "(";
@@ -117,8 +118,8 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 	}
 	
 	@Override
-	public boolean update(String table) throws Exception {
-		if (this.setValues.size() == 0) throw new Exception("Aucun champ n'est specifié");
+	public boolean update(String table) throws InvalidExpressionException, SQLException {
+		if (this.setValues.size() == 0) throw new InvalidExpressionException("Aucun champ n'est specifié");
 		int valueSize = this.setValues.size();
 		this.query = "UPDATE " + table + " SET ";
 		for (int i = 0; i < valueSize; i++) {
@@ -128,13 +129,7 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 		
 		this.preparedStatement = this.connection.prepareStatement(this.query);
 		
-		if (this.whereClauses.size() > 0 || this.orWhereClauses.size() > 0 || this.likeClauses.size() > 0 || this.orLikeClauses.size() > 0 || this.orILikeClauses.size() > 0 || this.iLikeClauses.size() > 0) this.query += " WHERE";
-		if (this.whereClauses.size() > 0) this.compileWhereClause();
-		if (this.orWhereClauses.size() > 0) this.compileOrWhereClause();
-		if (this.likeClauses.size() > 0) this.compileLikeClause();
-		if (this.orLikeClauses.size() > 0) this.compileOrLikeClause();
-		if (this.iLikeClauses.size() > 0) this.compileLikeClause();
-		if (this.orILikeClauses.size() > 0) this.compileOrILikeClause();
+		this.checkClauses();
 		
 		for (Pair keyValue : this.setValues) {
 			if (keyValue.getValue() instanceof String) this.preparedStatement.setString(++index, (String) keyValue.getValue());
@@ -148,6 +143,14 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 		}
 		this.combineLikeAndWhereClauses();
 		return this.preparedStatement.executeUpdate() > 0;
+	}
+	
+	@Override
+	public boolean delete(String table) throws InvalidExpressionException {
+		if(this.whereClauses.size() == 0 && this.orWhereClauses.size() == 0 && this.likeClauses.size() == 0 && this.orLikeClauses.size() == 0 && this.iLikeClauses.size() == 0 && this.orILikeClauses.size() == 0) throw new InvalidExpressionException();
+		this.query = "DELETE FROM " + table;
+		this.checkClauses();
+		return false;
 	}
 	
 	@Override
@@ -783,6 +786,17 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 		return rowCount;
 	}
 	
+	@Override
+	public void checkClauses() {
+		if (this.whereClauses.size() > 0 || this.orWhereClauses.size() > 0 || this.likeClauses.size() > 0 || this.orLikeClauses.size() > 0 || this.orILikeClauses.size() > 0 || this.iLikeClauses.size() > 0) this.query += " WHERE";
+		if (this.whereClauses.size() > 0) this.compileWhereClause();
+		if (this.orWhereClauses.size() > 0) this.compileOrWhereClause();
+		if (this.likeClauses.size() > 0) this.compileLikeClause();
+		if (this.orLikeClauses.size() > 0) this.compileOrLikeClause();
+		if (this.iLikeClauses.size() > 0) this.compileILikeClause();
+		if (this.orILikeClauses.size() > 0) this.compileOrILikeClause();
+	}
+	
 	private QueryBuilder compileSelect() throws NoSpecifiedTableException {
 		if (this.table == null) throw new NoSpecifiedTableException();
 		for (Join join : this.joins) if (join.hasNull()) throw new NoSpecifiedTableException();
@@ -793,13 +807,7 @@ public class PostgreSQLQueryBuilder implements QueryBuilder {
 		this.query += " FROM ";
 		this.query += this.table;
 		if (this.joins.size() > 0) for (Join join : this.joins) this.query += " " + join;
-		if (this.whereClauses.size() > 0 || this.orWhereClauses.size() > 0 || this.likeClauses.size() > 0 || this.orLikeClauses.size() > 0) this.query += " WHERE";
-		if (this.whereClauses.size() > 0) this.compileWhereClause();
-		if (this.orWhereClauses.size() > 0) this.compileOrWhereClause();
-		if (this.likeClauses.size() > 0) this.compileLikeClause();
-		if (this.orLikeClauses.size() > 0) this.compileOrLikeClause();
-		if (this.iLikeClauses.size() > 0) this.compileILikeClause();
-		if (this.orILikeClauses.size() > 0) this.compileOrILikeClause();
+		this.checkClauses();
 		this.query = this.query.replaceAll("  ", " ").replaceAll("WHERE OR", "WHERE").replaceAll("WHERE AND", "WHERE");
 		if (this.orderBy.size() > 0) {
 			this.query += " ORDER BY ";

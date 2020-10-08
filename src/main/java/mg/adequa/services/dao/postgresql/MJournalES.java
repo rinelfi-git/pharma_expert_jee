@@ -8,10 +8,10 @@ import mg.adequa.utils.DatatableParameter;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class ModelJournalEntreeSortie implements JournalEntreeSortieDao {
+public class MJournalES implements JournalEntreeSortieDao {
 	private DaoFactory daoFactory;
 	
-	public ModelJournalEntreeSortie(DaoFactory daoFactory) {this.daoFactory = daoFactory;}
+	public MJournalES(DaoFactory daoFactory) {this.daoFactory = daoFactory;}
 	
 	@Override
 	public String makeEntreeQuery(DatatableParameter constraints) {

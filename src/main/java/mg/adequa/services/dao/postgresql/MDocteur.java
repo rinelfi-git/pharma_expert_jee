@@ -17,11 +17,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ModelDocteur implements DDocteur {
+public class MDocteur implements DDocteur {
 	private DbTables tables;
 	private DaoFactory daoFactory;
 	
-	public ModelDocteur(DaoFactory daoFactory) {
+	public MDocteur(DaoFactory daoFactory) {
 		this.daoFactory = daoFactory;
 		this.tables = new DbTables();
 	}

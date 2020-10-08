@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ModelAchat implements DAchat {
+public class MAchat implements DAchat {
 	private DaoFactory daoFactory;
 	
-	public ModelAchat(DaoFactory daoFactory) { this.daoFactory = daoFactory;}
+	public MAchat(DaoFactory daoFactory) { this.daoFactory = daoFactory;}
 	
 	
 	@Override
