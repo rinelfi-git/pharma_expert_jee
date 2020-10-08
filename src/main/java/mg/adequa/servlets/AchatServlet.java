@@ -1,11 +1,12 @@
 package mg.adequa.servlets;
 
 import com.google.gson.Gson;
-import mg.adequa.payloadserialization.AchatPL;
+import com.google.gson.reflect.TypeToken;
+import mg.adequa.payloads.PAchat;
 import mg.adequa.services.dao.DaoFactory;
 import mg.adequa.services.dao.PostgreSQL;
 import mg.adequa.services.Transaction;
-import mg.adequa.services.dao.interfaces.AchatDao;
+import mg.adequa.services.dao.interfaces.DaoAchat;
 import mg.adequa.utils.*;
 
 import javax.servlet.ServletException;
@@ -15,12 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 public class AchatServlet extends HttpServlet {
 	private DaoFactory daoFactory;
-	private AchatDao achatDao;
+	private DaoAchat daoAchat;
 	
 	public AchatServlet() {super();}
 	
@@ -28,7 +28,7 @@ public class AchatServlet extends HttpServlet {
 	public void init() throws ServletException {
 		super.init();
 		this.daoFactory = PostgreSQL.getInstance();
-		this.achatDao = this.daoFactory.getAchatDao();
+		this.daoAchat = this.daoFactory.getAchat();
 	}
 	
 	public void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,6 +42,19 @@ public class AchatServlet extends HttpServlet {
 	}
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		UriUtils uriUtils = new UriUtils(request.getRequestURI());
+		response.setCharacterEncoding("UTF-8");
+		response.addHeader("Access-Control-Allow-Origin", "*");
+		response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
+		response.addHeader("Access-Control-Allow-Headers", "X-Requested-With,Cache-Control,content-type,Accept,DNT,X-CustomHeader,Keep-Alive,User-Agent");
+		response.addHeader("Access-Control-Allow-Credentials", "true");
+		response.addHeader("Access-Control-Max-Age", "1728000");
+		switch (uriUtils.toArray()[1]) {
+			case "select":
+				if(uriUtils.toArray().length > 2) response.getWriter().print(new Gson().toJson(this.select(uriUtils.toArray()[2])));
+				else response.getWriter().print(new Gson().toJson(this.select()));
+				break;
+		}
 	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -52,23 +65,19 @@ public class AchatServlet extends HttpServlet {
 		response.addHeader("Access-Control-Allow-Headers", "X-Requested-With,Cache-Control,content-type,Accept,DNT,X-CustomHeader,Keep-Alive,User-Agent");
 		response.addHeader("Access-Control-Allow-Credentials", "true");
 		response.addHeader("Access-Control-Max-Age", "1728000");
+		response.setContentType("application/json");
 		switch (uriUtils.getLastSegment()) {
 			case "make_datatable":
-				response.setContentType("application/json");
 				response.getWriter().print(new Gson().toJson(this.makeDatatable(request)));
 				break;
 			case "insert":
-				response.setContentType("application/json");
 				response.getWriter().print(new Gson().toJson(this.insert(request)));
 				break;
 		}
 	}
 	
-	private DatatablePresentation makeDatatable(HttpServletRequest request) {
-		DatatableParameter constraints = new DatatableParameter();
-		DatatablePresentation presentation = new DatatablePresentation();
-		
-		ArrayList<DatatableColumn> columns = new ArrayList<>();
+	private ArrayList<DatatableColumn> getColumnsFromRequest(HttpServletRequest request) {
+		final ArrayList<DatatableColumn> getColumnsFromRequest = new ArrayList<>();
 		boolean hasColumnParameter = false;
 		for (int index = 0; hasColumnParameter; index++) {
 			if (request.getParameter("columns[" + index + "][name]") != null) {
@@ -77,10 +86,17 @@ public class AchatServlet extends HttpServlet {
 				column.setName(request.getParameter("columns[" + index + "][name]"));
 				column.setOrderable(Boolean.valueOf(request.getParameter("columns[" + index + "][orderable]")));
 				column.setSearchable(Boolean.valueOf(request.getParameter("columns[" + index + "][searchable]")));
-				columns.add(column);
+				getColumnsFromRequest.add(column);
 			} else hasColumnParameter = false;
 		}
-		constraints.setColumns(columns.toArray(new DatatableColumn[0]));
+		return getColumnsFromRequest;
+	}
+	
+	private DatatablePresentation makeDatatable(HttpServletRequest request) {
+		DatatableParameter constraints = new DatatableParameter();
+		DatatablePresentation presentation = new DatatablePresentation();
+		// ArrayList<DatatableColumn> columns = this.getColumnsFromRequest(request);
+		// constraints.setColumns(columns.toArray(new DatatableColumn[0]));
 		constraints.setDraw(Integer.valueOf(request.getParameter("draw")));
 		constraints.setLimitLength(Integer.valueOf(request.getParameter("length")));
 		constraints.setLimitStart(Integer.valueOf(request.getParameter("start")));
@@ -88,8 +104,8 @@ public class AchatServlet extends HttpServlet {
 		constraints.setOrderDirection(request.getParameter("order[0][dir]"));
 		constraints.setSearch(new DatatableSearch(request.getParameter("search[value]"), Boolean.valueOf(request.getParameter("search[regex]"))));
 		
-		String queries = achatDao.makeQuery(constraints);
-		ArrayList<Map> incomingData = achatDao.makeDatatable(queries, constraints);
+		String queries = daoAchat.makeQuery(constraints);
+		ArrayList<Map> incomingData = daoAchat.makeDatatable(queries, constraints);
 		ArrayList<String[]> data = new ArrayList<>();
 		for (Map<String, Object> retrievedData : incomingData) {
 			data.add(new String[]{
@@ -107,31 +123,46 @@ public class AchatServlet extends HttpServlet {
 			});
 		}
 		presentation.setDraw(constraints.getDraw());
-		presentation.setRecordsTotal(this.achatDao.dataRecordsTotal());
+		presentation.setRecordsTotal(this.daoAchat.dataRecordsTotal());
 		presentation.setRecordsFiltered(data.size());
 		presentation.setData(data);
 		return presentation;
 	}
 	
+	private PAchat select(String uriSegment) {
+		return this.daoAchat.select(Integer.valueOf(uriSegment));
+	}
+	
+	private ArrayList<PAchat> select() {
+		return this.daoAchat.select();
+	}
+	
 	private MethodResponse insert(HttpServletRequest request) throws IOException {
-		Map<String, Object> post = new Gson().fromJson(request.getReader(), (Type) HashMap.class);
+		PAchat pAchat = new Gson().fromJson(request.getReader(), PAchat.class);
 		MethodResponse methodResponse = new MethodResponse();
-		
-		AchatPL achatPL = new AchatPL();
-		achatPL.setLibelle(post.get("libelle").toString());
-		achatPL.setFacture(Integer.valueOf(post.get("facture").toString()));
-		achatPL.setEnAttente((Boolean) post.get("payementEnAttente"));
-		achatPL.setDateOperation(post.get("dateOperation").toString());
-		achatPL.setSomme(Integer.valueOf(post.get("montant").toString()));
-		achatPL.setModeDePayement(post.get("modeDePayement") != null ? post.get("modeDePayement").toString() : "");
-		achatPL.setReferece(post.get("reference") != null ? post.get("reference").toString() : "");
-		achatPL.setDateEcheance(post.get("dateEcheance").toString());
 		
 		boolean querySucceded;
 		Transaction transaction = new Transaction(this.daoFactory);
 		transaction.begin();
-		if (achatPL.isEnAttente()) querySucceded = this.achatDao.insertOnly(achatPL);
-		else querySucceded = this.achatDao.insertAndLog(achatPL);
+		if (pAchat.isEnAttente()) querySucceded = this.daoAchat.insertOnly(pAchat);
+		else querySucceded = this.daoAchat.insertAndLog(pAchat);
+		if (!querySucceded) {
+			methodResponse.setRequestState(false).appendTable("achat");
+			transaction.rollback();
+		} else transaction.commit();
+		return methodResponse.validate();
+	}
+	
+	private MethodResponse update(HttpServletRequest request) throws IOException {
+		Type achatPlArray = new TypeToken<PAchat[]>(){}.getType();
+		PAchat[] pAchat = new Gson().fromJson(request.getReader(), achatPlArray);
+		MethodResponse methodResponse = new MethodResponse();
+		
+		boolean querySucceded;
+		Transaction transaction = new Transaction(this.daoFactory);
+		transaction.begin();
+		if (pAchat[0].isEnAttente()) querySucceded = this.daoAchat.insertOnly(pAchat[0]);
+		else querySucceded = this.daoAchat.insertAndLog(pAchat[0]);
 		if (!querySucceded) {
 			methodResponse.setRequestState(false).appendTable("achat");
 			transaction.rollback();

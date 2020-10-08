@@ -1,8 +1,8 @@
 package mg.adequa.services.dao.postgresql;
 
-import mg.adequa.payloadserialization.AchatPL;
+import mg.adequa.payloads.PAchat;
 import mg.adequa.services.dao.DaoFactory;
-import mg.adequa.services.dao.interfaces.AchatDao;
+import mg.adequa.services.dao.interfaces.DaoAchat;
 import mg.adequa.utils.DatatableParameter;
 
 import java.sql.*;
@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AchatModel implements AchatDao {
+public class ModelAchat implements DaoAchat {
 	private DaoFactory daoFactory;
 	
-	public AchatModel(DaoFactory daoFactory) { this.daoFactory = daoFactory;}
+	public ModelAchat(DaoFactory daoFactory) { this.daoFactory = daoFactory;}
 	
 	
 	@Override
@@ -77,8 +77,8 @@ public class AchatModel implements AchatDao {
 	
 	@Override
 	public int dataRecordsTotal() {
-		String query = "SELECT COUNT(*) AS total_records" +
-			               " FROM";
+		String query = "SELECT COUNT(*) AS total_records";
+		query += " FROM";
 		query += " datatable_achat";
 		Connection connection = null;
 		Statement statement = null;
@@ -104,17 +104,17 @@ public class AchatModel implements AchatDao {
 	}
 	
 	@Override
-	public AchatPL select(int reference) {
+	public PAchat select(int reference) {
 		return null;
 	}
 	
 	@Override
-	public ArrayList<AchatPL> select() {
+	public ArrayList<PAchat> select() {
 		return null;
 	}
 	
 	@Override
-	public boolean insertOnly(AchatPL achatPL) {
+	public boolean insertOnly(PAchat pAchat) {
 		boolean output = false;
 		String query = "INSERT INTO";
 		query += " achat(" +
@@ -131,12 +131,12 @@ public class AchatModel implements AchatDao {
 		try {
 			connection = this.daoFactory.getConnection();
 			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setInt(1, achatPL.getFacture());
-			preparedStatement.setDate(2, new Date(new SimpleDateFormat("yyyy-MM-dd").parse(achatPL.getDateOperation()).getTime()));
-			preparedStatement.setString(3, achatPL.getLibelle());
-			preparedStatement.setInt(4, achatPL.getSomme());
-			preparedStatement.setBoolean(5, achatPL.isEnAttente());
-			preparedStatement.setDate(6, new Date(new SimpleDateFormat("yyyy-MM-dd").parse(achatPL.getDateEcheance()).getTime()));
+			preparedStatement.setInt(1, pAchat.getFacture());
+			preparedStatement.setDate(2, new Date(new SimpleDateFormat("yyyy-MM-dd").parse(pAchat.getDateOperation()).getTime()));
+			preparedStatement.setString(3, pAchat.getLibelle());
+			preparedStatement.setInt(4, pAchat.getSomme());
+			preparedStatement.setBoolean(5, pAchat.isEnAttente());
+			preparedStatement.setDate(6, new Date(new SimpleDateFormat("yyyy-MM-dd").parse(pAchat.getDateEcheance()).getTime()));
 			output = preparedStatement.executeUpdate() > 0;
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
@@ -147,12 +147,12 @@ public class AchatModel implements AchatDao {
 	}
 	
 	@Override
-	public boolean insertAndLog(AchatPL achatPL) {
+	public boolean insertAndLog(PAchat pAchat) {
 		return false;
 	}
 	
 	@Override
-	public boolean update(int reference, AchatPL achatPL) {
+	public boolean update(int reference, PAchat pAchat) {
 		return false;
 	}
 	

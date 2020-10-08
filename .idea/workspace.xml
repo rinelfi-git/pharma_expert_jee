@@ -10,18 +10,60 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14fd4e27-a837-4fe7-b2d3-86afbdd55789" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/utils/MyDate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_annotations_20_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mindrot_jbcrypt_0_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lib/querybuilder/QueryBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lib/querybuilder/clauses/Join.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lib/querybuilder/clauses/Limit.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lib/querybuilder/clauses/OrderBy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lib/querybuilder/clauses/Pair.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lib/querybuilder/exceptions/NoConnectionException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lib/querybuilder/exceptions/NoSpecifiedTableException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lib/querybuilder/implementations/PostgreSQLQueryBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lib/querybuilder/utils/PreparedStatementDataset.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/beans/BDocteur.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/beans/BPersonne.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/beans/Utilisateur.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/dbentity/DbTables.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/dbentity/DbViews.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/payloads/PlEvolutionDeCompteFinancierConstraint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DaoBilan.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DaoPersonne.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DaoSession.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/ModelBilan.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/ModelJournalEntreeSortie.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/ModelPersonne.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/SessionManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SLogin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/tableviews/JournalEntreeSortieTV.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/tableviews/TvDocteur.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/utils/SQLFormatter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/utils/jwt/Session.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/adequa_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/adequa_war_exploded.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/PsqlDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/PostgreSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adequa.iml" beforeDir="false" afterPath="$PROJECT_DIR$/adequa.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/payloadserialization/AchatPL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/payloads/PAchat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/payloadserialization/AutreEntreePL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/payloads/PlAutreEntree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/payloadserialization/DocteurPL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/payloads/PDocteur.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/payloadserialization/PersonnePL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/payloads/PlPersonne.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/DaoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/DaoFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/PostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/PostgreSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/AchatDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DaoAchat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/AutreEntreeDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DaoAutreEntree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/BilanDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DocteurDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DaoDocteur.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/JournalEntreeSortieDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/JournalEntreeSortieDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/models/AchatModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/AchatModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/models/AutreEntreeModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/AutreEntreeModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/models/BilanModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/BilanModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/models/DocteurModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/DocteurModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/models/JournalEntreeSortieModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/JournalEntreeSortieModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/AchatModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/ModelAchat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/AutreEntreeModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/ModelAutreEntree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/BilanModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/DocteurModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/ModelDocteur.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/JournalEntreeSortieModel.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/AchatServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/AchatServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/DocteurServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/DocteurServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/AutreEntreeServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/AutreEntreeServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/DocteurServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/ServletDocteur.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/TableauDeBordServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/TableauDeBordServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +109,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/mg/adequa/services/querybuilder" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -81,6 +123,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/mg/adequa/services/querybuilder" />
       <recent name="$PROJECT_DIR$/external_libs" />
       <recent name="$PROJECT_DIR$/libs" />
     </key>
@@ -191,7 +234,14 @@
       <workItem from="1600959918327" duration="3434000" />
       <workItem from="1601100061555" duration="1624000" />
       <workItem from="1601103701504" duration="5265000" />
-      <workItem from="1601282744303" duration="8201000" />
+      <workItem from="1601282744303" duration="18795000" />
+      <workItem from="1601744781595" duration="79000" />
+      <workItem from="1601812126737" duration="76000" />
+      <workItem from="1601817951870" duration="66000" />
+      <workItem from="1602122495775" duration="12723000" />
+      <workItem from="1602147258536" duration="3202000" />
+      <workItem from="1602157492069" duration="5338000" />
+      <workItem from="1602163987647" duration="366000" />
     </task>
     <servers />
   </component>
@@ -211,70 +261,78 @@
       <screen x="0" y="0" width="1366" height="735" />
     </state>
     <state x="141" y="0" width="1084" height="735" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.735@0.0.1366.735" timestamp="1600967764392" />
-    <state x="491" y="56" width="380" height="623" key="#com.intellij.ide.util.MemberChooser" timestamp="1601292220893">
+    <state x="491" y="56" width="380" height="623" key="#com.intellij.ide.util.MemberChooser" timestamp="1602162255881">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state x="491" y="56" width="380" height="623" key="#com.intellij.ide.util.MemberChooser/0.0.1366.735@0.0.1366.735" timestamp="1601292220893" />
+    <state x="491" y="56" width="380" height="623" key="#com.intellij.ide.util.MemberChooser/0.0.1366.735@0.0.1366.735" timestamp="1602162255881" />
     <state x="366" y="108" width="630" height="519" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1600855612570">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
     <state x="366" y="108" width="630" height="519" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1366.735@0.0.1366.735" timestamp="1600855612570" />
-    <state x="9" y="0" width="1339" height="732" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1600860998479">
+    <state x="265" y="296" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1601305019790">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state x="9" y="0" width="1339" height="732" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.735@0.0.1366.735" timestamp="1600860998479" />
-    <state x="357" y="110" width="643" height="508" key="FileChooserDialogImpl" timestamp="1600967733216">
+    <state x="265" y="296" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1366.735@0.0.1366.735" timestamp="1601305019790" />
+    <state x="9" y="0" width="1339" height="732" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1602147640187">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state x="357" y="110" width="643" height="508" key="FileChooserDialogImpl/0.0.1366.735@0.0.1366.735" timestamp="1600967733216" />
-    <state width="984" height="235" key="GridCell.Tab.0.bottom" timestamp="1600967771073">
+    <state x="9" y="0" width="1339" height="732" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.735@0.0.1366.735" timestamp="1602147640187" />
+    <state x="357" y="110" width="643" height="508" key="FileChooserDialogImpl" timestamp="1601818018765">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state width="984" height="235" key="GridCell.Tab.0.bottom/0.0.1366.735@0.0.1366.735" timestamp="1600967771073" />
-    <state width="984" height="235" key="GridCell.Tab.0.center" timestamp="1600967771072">
+    <state x="357" y="110" width="643" height="508" key="FileChooserDialogImpl/0.0.1366.735@0.0.1366.735" timestamp="1601818018765" />
+    <state width="998" height="184" key="GridCell.Tab.0.bottom" timestamp="1602136419447">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state width="984" height="235" key="GridCell.Tab.0.center/0.0.1366.735@0.0.1366.735" timestamp="1600967771072" />
-    <state width="984" height="235" key="GridCell.Tab.0.left" timestamp="1600967771072">
+    <state width="998" height="184" key="GridCell.Tab.0.bottom/0.0.1366.735@0.0.1366.735" timestamp="1602136419447" />
+    <state width="998" height="184" key="GridCell.Tab.0.center" timestamp="1602136419446">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state width="984" height="235" key="GridCell.Tab.0.left/0.0.1366.735@0.0.1366.735" timestamp="1600967771072" />
-    <state width="984" height="235" key="GridCell.Tab.0.right" timestamp="1600967771073">
+    <state width="998" height="184" key="GridCell.Tab.0.center/0.0.1366.735@0.0.1366.735" timestamp="1602136419446" />
+    <state width="998" height="184" key="GridCell.Tab.0.left" timestamp="1602136419445">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state width="984" height="235" key="GridCell.Tab.0.right/0.0.1366.735@0.0.1366.735" timestamp="1600967771073" />
-    <state width="984" height="235" key="GridCell.Tab.1.bottom" timestamp="1600967771075">
+    <state width="998" height="184" key="GridCell.Tab.0.left/0.0.1366.735@0.0.1366.735" timestamp="1602136419445" />
+    <state width="998" height="184" key="GridCell.Tab.0.right" timestamp="1602136419446">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state width="984" height="235" key="GridCell.Tab.1.bottom/0.0.1366.735@0.0.1366.735" timestamp="1600967771075" />
-    <state width="984" height="235" key="GridCell.Tab.1.center" timestamp="1600967771074">
+    <state width="998" height="184" key="GridCell.Tab.0.right/0.0.1366.735@0.0.1366.735" timestamp="1602136419446" />
+    <state width="998" height="184" key="GridCell.Tab.1.bottom" timestamp="1602136419449">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state width="984" height="235" key="GridCell.Tab.1.center/0.0.1366.735@0.0.1366.735" timestamp="1600967771074" />
-    <state width="984" height="235" key="GridCell.Tab.1.left" timestamp="1600967771074">
+    <state width="998" height="184" key="GridCell.Tab.1.bottom/0.0.1366.735@0.0.1366.735" timestamp="1602136419449" />
+    <state width="998" height="184" key="GridCell.Tab.1.center" timestamp="1602136419449">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state width="984" height="235" key="GridCell.Tab.1.left/0.0.1366.735@0.0.1366.735" timestamp="1600967771074" />
-    <state width="984" height="235" key="GridCell.Tab.1.right" timestamp="1600967771074">
+    <state width="998" height="184" key="GridCell.Tab.1.center/0.0.1366.735@0.0.1366.735" timestamp="1602136419449" />
+    <state width="998" height="184" key="GridCell.Tab.1.left" timestamp="1602136419448">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state width="984" height="235" key="GridCell.Tab.1.right/0.0.1366.735@0.0.1366.735" timestamp="1600967771074" />
-    <state width="984" height="235" key="GridCell.Tab.2.bottom" timestamp="1600967771074">
+    <state width="998" height="184" key="GridCell.Tab.1.left/0.0.1366.735@0.0.1366.735" timestamp="1602136419448" />
+    <state width="998" height="184" key="GridCell.Tab.1.right" timestamp="1602136419449">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state width="984" height="235" key="GridCell.Tab.2.bottom/0.0.1366.735@0.0.1366.735" timestamp="1600967771074" />
-    <state width="984" height="235" key="GridCell.Tab.2.center" timestamp="1600967771073">
+    <state width="998" height="184" key="GridCell.Tab.1.right/0.0.1366.735@0.0.1366.735" timestamp="1602136419449" />
+    <state width="998" height="184" key="GridCell.Tab.2.bottom" timestamp="1602136419448">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state width="984" height="235" key="GridCell.Tab.2.center/0.0.1366.735@0.0.1366.735" timestamp="1600967771073" />
-    <state width="984" height="235" key="GridCell.Tab.2.left" timestamp="1600967771073">
+    <state width="998" height="184" key="GridCell.Tab.2.bottom/0.0.1366.735@0.0.1366.735" timestamp="1602136419448" />
+    <state width="998" height="184" key="GridCell.Tab.2.center" timestamp="1602136419447">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state width="984" height="235" key="GridCell.Tab.2.left/0.0.1366.735@0.0.1366.735" timestamp="1600967771073" />
-    <state width="984" height="235" key="GridCell.Tab.2.right" timestamp="1600967771074">
+    <state width="998" height="184" key="GridCell.Tab.2.center/0.0.1366.735@0.0.1366.735" timestamp="1602136419447" />
+    <state width="998" height="184" key="GridCell.Tab.2.left" timestamp="1602136419447">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state width="984" height="235" key="GridCell.Tab.2.right/0.0.1366.735@0.0.1366.735" timestamp="1600967771074" />
+    <state width="998" height="184" key="GridCell.Tab.2.left/0.0.1366.735@0.0.1366.735" timestamp="1602136419447" />
+    <state width="998" height="184" key="GridCell.Tab.2.right" timestamp="1602136419448">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state width="998" height="184" key="GridCell.Tab.2.right/0.0.1366.735@0.0.1366.735" timestamp="1602136419448" />
+    <state x="266" y="113" width="834" height="512" key="IDE.errors.dialog" timestamp="1602134207352">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state x="266" y="113" width="834" height="512" key="IDE.errors.dialog/0.0.1366.735@0.0.1366.735" timestamp="1602134207352" />
     <state x="216" y="27" width="930" height="681" key="Maven.ArtifactSearchDialog" timestamp="1600844271370">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
@@ -283,5 +341,13 @@
       <screen x="0" y="0" width="1366" height="735" />
     </state>
     <state x="166" y="0" width="1030" height="732" key="SettingsEditor/0.0.1366.735@0.0.1366.735" timestamp="1600844299023" />
+    <state x="416" y="131" width="534" height="476" key="extract.method.dialog" timestamp="1602125123139">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state x="416" y="131" width="534" height="476" key="extract.method.dialog/0.0.1366.735@0.0.1366.735" timestamp="1602125123139" />
+    <state x="344" y="162" key="run.anything.popup" timestamp="1602131223766">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state x="344" y="162" key="run.anything.popup/0.0.1366.735@0.0.1366.735" timestamp="1602131223766" />
   </component>
 </project>

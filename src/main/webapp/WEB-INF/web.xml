@@ -9,18 +9,39 @@
 	</servlet>
 	<servlet>
 		<servlet-name>Docteur</servlet-name>
-		<servlet-class>mg.adequa.servlets.DocteurServlet</servlet-class>
+		<servlet-class>mg.adequa.servlets.ServletDocteur</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>TableauDeBord</servlet-name>
+		<servlet-class>mg.adequa.servlets.TableauDeBordServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>UserSession</servlet-name>
+		<servlet-class>mg.adequa.servlets.UserSessionServlet</servlet-class>
+	</servlet>
+	
 	
 	<servlet-mapping>
 		<servlet-name>Achat</servlet-name>
 		<url-pattern>/achat</url-pattern>
 		<url-pattern>/achat/*</url-pattern>
 	</servlet-mapping>
+	
 	<servlet-mapping>
 		<servlet-name>Docteur</servlet-name>
 		<url-pattern>/docteur</url-pattern>
 		<url-pattern>/docteur/*</url-pattern>
 	</servlet-mapping>
 	
+	<servlet-mapping>
+		<servlet-name>TableauDeBord</servlet-name>
+		<url-pattern>/tableau-de-bord</url-pattern>
+		<url-pattern>/tableau-de-bord/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>UserSession</servlet-name>
+		<url-pattern>/user-session</url-pattern>
+		<url-pattern>/user-session/*</url-pattern>
+	</servlet-mapping>
 </web-app>

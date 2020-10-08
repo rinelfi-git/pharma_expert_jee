@@ -1,13 +1,7 @@
 package mg.adequa.services.dao;
 
-import mg.adequa.services.dao.interfaces.AchatDao;
-import mg.adequa.services.dao.interfaces.BilanDao;
-import mg.adequa.services.dao.interfaces.DocteurDao;
-import mg.adequa.services.dao.interfaces.JournalEntreeSortieDao;
-import mg.adequa.services.dao.postgresql.AchatModel;
-import mg.adequa.services.dao.postgresql.BilanModel;
-import mg.adequa.services.dao.postgresql.DocteurModel;
-import mg.adequa.services.dao.postgresql.JournalEntreeSortieModel;
+import mg.adequa.services.dao.interfaces.*;
+import mg.adequa.services.dao.postgresql.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -41,16 +35,19 @@ public class PostgreSQL implements DaoFactory {
 	}
 	
 	@Override
-	public AchatDao getAchatDao() {
-		return new AchatModel(this);
+	public DaoAchat getAchat() {
+		return new ModelAchat(this);
 	}
 	
 	@Override
-	public DocteurDao getDocteurDao() {return new DocteurModel(this);}
+	public DaoDocteur getDocteur() {return new ModelDocteur(this);}
 	
 	@Override
-	public BilanDao getBilanDao() {return new BilanModel(this);}
+	public DaoBilan getBilan() {return new ModelBilan(this);}
 	
 	@Override
-	public JournalEntreeSortieDao getJournalEntreeSortieDao() {return new JournalEntreeSortieModel(this);}
+	public JournalEntreeSortieDao getJournalEntreeSortie() {return new ModelJournalEntreeSortie(this);}
+	
+	@Override
+	public DaoPersonne getPersonne() {return new ModelPersonne(this);}
 }

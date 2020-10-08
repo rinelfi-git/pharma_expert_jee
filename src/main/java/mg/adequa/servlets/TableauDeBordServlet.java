@@ -2,9 +2,11 @@ package mg.adequa.servlets;
 
 import com.google.gson.Gson;
 import mg.adequa.beans.BilanTableauDeBord;
+import mg.adequa.services.dao.postgresql.SessionManager;
+import mg.adequa.payloads.PlEvolutionDeCompteFinancierConstraint;
 import mg.adequa.services.dao.DaoFactory;
 import mg.adequa.services.dao.PostgreSQL;
-import mg.adequa.services.dao.interfaces.BilanDao;
+import mg.adequa.services.dao.interfaces.DaoBilan;
 import mg.adequa.services.dao.interfaces.JournalEntreeSortieDao;
 import mg.adequa.utils.UriUtils;
 
@@ -19,7 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TableauDeBordServlet extends HttpServlet {
-	private BilanDao bilanDao;
+	private DaoBilan daoBilan;
 	private JournalEntreeSortieDao journalEntreeSortieDao;
 	private DaoFactory daoFactory;
 	
@@ -27,8 +29,9 @@ public class TableauDeBordServlet extends HttpServlet {
 	public void init() throws ServletException {
 		super.init();
 		this.daoFactory = PostgreSQL.getInstance();
-		this.bilanDao = this.daoFactory.getBilanDao();
-		this.journalEntreeSortieDao = this.daoFactory.getJournalEntreeSortieDao();
+		this.daoBilan = this.daoFactory.getBilan();
+		this.journalEntreeSortieDao = this.daoFactory.getJournalEntreeSortie();
+		new SessionManager();
 	}
 	
 	@Override
@@ -53,7 +56,7 @@ public class TableauDeBordServlet extends HttpServlet {
 		response.addHeader("Access-Control-Allow-Credentials", "true");
 		response.addHeader("Access-Control-Max-Age", "1728000");
 		switch (uriUtils.toArray()[1]) {
-			case "dernier_bilan":
+			case "dernier-bilan":
 				response.getWriter().print(new Gson().toJson(this.dernierBilan(request)));
 				break;
 		}
@@ -70,7 +73,7 @@ public class TableauDeBordServlet extends HttpServlet {
 		response.addHeader("Access-Control-Allow-Credentials", "true");
 		response.addHeader("Access-Control-Max-Age", "1728000");
 		switch (uriUtils.toArray()[1]) {
-			case "evolution_compte_financier":
+			case "evolution-du-compte-financier":
 				response.getWriter().print(new Gson().toJson(this.evolutionCompteFinancier(request)));
 				break;
 		}
@@ -78,15 +81,15 @@ public class TableauDeBordServlet extends HttpServlet {
 	
 	private BilanTableauDeBord dernierBilan(HttpServletRequest request) {
 		BilanTableauDeBord bilan = new BilanTableauDeBord();
-		bilan.setTotalProduitEnStock(this.bilanDao.getProduit());
-		bilan.setCompteCaisse(this.bilanDao.getCaisse());
-		bilan.setCompteEnBanque(this.bilanDao.getBanque());
-		bilan.setCapital(this.bilanDao.getProduit() + this.bilanDao.getCaisse() + this.bilanDao.getBanque());
+		bilan.setTotalProduitEnStock(this.daoBilan.getProduit());
+		bilan.setCompteCaisse(this.daoBilan.getCaisse());
+		bilan.setCompteEnBanque(this.daoBilan.getBanque());
+		bilan.setCapital(this.daoBilan.getProduit() + this.daoBilan.getCaisse() + this.daoBilan.getBanque());
 		return bilan;
 	}
 	
 	private ArrayList<Map> evolutionCompteFinancier(HttpServletRequest request) throws IOException {
-		Map<String, Integer> post = new Gson().fromJson(request.getReader(), HashMap.class);
+		PlEvolutionDeCompteFinancierConstraint post = new Gson().fromJson(request.getReader(), PlEvolutionDeCompteFinancierConstraint.class);
 		ArrayList<Map> output = new ArrayList<>();
 		
 		Calendar maintenant = Calendar.getInstance(),
@@ -94,10 +97,10 @@ public class TableauDeBordServlet extends HttpServlet {
 			arretDeBoucle = Calendar.getInstance();
 		ilYaDouzeMois.add(Calendar.MONTH, -12);
 		
-		int moisDebut = post.get("moisDebut") != null ? post.get("moisDebut") : ilYaDouzeMois.get(Calendar.MONTH) + 1,
-			anneeDebut = post.get("anneeDebut") != null ? post.get("anneeDebut") : ilYaDouzeMois.get(Calendar.YEAR),
-			moisFin = post.get("moisFin") != null ? post.get("moisFin") : maintenant.get(Calendar.MONTH) + 1,
-			anneeFin = post.get("anneeFin") != null ? post.get("anneeFin") : maintenant.get(Calendar.YEAR);
+		int moisDebut = post.getMoisDebut() != 0 ? post.getMoisDebut() : ilYaDouzeMois.get(Calendar.MONTH) + 1,
+			anneeDebut = post.getAnneeDebut() != 0 ? post.getAnneeDebut() : ilYaDouzeMois.get(Calendar.YEAR),
+			moisFin = post.getMoisFin() != 0 ? post.getMoisFin() : maintenant.get(Calendar.MONTH) + 1,
+			anneeFin = post.getAnneeFin() != 0 ? post.getAnneeFin() : maintenant.get(Calendar.YEAR);
 		
 		arretDeBoucle.set(Calendar.SECOND, arretDeBoucle.get(Calendar.SECOND) + 1);
 		arretDeBoucle.set(Calendar.YEAR, anneeFin);

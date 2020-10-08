@@ -1,7 +1,9 @@
-package mg.adequa.payloadserialization;
+package mg.adequa.payloads;
 
-public class DocteurPL extends PersonnePL {
+public class PDocteur extends PlPersonne {
 	private int serviceHospitalier;
+	
+	
 	
 	public int getServiceHospitalier() {
 		return serviceHospitalier;

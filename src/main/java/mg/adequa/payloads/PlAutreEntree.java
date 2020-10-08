@@ -1,6 +1,6 @@
-package mg.adequa.payloadserialization;
+package mg.adequa.payloads;
 
-public class AutreEntreePL {
+public class PlAutreEntree {
 	private String dateOperation, modeDePayment, libelleOperation, numeroDePieceJustificative, observation;
 	private boolean libelleEnregistre;
 	private int somme;

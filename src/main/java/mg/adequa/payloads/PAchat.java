@@ -1,6 +1,6 @@
-package mg.adequa.payloadserialization;
+package mg.adequa.payloads;
 
-public class AchatPL {
+public class PAchat {
 	private int id, facture, somme;
 	private String dateOperation, libelle, modeDePayement, referece, dateEcheance;
 	private boolean enAttente;

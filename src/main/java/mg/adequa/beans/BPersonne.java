@@ -1,6 +1,6 @@
-package mg.adequa.payloadserialization;
+package mg.adequa.beans;
 
-public abstract class PersonnePL {
+public class BPersonne {
 	protected int id;
 	protected String nom, prenom;
 	

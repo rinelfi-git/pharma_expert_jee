@@ -1,8 +1,8 @@
 package mg.adequa.services.dao.postgresql;
 
-import mg.adequa.payloadserialization.AutreEntreePL;
+import mg.adequa.payloads.PlAutreEntree;
 import mg.adequa.services.dao.DaoFactory;
-import mg.adequa.services.dao.interfaces.AutreEntreeDao;
+import mg.adequa.services.dao.interfaces.DaoAutreEntree;
 import mg.adequa.tableviews.AutreEntreeTV;
 import mg.adequa.utils.DatatableParameter;
 
@@ -11,10 +11,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-public class AutreEntreeModel implements AutreEntreeDao {
+public class ModelAutreEntree implements DaoAutreEntree {
 	private DaoFactory daoFactory;
 	
-	public AutreEntreeModel(DaoFactory daoFactory) { this.daoFactory = daoFactory; }
+	public ModelAutreEntree(DaoFactory daoFactory) { this.daoFactory = daoFactory; }
 	
 	@Override
 	public String makeQuery(DatatableParameter constraints) {
@@ -103,12 +103,12 @@ public class AutreEntreeModel implements AutreEntreeDao {
 	}
 	
 	@Override
-	public AutreEntreePL select(int reference) {
+	public PlAutreEntree select(int reference) {
 		return null;
 	}
 	
 	@Override
-	public boolean insert(AutreEntreePL data) {
+	public boolean insert(PlAutreEntree data) {
 		boolean output = false;
 		String autreEntreeInsert = "INSERT INTO";
 		autreEntreeInsert += " autre_entree(" +
@@ -159,7 +159,7 @@ public class AutreEntreeModel implements AutreEntreeDao {
 	}
 	
 	@Override
-	public boolean insertAndArchive(AutreEntreePL data) {
+	public boolean insertAndArchive(PlAutreEntree data) {
 		return false;
 	}
 	
