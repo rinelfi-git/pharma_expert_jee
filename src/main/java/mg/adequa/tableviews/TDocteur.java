@@ -1,6 +1,6 @@
 package mg.adequa.tableviews;
 
-public class TvDocteur {
+public class TDocteur {
 	private int id;
 	private String nomPrenom, service, action;
 	

@@ -1,16 +1,16 @@
 package mg.adequa.services.dao.postgresql;
 
+import lib.querybuilder.QueryBuilder;
+import lib.querybuilder.clauses.OrderBy;
+import lib.querybuilder.exceptions.NoConnectionException;
+import lib.querybuilder.exceptions.NoSpecifiedTableException;
+import lib.querybuilder.implementations.PostgreSQL;
 import mg.adequa.beans.BDocteur;
 import mg.adequa.dbentity.DbTables;
 import mg.adequa.payloads.PDocteur;
 import mg.adequa.services.dao.DaoFactory;
 import mg.adequa.services.dao.interfaces.DDocteur;
-import lib.querybuilder.implementations.PostgreSQLQueryBuilder;
-import lib.querybuilder.QueryBuilder;
-import lib.querybuilder.clauses.OrderBy;
-import lib.querybuilder.exceptions.NoConnectionException;
-import lib.querybuilder.exceptions.NoSpecifiedTableException;
-import mg.adequa.tableviews.TvDocteur;
+import mg.adequa.tableviews.TDocteur;
 import mg.adequa.utils.DatatableParameter;
 
 import java.sql.ResultSet;
@@ -27,36 +27,36 @@ public class MDocteur implements DDocteur {
 	}
 	
 	@Override
-	public QueryBuilder makeQuery(DatatableParameter constraints) throws SQLException {
-		PostgreSQLQueryBuilder qeryBuilder = new PostgreSQLQueryBuilder(this.daoFactory.getConnection());
+	public PostgreSQL makeQuery(DatatableParameter constraints) throws SQLException {
+		PostgreSQL query = new PostgreSQL(this.daoFactory.getConnection());
 		String[] colonne = new String[]{
 			"nom",
 			"prenom",
 			this.tables.getServiceHospitalier() + ".libelle"
 		};
-		qeryBuilder
+		query
 			.select(new String[]{this.tables.getDocteur() + ".id", "nom", "prenom"})
 			.select(this.tables.getServiceHospitalier() + ".libelle", "service ")
 			.from(this.tables.getPersonne())
 			.join(this.tables.getDocteur() + ".id", this.tables.getPersonne() + ".id")
 			.join(this.tables.getServiceHospitalier() + ".id", this.tables.getDocteur() + ".service_hospitalier");
 		if (constraints.getSearch() != null && constraints.getSearch().getValue() != null) {
-			qeryBuilder.iLike("nom", "%" + constraints.getSearch().getValue() + "%")
-				.orLike("prenom", "%" + constraints.getSearch().getValue() + "%")
-				.orLike("libelle", "%" + constraints.getSearch().getValue() + "%");
+			query.iLike("nom", "%" + constraints.getSearch().getValue() + "%")
+				.orILike("prenom", "%" + constraints.getSearch().getValue() + "%")
+				.orILike("libelle", "%" + constraints.getSearch().getValue() + "%");
 		}
-		if (constraints.getOrderColumn() != -1) return qeryBuilder.orderBy(colonne[constraints.getOrderColumn()], constraints.getOrderDirection());
-		else return qeryBuilder.orderBy("nom, prenom", OrderBy.ASC);
+		if (constraints.getOrderColumn() != -1) return query.orderBy(colonne[constraints.getOrderColumn()], constraints.getOrderDirection());
+		else return query.orderBy("nom, prenom", OrderBy.ASC);
 	}
 	
 	@Override
-	public ArrayList<TvDocteur> makeDatatable(QueryBuilder queryBuilder, DatatableParameter constraints) throws SQLException, NoSpecifiedTableException, NoConnectionException {
-		ArrayList<TvDocteur> makeDatatable = new ArrayList<>();
+	public ArrayList<TDocteur> makeDatatable(QueryBuilder queryBuilder, DatatableParameter constraints) throws SQLException, NoSpecifiedTableException, NoConnectionException {
+		ArrayList<TDocteur> makeDatatable = new ArrayList<>();
 		if (constraints.getLimitLength() != -1) queryBuilder.limit(constraints.getLimitLength(), constraints.getLimitStart());
-		ResultSet resultSet;
+		ResultSet resultSet = null;
 		resultSet = queryBuilder.get().result();
 		while (resultSet.next()) {
-			TvDocteur docteur = new TvDocteur();
+			TDocteur docteur = new TDocteur();
 			docteur.setId(resultSet.getInt("id"));
 			docteur.setNomPrenom(resultSet.getString("nom") + " " + resultSet.getString("prenom"));
 			docteur.setService(resultSet.getString("service"));
@@ -69,20 +69,19 @@ public class MDocteur implements DDocteur {
 	
 	@Override
 	public int dataRecordsTotal() throws SQLException {
-		QueryBuilder queryBuilder = new PostgreSQLQueryBuilder(this.daoFactory.getConnection());
+		QueryBuilder queryBuilder = new PostgreSQL(this.daoFactory.getConnection());
 		return queryBuilder.count(this.tables.getDocteur());
 	}
 	
 	@Override
 	public PDocteur select(int reference) throws SQLException, NoSpecifiedTableException, NoConnectionException {
-		QueryBuilder query = new PostgreSQLQueryBuilder(this.daoFactory.getConnection());
-		ResultSet resultSet =
-			query
-				.select(new String[]{this.tables.getPersonne() + ".id", "nom", "prenom", "service_hospitalier"})
-				.from(this.tables.getDocteur())
-				.join(this.tables.getDocteur() + ".id", this.tables.getPersonne() + ".id")
-				.get()
-				.result();
+		QueryBuilder query = new PostgreSQL(this.daoFactory.getConnection());
+		ResultSet resultSet = query
+			                      .select(new String[]{this.tables.getPersonne() + ".id", "nom", "prenom", "service_hospitalier"})
+			                      .from(this.tables.getDocteur())
+			                      .join(this.tables.getDocteur() + ".id", this.tables.getPersonne() + ".id")
+			                      .get()
+			                      .result();
 		PDocteur select = null;
 		if (resultSet.next()) {
 			select = new PDocteur();
@@ -96,7 +95,7 @@ public class MDocteur implements DDocteur {
 	
 	@Override
 	public boolean insert(BDocteur docteur) throws Exception {
-		QueryBuilder query = new PostgreSQLQueryBuilder(this.daoFactory.getConnection());
+		QueryBuilder query = new PostgreSQL(this.daoFactory.getConnection());
 		return query
 			       .set("nom", docteur.getNom())
 			       .set("id", docteur.getIdPersonne())
@@ -106,7 +105,7 @@ public class MDocteur implements DDocteur {
 	
 	@Override
 	public boolean update(BDocteur docteur, int reference) throws Exception {
-		QueryBuilder query = new PostgreSQLQueryBuilder(this.daoFactory.getConnection());
+		QueryBuilder query = new PostgreSQL(this.daoFactory.getConnection());
 		return query
 			       .set("id", docteur.getIdPersonne())
 			       .set("service_hospitalier", docteur.getServiceHospitalier())

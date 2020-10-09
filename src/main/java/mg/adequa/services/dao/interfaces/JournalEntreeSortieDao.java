@@ -1,6 +1,6 @@
 package mg.adequa.services.dao.interfaces;
 
-import mg.adequa.tableviews.JournalEntreeSortieTV;
+import mg.adequa.tableviews.TJournalEntreeSortie;
 import mg.adequa.utils.DatatableParameter;
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ public interface JournalEntreeSortieDao {
 	
 	String makeSortieQuery(DatatableParameter constraints);
 	
-	ArrayList<JournalEntreeSortieTV> makeDatatable(String query, DatatableParameter constraints);
+	ArrayList<TJournalEntreeSortie> makeDatatable(String query, DatatableParameter constraints);
 	
 	int dataRecordsTotalSortie();
 	int dataRecordsTotalEntree();

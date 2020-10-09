@@ -1,6 +1,6 @@
 package mg.adequa.tableviews;
 
-public class JournalEntreeSortieTV {
+public class TJournalEntreeSortie {
 	private int id, somme;
 	private String dateOperation, libelleOperation, pieceJustificative, observation;
 	

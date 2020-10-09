@@ -3,17 +3,13 @@ package mg.adequa.servlets;
 import com.google.gson.Gson;
 import lib.querybuilder.exceptions.NoConnectionException;
 import lib.querybuilder.exceptions.NoSpecifiedTableException;
-import mg.adequa.beans.BDocteur;
 import mg.adequa.beans.BJournalDeSession;
-import mg.adequa.beans.BPersonne;
-import mg.adequa.payloads.PDocteur;
 import mg.adequa.payloads.PJournalDeSession;
 import mg.adequa.services.Transaction;
 import mg.adequa.services.dao.DaoFactory;
 import mg.adequa.services.dao.PostgreSQL;
 import mg.adequa.services.dao.interfaces.DJournalDeSession;
 import mg.adequa.tableviews.TJournalDeSession;
-import mg.adequa.tableviews.TvDocteur;
 import mg.adequa.utils.*;
 
 import javax.servlet.ServletException;

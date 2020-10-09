@@ -11,7 +11,7 @@ import mg.adequa.services.dao.DaoFactory;
 import mg.adequa.services.dao.PostgreSQL;
 import mg.adequa.services.dao.interfaces.DDocteur;
 import mg.adequa.services.dao.interfaces.DPersonne;
-import mg.adequa.tableviews.TvDocteur;
+import mg.adequa.tableviews.TDocteur;
 import mg.adequa.utils.*;
 
 import javax.servlet.ServletException;
@@ -95,14 +95,14 @@ public class SDocteur extends HttpServlet {
 		constraints.setOrderDirection(request.getParameter("order[0][dir]"));
 		constraints.setSearch(new DatatableSearch(request.getParameter("search[value]"), Boolean.valueOf(request.getParameter("search[regex]"))));
 		
-		ArrayList<TvDocteur> incomingData = new ArrayList<>();
+		ArrayList<TDocteur> incomingData = new ArrayList<>();
 		try {
 			incomingData = dDocteur.makeDatatable(dDocteur.makeQuery(constraints), constraints);
 		} catch (SQLException | NoSpecifiedTableException | NoConnectionException throwables) {
 			throwables.printStackTrace();
 		}
 		ArrayList<String[]> data = new ArrayList<>();
-		for (TvDocteur retrievedData : incomingData) {
+		for (TDocteur retrievedData : incomingData) {
 			data.add(new String[]{
 				retrievedData.getNomPrenom(),
 				retrievedData.getService(),

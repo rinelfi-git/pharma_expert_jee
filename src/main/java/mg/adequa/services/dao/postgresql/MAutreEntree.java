@@ -3,7 +3,7 @@ package mg.adequa.services.dao.postgresql;
 import mg.adequa.payloads.PAutreEntree;
 import mg.adequa.services.dao.DaoFactory;
 import mg.adequa.services.dao.interfaces.DAutreEntree;
-import mg.adequa.tableviews.AutreEntreeTV;
+import mg.adequa.tableviews.TAutreEntree;
 import mg.adequa.utils.DatatableParameter;
 
 import java.sql.*;
@@ -40,8 +40,8 @@ public class MAutreEntree implements DAutreEntree {
 	}
 	
 	@Override
-	public ArrayList<AutreEntreeTV> makeDatatable(String query, DatatableParameter constraints) {
-		ArrayList<AutreEntreeTV> output = new ArrayList<>();
+	public ArrayList<TAutreEntree> makeDatatable(String query, DatatableParameter constraints) {
+		ArrayList<TAutreEntree> output = new ArrayList<>();
 		if (constraints.getLimitLength() != -1) query += " LIMIT " + constraints.getLimitLength() + " OFFSET " + constraints.getLimitStart();
 		ResultSet resultSet = null;
 		Connection connection = null;
@@ -51,7 +51,7 @@ public class MAutreEntree implements DAutreEntree {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(query);
 			while (resultSet.next()) {
-				AutreEntreeTV temp = new AutreEntreeTV();
+				TAutreEntree temp = new TAutreEntree();
 				temp.setId(resultSet.getInt("id"));
 				temp.setDateOperation(resultSet.getString("date_operation"));
 				temp.setLibelleOperation(resultSet.getString("libelle_operation"));

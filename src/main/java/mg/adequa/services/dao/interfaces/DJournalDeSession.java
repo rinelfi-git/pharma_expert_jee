@@ -3,11 +3,8 @@ package mg.adequa.services.dao.interfaces;
 import lib.querybuilder.QueryBuilder;
 import lib.querybuilder.exceptions.NoConnectionException;
 import lib.querybuilder.exceptions.NoSpecifiedTableException;
-import mg.adequa.beans.BDocteur;
 import mg.adequa.beans.BJournalDeSession;
-import mg.adequa.payloads.PDocteur;
 import mg.adequa.tableviews.TJournalDeSession;
-import mg.adequa.tableviews.TvDocteur;
 import mg.adequa.utils.DatatableParameter;
 
 import java.sql.SQLException;

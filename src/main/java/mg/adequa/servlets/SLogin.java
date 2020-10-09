@@ -63,29 +63,19 @@ public class SLogin extends HttpServlet {
 		String[] arrayUri = uriUtils.toArray();
 		switch (arrayUri[2]) {
 			case "check_user":
-				response
-					.getWriter()
-					.print(new Gson().toJson(this.checkUser(request)));
+				response.getWriter().print(new Gson().toJson(this.checkUser(request)));
 				break;
 			case "match_password":
-				response
-					.getWriter()
-					.print(new Gson().toJson(this.matchPassword(request)));
+				response.getWriter().print(new Gson().toJson(this.matchPassword(request)));
 				break;
 			case "check_token":
-				response
-					.getWriter()
-					.print(new Gson().toJson(this.isTokenAlive(request)));
+				response.getWriter().print(new Gson().toJson(this.isTokenAlive(request)));
 				break;
 			case "create_session":
-				response
-					.getWriter()
-					.print(new Gson().toJson(this.createSession(request)));
+				response.getWriter().print(new Gson().toJson(this.createSession(request)));
 				break;
 			case "sign_out":
-				response
-					.getWriter()
-					.print(new Gson().toJson(this.signOut(request)));
+				response.getWriter().print(new Gson().toJson(this.signOut(request)));
 				break;
 		}
 	}

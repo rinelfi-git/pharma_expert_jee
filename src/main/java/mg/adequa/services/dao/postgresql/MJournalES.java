@@ -2,7 +2,7 @@ package mg.adequa.services.dao.postgresql;
 
 import mg.adequa.services.dao.DaoFactory;
 import mg.adequa.services.dao.interfaces.JournalEntreeSortieDao;
-import mg.adequa.tableviews.JournalEntreeSortieTV;
+import mg.adequa.tableviews.TJournalEntreeSortie;
 import mg.adequa.utils.DatatableParameter;
 
 import java.sql.*;
@@ -60,8 +60,8 @@ public class MJournalES implements JournalEntreeSortieDao {
 	}
 	
 	@Override
-	public ArrayList<JournalEntreeSortieTV> makeDatatable(String query, DatatableParameter constraints) {
-		ArrayList<JournalEntreeSortieTV> journals = new ArrayList<>();
+	public ArrayList<TJournalEntreeSortie> makeDatatable(String query, DatatableParameter constraints) {
+		ArrayList<TJournalEntreeSortie> journals = new ArrayList<>();
 		if (constraints.getLimitLength() != -1) query += " LIMIT " + constraints.getLimitLength() + " OFFSET " + constraints.getLimitStart();
 		ResultSet resultSet = null;
 		Connection connection = null;
@@ -71,7 +71,7 @@ public class MJournalES implements JournalEntreeSortieDao {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(query);
 			while (resultSet.next()) {
-				JournalEntreeSortieTV journal = new JournalEntreeSortieTV();
+				TJournalEntreeSortie journal = new TJournalEntreeSortie();
 				journal.setId(resultSet.getInt("id"));
 				journal.setDateOperation(resultSet.getString("date_operation"));
 				journal.setLibelleOperation(resultSet.getString("libelle_operation"));

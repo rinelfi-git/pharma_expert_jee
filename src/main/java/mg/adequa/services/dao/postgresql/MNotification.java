@@ -5,14 +5,12 @@ import lib.querybuilder.clauses.OrderBy;
 import lib.querybuilder.exceptions.InvalidExpressionException;
 import lib.querybuilder.exceptions.NoConnectionException;
 import lib.querybuilder.exceptions.NoSpecifiedTableException;
-import lib.querybuilder.implementations.PostgreSQLQueryBuilder;
+import lib.querybuilder.implementations.PostgreSQL;
 import mg.adequa.dbentity.DbTables;
 import mg.adequa.payloads.PNotification;
 import mg.adequa.services.dao.DaoFactory;
-import mg.adequa.services.dao.PostgreSQL;
 import mg.adequa.services.dao.interfaces.DNotification;
 
-import java.lang.reflect.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -33,7 +31,7 @@ public class MNotification implements DNotification {
 	@Override
 	public ArrayList<PNotification> getLastimited(int limit, int poste) throws SQLException, NoSpecifiedTableException, NoConnectionException {
 		ArrayList<PNotification> getLast = new ArrayList<>();
-		QueryBuilder query = new PostgreSQLQueryBuilder(this.dao.getConnection());
+		QueryBuilder query = new PostgreSQL(this.dao.getConnection());
 		Map<String, String> transposition = new HashMap<>();
 		Calendar calendar = Calendar.getInstance();
 		transposition.put(
@@ -69,7 +67,7 @@ public class MNotification implements DNotification {
 	@Override
 	public ArrayList<PNotification> selectAll(int poste) throws NoSpecifiedTableException, SQLException, NoConnectionException {
 		ArrayList<PNotification> getLast = new ArrayList<>();
-		QueryBuilder query = new PostgreSQLQueryBuilder(this.dao.getConnection());
+		QueryBuilder query = new PostgreSQL(this.dao.getConnection());
 		Map<String, String> transposition = new HashMap<>();
 		Calendar calendar = Calendar.getInstance();
 		transposition.put(
@@ -103,13 +101,13 @@ public class MNotification implements DNotification {
 	
 	@Override
 	public boolean clean(int poste) throws SQLException, InvalidExpressionException {
-		QueryBuilder query = new PostgreSQLQueryBuilder(this.dao.getConnection());
+		QueryBuilder query = new PostgreSQL(this.dao.getConnection());
 		return query.where("poste", poste).delete(this.tables.getNotification());
 	}
 	
 	@Override
 	public int countNew(int poste) throws NoConnectionException, SQLException, NoSpecifiedTableException {
-		QueryBuilder query = new PostgreSQLQueryBuilder(this.dao.getConnection());
+		QueryBuilder query = new PostgreSQL(this.dao.getConnection());
 		return query.where("poste", poste).where("new", true).rowCount(this.tables.getNotification());
 	}
 }

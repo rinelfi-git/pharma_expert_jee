@@ -1,6 +1,6 @@
 package mg.adequa.tableviews;
 
-public class AutreEntreeTV {
+public class TAutreEntree {
 	private String dateOperation, libelleOperation, numeroDePieceJustificative, observation, action;
 	private int id, somme;
 	

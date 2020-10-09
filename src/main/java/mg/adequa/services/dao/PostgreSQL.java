@@ -62,4 +62,10 @@ public class PostgreSQL implements DaoFactory {
 	
 	@Override
 	public DNotification getNotification() {return new MNotification(this);}
+	
+	@Override
+	public DAutorisation getAutorisation() { return new MAutorisation(this);}
+	
+	@Override
+	public DMenu getMenu() {return new MMenu(this);}
 }

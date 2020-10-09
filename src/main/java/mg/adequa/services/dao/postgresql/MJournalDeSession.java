@@ -4,13 +4,12 @@ import lib.querybuilder.QueryBuilder;
 import lib.querybuilder.clauses.OrderBy;
 import lib.querybuilder.exceptions.NoConnectionException;
 import lib.querybuilder.exceptions.NoSpecifiedTableException;
-import lib.querybuilder.implementations.PostgreSQLQueryBuilder;
+import lib.querybuilder.implementations.PostgreSQL;
 import mg.adequa.beans.BJournalDeSession;
 import mg.adequa.dbentity.DbTables;
 import mg.adequa.services.dao.DaoFactory;
 import mg.adequa.services.dao.interfaces.DJournalDeSession;
 import mg.adequa.tableviews.TJournalDeSession;
-import mg.adequa.tableviews.TvDocteur;
 import mg.adequa.utils.DatatableParameter;
 
 import java.sql.ResultSet;
@@ -30,7 +29,7 @@ public class MJournalDeSession implements DJournalDeSession {
 	
 	@Override
 	public QueryBuilder makeQuery(DatatableParameter constraints) throws SQLException {
-		PostgreSQLQueryBuilder qeryBuilder = new PostgreSQLQueryBuilder(this.dao.getConnection());
+		PostgreSQL qeryBuilder = new PostgreSQL(this.dao.getConnection());
 		String[] colonne = new String[]{
 			"to_char(date, 'DD Month YYYY HH24:MI:SS')",
 			"nom, prenom, " + this.tables.getPoste() + ".nom",
@@ -82,20 +81,20 @@ public class MJournalDeSession implements DJournalDeSession {
 	
 	@Override
 	public int dataRecordsTotal() throws SQLException{
-		QueryBuilder queryBuilder = new PostgreSQLQueryBuilder(this.dao.getConnection());
+		QueryBuilder queryBuilder = new PostgreSQL(this.dao.getConnection());
 		return queryBuilder.count(this.tables.getJournalDeSession());
 	}
 	
 	@Override
 	public boolean insert(BJournalDeSession journal) throws Exception {
-		QueryBuilder queryBuilder = new PostgreSQLQueryBuilder(this.dao.getConnection());
+		QueryBuilder queryBuilder = new PostgreSQL(this.dao.getConnection());
 		return queryBuilder.set("compte_personnel", journal.getComptePersonnel())
 			.set("action", journal.getAction()).insert(this.tables.getJournalDeSession());
 	}
 	
 	@Override
 	public boolean delete() throws Exception {
-		QueryBuilder queryBuilder = new PostgreSQLQueryBuilder(this.dao.getConnection());
+		QueryBuilder queryBuilder = new PostgreSQL(this.dao.getConnection());
 		return queryBuilder.delete(this.tables.getJournalDeSession());
 	}
 }

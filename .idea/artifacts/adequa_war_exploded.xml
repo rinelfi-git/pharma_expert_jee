@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="adequa:war exploded">
-    <output-path>$PROJECT_DIR$/target/adequa-1.0.0</output-path>
+    <output-path>$PROJECT_DIR$/target/adequa-2.0.0</output-path>
     <properties id="maven-jee-properties">
       <options>
         <exploded>true</exploded>
@@ -15,13 +15,14 @@
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.8.6" />
-          <element id="library" level="project" name="Maven: org.postgresql:postgresql:42.2.5" />
+          <element id="library" level="project" name="Maven: org.postgresql:postgresql:42.2.16" />
+          <element id="library" level="project" name="Maven: org.checkerframework:checker-qual:3.5.0" />
           <element id="library" level="project" name="Maven: org.mindrot:jbcrypt:0.4" />
-          <element id="library" level="project" name="Maven: org.jetbrains:annotations:20.1.0" />
+          <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.15" />
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/adequa-1.0.0/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/target/adequa-2.0.0/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="adequa/web/Web" />
     </root>

@@ -27,6 +27,34 @@
 		<servlet-name>Notification</servlet-name>
 		<servlet-class>mg.adequa.servlets.SNotification</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>Autorisation</servlet-name>
+		<servlet-class>mg.adequa.servlets.SAutorisation</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>AutreEntree</servlet-name>
+		<servlet-class>mg.adequa.servlets.SAutreEntree</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>AutreSortie</servlet-name>
+		<servlet-class>mg.adequa.servlets.SAutreSortie</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>BonDeCommande</servlet-name>
+		<servlet-class>mg.adequa.servlets.SBonDeCommande</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ContratUrgence</servlet-name>
+		<servlet-class>mg.adequa.servlets.SContratUrgence</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>Facture</servlet-name>
+		<servlet-class>mg.adequa.servlets.SFacture</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>Fournisseur</servlet-name>
+		<servlet-class>mg.adequa.servlets.SFournisseur</servlet-class>
+	</servlet>
 	
 	
 	<servlet-mapping>
@@ -63,5 +91,47 @@
 		<servlet-name>Notification</servlet-name>
 		<url-pattern>/notification</url-pattern>
 		<url-pattern>/notification/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>Autorisation</servlet-name>
+		<url-pattern>/autorisation</url-pattern>
+		<url-pattern>/autorisation/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>AutreEntree</servlet-name>
+		<url-pattern>/autre_entree</url-pattern>
+		<url-pattern>/autre_entree/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>AutreSortie</servlet-name>
+		<url-pattern>/autre_sortie</url-pattern>
+		<url-pattern>/autre_sortie/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>BonDeCommande</servlet-name>
+		<url-pattern>/bon_de_commande</url-pattern>
+		<url-pattern>/bon_de_commande/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>ContratUrgence</servlet-name>
+		<url-pattern>/contrat_urgence</url-pattern>
+		<url-pattern>/contrat_urgence/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>Facture</servlet-name>
+		<url-pattern>/facture</url-pattern>
+		<url-pattern>/facture/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>Fournisseur</servlet-name>
+		<url-pattern>/fournisseur</url-pattern>
+		<url-pattern>/fournisseur/*</url-pattern>
 	</servlet-mapping>
 </web-app>

@@ -31,6 +31,7 @@ public class SAchat extends HttpServlet {
 		this.dAchat = this.daoFactory.getAchat();
 	}
 	
+	@Override
 	public void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
@@ -41,6 +42,7 @@ public class SAchat extends HttpServlet {
 		response.setStatus(HttpServletResponse.SC_OK);
 	}
 	
+	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UriUtils uriUtils = new UriUtils(request.getRequestURI());
 		response.setCharacterEncoding("UTF-8");
@@ -57,6 +59,7 @@ public class SAchat extends HttpServlet {
 		}
 	}
 	
+	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		UriUtils uriUtils = new UriUtils(request.getRequestURI());
 		response.setCharacterEncoding("UTF-8");

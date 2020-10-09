@@ -3,7 +3,7 @@ package mg.adequa.services.dao.postgresql;
 import lib.querybuilder.QueryBuilder;
 import lib.querybuilder.exceptions.NoConnectionException;
 import lib.querybuilder.exceptions.NoSpecifiedTableException;
-import lib.querybuilder.implementations.PostgreSQLQueryBuilder;
+import lib.querybuilder.implementations.PostgreSQL;
 import mg.adequa.beans.BUtilisateur;
 import mg.adequa.dbentity.DbTables;
 import mg.adequa.services.dao.DaoFactory;
@@ -25,7 +25,7 @@ public class MLogin implements DLogin {
 	
 	@Override
 	public boolean urtilisateurExiste(String login) throws SQLException, NoConnectionException, NoSpecifiedTableException {
-		QueryBuilder query = new PostgreSQLQueryBuilder(this.dao.getConnection());
+		QueryBuilder query = new PostgreSQL(this.dao.getConnection());
 		return query
 			       .where("login", login)
 			       .rowCount(this.tables.getUtilisateur()) > 0;
@@ -34,7 +34,7 @@ public class MLogin implements DLogin {
 	@Override
 	public String getPassword(String login) throws SQLException, NoSpecifiedTableException, NoConnectionException {
 		String getPassword = null;
-		QueryBuilder query = new PostgreSQLQueryBuilder(this.dao.getConnection());
+		QueryBuilder query = new PostgreSQL(this.dao.getConnection());
 		ResultSet resultSet = query
 			                      .select("password")
 			                      .from(this.tables.getUtilisateur())
@@ -48,7 +48,7 @@ public class MLogin implements DLogin {
 	@Override
 	public BUtilisateur getData(String login) throws SQLException, NoSpecifiedTableException, NoConnectionException {
 		BUtilisateur getData = null;
-		QueryBuilder query = new PostgreSQLQueryBuilder(this.dao.getConnection());
+		QueryBuilder query = new PostgreSQL(this.dao.getConnection());
 		Map<String, String> transposition = new HashMap<>();
 		ResultSet resultSet =
 			query

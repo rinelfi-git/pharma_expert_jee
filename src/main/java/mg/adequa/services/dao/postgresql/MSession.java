@@ -4,7 +4,7 @@ import lib.querybuilder.QueryBuilder;
 import lib.querybuilder.exceptions.InvalidExpressionException;
 import lib.querybuilder.exceptions.NoConnectionException;
 import lib.querybuilder.exceptions.NoSpecifiedTableException;
-import lib.querybuilder.implementations.PostgreSQLQueryBuilder;
+import lib.querybuilder.implementations.PostgreSQL;
 import mg.adequa.beans.BSession;
 import mg.adequa.beans.BUtilisateur;
 import mg.adequa.dbentity.DbTables;
@@ -30,7 +30,7 @@ public class MSession implements DSession {
 	
 	@Override
 	public boolean insert(BSession<BUtilisateur> session) throws SQLException, InvalidExpressionException {
-		QueryBuilder query = new PostgreSQLQueryBuilder(this.dao.getConnection());
+		QueryBuilder query = new PostgreSQL(this.dao.getConnection());
 		return query
 			       .set("id", session.getId())
 			       .set("type", session.getType())
@@ -42,7 +42,7 @@ public class MSession implements DSession {
 	
 	@Override
 	public boolean delete(String id) throws SQLException, InvalidExpressionException {
-		QueryBuilder query = new PostgreSQLQueryBuilder(this.dao.getConnection());
+		QueryBuilder query = new PostgreSQL(this.dao.getConnection());
 		return query
 			       .where("id", id)
 			       .delete(this.tables.getSession());
@@ -50,7 +50,7 @@ public class MSession implements DSession {
 	
 	@Override
 	public boolean exists(String id) throws SQLException, NoSpecifiedTableException, NoConnectionException {
-		QueryBuilder query = new PostgreSQLQueryBuilder(this.dao.getConnection());
+		QueryBuilder query = new PostgreSQL(this.dao.getConnection());
 		return query
 			       .where("id", id)
 			       .rowCount(this.tables.getSession()) > 0;
@@ -58,7 +58,7 @@ public class MSession implements DSession {
 	
 	@Override
 	public boolean addTimer(String id) throws SQLException, InvalidExpressionException {
-		QueryBuilder query = new PostgreSQLQueryBuilder(this.dao.getConnection());
+		QueryBuilder query = new PostgreSQL(this.dao.getConnection());
 		return query
 			       .where("id", id)
 			       .set("date_expiration", new Timestamp(System.currentTimeMillis() + BSession.DEFAULT_TIMER * 1000))
@@ -68,7 +68,7 @@ public class MSession implements DSession {
 	@Override
 	public PSession<PUtilisateur> get(String id) throws SQLException, NoSpecifiedTableException, NoConnectionException {
 		PSession<PUtilisateur> get = null;
-		QueryBuilder query = new PostgreSQLQueryBuilder(this.dao.getConnection());
+		QueryBuilder query = new PostgreSQL(this.dao.getConnection());
 		Map<String, String> transformation = new HashMap<>();
 		transformation.put(this.tables.getUtilisateur() + ".id", "id_utilisateur");
 		transformation.put(this.tables.getSession() + ".id", "id_session");

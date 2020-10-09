@@ -5,7 +5,7 @@ import mg.adequa.payloads.PAutreEntree;
 import mg.adequa.services.Transaction;
 import mg.adequa.services.dao.DaoFactory;
 import mg.adequa.services.dao.interfaces.DAutreEntree;
-import mg.adequa.tableviews.AutreEntreeTV;
+import mg.adequa.tableviews.TAutreEntree;
 import mg.adequa.utils.*;
 
 import javax.servlet.ServletException;
@@ -84,9 +84,9 @@ public class SAutreEntree extends HttpServlet {
 		constraints.setSearch(new DatatableSearch(request.getParameter("search[value]"), Boolean.valueOf(request.getParameter("search[regex]"))));
 		
 		String queries = dAutreEntree.makeQuery(constraints);
-		ArrayList<AutreEntreeTV> incomingData = dAutreEntree.makeDatatable(queries, constraints);
+		ArrayList<TAutreEntree> incomingData = dAutreEntree.makeDatatable(queries, constraints);
 		ArrayList<String[]> data = new ArrayList<>();
-		for (AutreEntreeTV retrievedData : incomingData) {
+		for (TAutreEntree retrievedData : incomingData) {
 			data.add(new String[]{
 				retrievedData.getDateOperation(),
 				retrievedData.getLibelleOperation(),

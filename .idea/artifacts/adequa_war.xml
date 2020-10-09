@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="adequa-1.0.0.war">
+    <root id="archive" name="adequa-2.0.0.war">
       <element id="artifact" artifact-name="adequa:war exploded" />
     </root>
   </artifact>
