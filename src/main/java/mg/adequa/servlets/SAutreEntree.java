@@ -1,7 +1,7 @@
 package mg.adequa.servlets;
 
 import com.google.gson.Gson;
-import mg.adequa.payloads.PlAutreEntree;
+import mg.adequa.payloads.PAutreEntree;
 import mg.adequa.services.Transaction;
 import mg.adequa.services.dao.DaoFactory;
 import mg.adequa.services.dao.interfaces.DAutreEntree;
@@ -104,7 +104,7 @@ public class SAutreEntree extends HttpServlet {
 	}
 	
 	private MethodResponse insert(HttpServletRequest request) throws IOException {
-		PlAutreEntree post = new Gson().fromJson(request.getReader(), PlAutreEntree.class);
+		PAutreEntree post = new Gson().fromJson(request.getReader(), PAutreEntree.class);
 		MethodResponse methodResponse = new MethodResponse();
 		
 		final String now = new SimpleDateFormat("yyyy-MM-dd").format(new Date());

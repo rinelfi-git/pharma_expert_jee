@@ -1,6 +1,6 @@
 package mg.adequa.services.dao.postgresql;
 
-import mg.adequa.payloads.PlAutreEntree;
+import mg.adequa.payloads.PAutreEntree;
 import mg.adequa.services.dao.DaoFactory;
 import mg.adequa.services.dao.interfaces.DAutreEntree;
 import mg.adequa.tableviews.AutreEntreeTV;
@@ -103,12 +103,12 @@ public class MAutreEntree implements DAutreEntree {
 	}
 	
 	@Override
-	public PlAutreEntree select(int reference) {
+	public PAutreEntree select(int reference) {
 		return null;
 	}
 	
 	@Override
-	public boolean insert(PlAutreEntree data) {
+	public boolean insert(PAutreEntree data) {
 		boolean output = false;
 		String autreEntreeInsert = "INSERT INTO";
 		autreEntreeInsert += " autre_entree(" +
@@ -159,7 +159,7 @@ public class MAutreEntree implements DAutreEntree {
 	}
 	
 	@Override
-	public boolean insertAndArchive(PlAutreEntree data) {
+	public boolean insertAndArchive(PAutreEntree data) {
 		return false;
 	}
 	

@@ -1,6 +1,6 @@
 package mg.adequa.payloads;
 
-public class PDocteur extends PlPersonne {
+public class PDocteur extends PPersonne {
 	private int serviceHospitalier;
 	
 	

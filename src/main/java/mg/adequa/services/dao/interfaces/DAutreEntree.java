@@ -1,6 +1,6 @@
 package mg.adequa.services.dao.interfaces;
 
-import mg.adequa.payloads.PlAutreEntree;
+import mg.adequa.payloads.PAutreEntree;
 import mg.adequa.tableviews.AutreEntreeTV;
 import mg.adequa.utils.DatatableParameter;
 
@@ -12,7 +12,7 @@ public interface DAutreEntree {
 	ArrayList<AutreEntreeTV> makeDatatable(String query, DatatableParameter constraints);
 	int dataRecordsTotal();
 	// Datatables
-	PlAutreEntree select(int reference);
-	boolean insert(PlAutreEntree data);
-	boolean insertAndArchive(PlAutreEntree data);
+	PAutreEntree select(int reference);
+	boolean insert(PAutreEntree data);
+	boolean insertAndArchive(PAutreEntree data);
 }

@@ -10,14 +10,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14fd4e27-a837-4fe7-b2d3-86afbdd55789" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/payloads/PNotification.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/payloads/PPersonnel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/payloads/PSession.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DNotification.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MNotification.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SNotification.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lib/querybuilder/QueryBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lib/querybuilder/QueryBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lib/querybuilder/implementations/PostgreSQLQueryBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lib/querybuilder/implementations/PostgreSQLQueryBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MDocteur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MDocteur.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/payloads/PDocteur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/payloads/PDocteur.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/payloads/PUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/payloads/PUtilisateur.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/payloads/PlAutreEntree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/payloads/PAutreEntree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/payloads/PlEvolutionDeCompteFinancierConstraint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/payloads/PEvolutionDeCompteFinancierConstraint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/payloads/PlPersonne.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/payloads/PPersonne.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/DaoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/DaoFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/PostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/PostgreSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DAutreEntree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DAutreEntree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DSession.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MAutreEntree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MAutreEntree.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MSession.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SJournalDeSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SJournalDeSession.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SAutreEntree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SAutreEntree.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/STableauDeBord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/STableauDeBord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +91,9 @@
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="mg.adequa.services.dao.postgresql" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java/mg/adequa/services/querybuilder" />
       <recent name="$PROJECT_DIR$/external_libs" />
@@ -84,13 +101,15 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -196,6 +215,7 @@
       <workItem from="1602157492069" duration="5338000" />
       <workItem from="1602163987647" duration="1202000" />
       <workItem from="1602167788025" duration="24674000" />
+      <workItem from="1602212230157" duration="5339000" />
     </task>
     <servers />
   </component>
@@ -215,10 +235,10 @@
       <screen x="0" y="0" width="1366" height="735" />
     </state>
     <state x="141" y="0" width="1084" height="735" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.735@0.0.1366.735" timestamp="1600967764392" />
-    <state x="491" y="56" width="380" height="623" key="#com.intellij.ide.util.MemberChooser" timestamp="1602187694843">
+    <state x="491" y="56" width="380" height="623" key="#com.intellij.ide.util.MemberChooser" timestamp="1602216116427">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state x="491" y="56" width="380" height="623" key="#com.intellij.ide.util.MemberChooser/0.0.1366.735@0.0.1366.735" timestamp="1602187694843" />
+    <state x="491" y="56" width="380" height="623" key="#com.intellij.ide.util.MemberChooser/0.0.1366.735@0.0.1366.735" timestamp="1602216116427" />
     <state x="366" y="108" width="630" height="519" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1600855612570">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
@@ -227,10 +247,10 @@
       <screen x="0" y="0" width="1366" height="735" />
     </state>
     <state x="265" y="296" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1366.735@0.0.1366.735" timestamp="1601305019790" />
-    <state x="9" y="0" width="1339" height="732" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1602184561208">
+    <state x="9" y="0" width="1339" height="732" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1602212848715">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state x="9" y="0" width="1339" height="732" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.735@0.0.1366.735" timestamp="1602184561208" />
+    <state x="9" y="0" width="1339" height="732" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.735@0.0.1366.735" timestamp="1602212848715" />
     <state x="416" y="117" width="534" height="504" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1602171693682">
       <screen x="0" y="0" width="1366" height="735" />
     </state>

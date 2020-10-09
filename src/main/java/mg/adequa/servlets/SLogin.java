@@ -6,7 +6,8 @@ import lib.querybuilder.exceptions.NoConnectionException;
 import lib.querybuilder.exceptions.NoSpecifiedTableException;
 import mg.adequa.beans.BSession;
 import mg.adequa.beans.BUtilisateur;
-import mg.adequa.payloads.PUser;
+import mg.adequa.payloads.PSession;
+import mg.adequa.payloads.PUtilisateur;
 import mg.adequa.services.Transaction;
 import mg.adequa.services.dao.DaoFactory;
 import mg.adequa.services.dao.PostgreSQL;
@@ -104,9 +105,9 @@ public class SLogin extends HttpServlet {
 	}
 	
 	private boolean checkUser(HttpServletRequest request) throws IOException {
-		PUser pUser = new Gson().fromJson(request.getReader(), PUser.class);
+		PUtilisateur pUtilisateur = new Gson().fromJson(request.getReader(), PUtilisateur.class);
 		try {
-			return this.dLogin.urtilisateurExiste(pUser.getLogin());
+			return this.dLogin.urtilisateurExiste(pUtilisateur.getLogin());
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
 		} catch (NoSpecifiedTableException e) {
@@ -118,10 +119,10 @@ public class SLogin extends HttpServlet {
 	}
 	
 	private boolean matchPassword(HttpServletRequest request) throws IOException {
-		PUser pUser = new Gson().fromJson(request.getReader(), PUser.class);
+		PUtilisateur pUtilisateur = new Gson().fromJson(request.getReader(), PUtilisateur.class);
 		try {
-			String password = this.dLogin.getPassword(pUser.getLogin());
-			return BCrypt.checkpw(pUser.getPassword(), password);
+			String password = this.dLogin.getPassword(pUtilisateur.getLogin());
+			return BCrypt.checkpw(pUtilisateur.getPassword(), password);
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
 		} catch (NoConnectionException e) {
@@ -132,7 +133,7 @@ public class SLogin extends HttpServlet {
 		return false;
 	}
 	
-	private BSession<BUtilisateur> retrieveSession(String id) {
+	private PSession<PUtilisateur> retrieveSession(String id) {
 		try {
 			return this.dSession.get(id);
 		} catch (SQLException throwables) {
@@ -146,7 +147,7 @@ public class SLogin extends HttpServlet {
 	}
 	
 	private BSession<BUtilisateur> createSession(HttpServletRequest request) throws IOException {
-		PUser user = new Gson().fromJson(request.getReader(), PUser.class);
+		PUtilisateur user = new Gson().fromJson(request.getReader(), PUtilisateur.class);
 		BUtilisateur utilisateur = null;
 		BSession<BUtilisateur> session = null;
 		Transaction transaction = new Transaction(this.daoFactory);
@@ -181,7 +182,7 @@ public class SLogin extends HttpServlet {
 	private boolean isTokenAlive(HttpServletRequest request) throws IOException {
 		HashMap post = new Gson().fromJson(request.getReader(), HashMap.class);
 		try {
-			BSession<BUtilisateur> session = this.dSession.get(post.get("token").toString());
+			PSession<PUtilisateur> session = this.dSession.get(post.get("token").toString());
 			if (session != null) {
 				long currentTimestamp = System.currentTimeMillis();
 				if (session.getDateExpiration().getTime() <= currentTimestamp) {

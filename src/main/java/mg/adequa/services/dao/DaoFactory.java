@@ -15,5 +15,5 @@ public interface DaoFactory {
 	DSession getSession();
 	DLogin getLogin();
 	DJournalDeSession getJournalDeSession();
-	
+	DNotification getNotification();
 }

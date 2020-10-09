@@ -8,6 +8,8 @@ import lib.querybuilder.implementations.PostgreSQLQueryBuilder;
 import mg.adequa.beans.BSession;
 import mg.adequa.beans.BUtilisateur;
 import mg.adequa.dbentity.DbTables;
+import mg.adequa.payloads.PSession;
+import mg.adequa.payloads.PUtilisateur;
 import mg.adequa.services.dao.DaoFactory;
 import mg.adequa.services.dao.interfaces.DSession;
 
@@ -64,13 +66,13 @@ public class MSession implements DSession {
 	}
 	
 	@Override
-	public BSession<BUtilisateur> get(String id) throws SQLException, NoSpecifiedTableException, NoConnectionException {
-		BSession<BUtilisateur> get = null;
+	public PSession<PUtilisateur> get(String id) throws SQLException, NoSpecifiedTableException, NoConnectionException {
+		PSession<PUtilisateur> get = null;
 		QueryBuilder query = new PostgreSQLQueryBuilder(this.dao.getConnection());
 		Map<String, String> transformation = new HashMap<>();
 		transformation.put(this.tables.getUtilisateur() + ".id", "id_utilisateur");
 		transformation.put(this.tables.getSession() + ".id", "id_session");
-		transformation.put(this.tables.getPoste() + ".nom", "poste");
+		transformation.put(this.tables.getPoste() + ".nom", "nom_poste");
 		ResultSet resultSet = query.select(new String[]{
 			"type",
 			"date_creation",
@@ -80,6 +82,7 @@ public class MSession implements DSession {
 			"login",
 			"administrateur",
 			"role",
+			"poste",
 			"email"
 		})
 			                      .select(transformation)
@@ -91,8 +94,8 @@ public class MSession implements DSession {
 			                      .get()
 			                      .result();
 		if (resultSet.next()) {
-			get = new BSession<>();
-			BUtilisateur utilisateur = new BUtilisateur();
+			get = new PSession<>();
+			PUtilisateur utilisateur = new PUtilisateur();
 			
 			utilisateur.setIdUtilisateur(resultSet.getInt("id_utilisateur"));
 			utilisateur.setLogin(resultSet.getString("login"));
@@ -101,6 +104,8 @@ public class MSession implements DSession {
 			utilisateur.setNom(resultSet.getString("nom"));
 			utilisateur.setPrenom(resultSet.getString("prenom"));
 			utilisateur.setEmail(resultSet.getString("email"));
+			utilisateur.setPoste(resultSet.getInt("poste"));
+			utilisateur.setNomPoste(resultSet.getString("nom_poste"));
 			
 			get.setId(resultSet.getString("id_session"));
 			get.setContenu(utilisateur);

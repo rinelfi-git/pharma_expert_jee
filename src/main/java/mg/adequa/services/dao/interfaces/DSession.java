@@ -5,6 +5,8 @@ import lib.querybuilder.exceptions.NoConnectionException;
 import lib.querybuilder.exceptions.NoSpecifiedTableException;
 import mg.adequa.beans.BSession;
 import mg.adequa.beans.BUtilisateur;
+import mg.adequa.payloads.PSession;
+import mg.adequa.payloads.PUtilisateur;
 
 import java.sql.SQLException;
 
@@ -13,5 +15,5 @@ public interface DSession {
 	boolean delete(String id) throws SQLException, InvalidExpressionException;
 	boolean exists(String id) throws SQLException, NoSpecifiedTableException, NoConnectionException;
 	boolean addTimer(String id) throws SQLException, InvalidExpressionException;
-	BSession<BUtilisateur> get(String id) throws SQLException, NoSpecifiedTableException, NoConnectionException;
+	PSession<PUtilisateur> get(String id) throws SQLException, NoSpecifiedTableException, NoConnectionException;
 }

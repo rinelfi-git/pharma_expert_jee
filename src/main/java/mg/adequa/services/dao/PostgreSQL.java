@@ -59,4 +59,7 @@ public class PostgreSQL implements DaoFactory {
 	
 	@Override
 	public DJournalDeSession getJournalDeSession() {return new MJournalDeSession(this);}
+	
+	@Override
+	public DNotification getNotification() {return new MNotification(this);}
 }

@@ -1,9 +1,9 @@
 package mg.adequa.payloads;
 
-public class PlEvolutionDeCompteFinancierConstraint {
+public class PEvolutionDeCompteFinancierConstraint {
 	private int moisDebut, anneeDebut, moisFin, anneeFin;
 	
-	public PlEvolutionDeCompteFinancierConstraint() {
+	public PEvolutionDeCompteFinancierConstraint() {
 		this.moisDebut = 0;
 		this.anneeDebut = 0;
 		this.moisFin = 0;

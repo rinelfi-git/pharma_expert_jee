@@ -3,7 +3,7 @@ package mg.adequa.servlets;
 import com.google.gson.Gson;
 import mg.adequa.beans.BilanTableauDeBord;
 import mg.adequa.services.dao.postgresql.SessionManager;
-import mg.adequa.payloads.PlEvolutionDeCompteFinancierConstraint;
+import mg.adequa.payloads.PEvolutionDeCompteFinancierConstraint;
 import mg.adequa.services.dao.DaoFactory;
 import mg.adequa.services.dao.PostgreSQL;
 import mg.adequa.services.dao.interfaces.DBilan;
@@ -89,7 +89,7 @@ public class STableauDeBord extends HttpServlet {
 	}
 	
 	private ArrayList<Map> evolutionCompteFinancier(HttpServletRequest request) throws IOException {
-		PlEvolutionDeCompteFinancierConstraint post = new Gson().fromJson(request.getReader(), PlEvolutionDeCompteFinancierConstraint.class);
+		PEvolutionDeCompteFinancierConstraint post = new Gson().fromJson(request.getReader(), PEvolutionDeCompteFinancierConstraint.class);
 		ArrayList<Map> output = new ArrayList<>();
 		
 		Calendar maintenant = Calendar.getInstance(),

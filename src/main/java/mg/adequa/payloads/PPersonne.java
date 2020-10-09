@@ -1,6 +1,6 @@
 package mg.adequa.payloads;
 
-public class PlPersonne {
+public class PPersonne {
 	protected int id;
 	protected String nom, prenom;
 	

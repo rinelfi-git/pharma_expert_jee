@@ -1,6 +1,6 @@
 package mg.adequa.payloads;
 
-public class PlAutreEntree {
+public class PAutreEntree {
 	private String dateOperation, modeDePayment, libelleOperation, numeroDePieceJustificative, observation;
 	private boolean libelleEnregistre;
 	private int somme;
