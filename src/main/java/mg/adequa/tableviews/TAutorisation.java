@@ -14,11 +14,17 @@ import java.util.ArrayList;
 
 public class TAutorisation {
 	private static int round;
-	private int id, utilisateur;
+	private int id;
 	private String action, nom, list;
 	
 	public void setId(int id) {
 		this.id = id;
+		StringBuilder builder = new StringBuilder();
+		builder
+			.append("<div class=\"btn-group-vertical\">")
+			.append("<button class=\"btn btn-adequa modification\" data-toggle = \"modal\" data-target=\"#modifier\" data-identifiant = \"" + this.id + "\" >Modifier</button >")
+			.append("</div >");
+		this.action = builder.toString();
 	}
 	
 	public String getAction() {
@@ -37,14 +43,6 @@ public class TAutorisation {
 		return list;
 	}
 	
-	public int getUtilisateur() {
-		return utilisateur;
-	}
-	
-	public void setUtilisateur(int utilisateur) {
-		this.utilisateur = utilisateur;
-	}
-	
 	public void setList(ArrayList<BAutorisation> autorisations) throws NoConnectionException, SQLException, NoSpecifiedTableException {
 		int count = TAutorisation.round++;
 		StringBuilder formattedAutorisation = new StringBuilder("<div id=\"accordion" + count + "\">");
@@ -57,14 +55,14 @@ public class TAutorisation {
 			if (!menuInfo.getGroup().equals(lastMenuGroup)) {
 				if (collapseContent.toString().length() > 0) collapseContent.append("</ul></div></div></div>");
 				formattedAutorisation.append(collapseContent.toString())
-				.append("<div class=\"card card-adequat\">")
-				.append("<div class=\"card-header\" id=\"heading" + DigestUtils.sha1(menuInfo.getGroup()) + count + "\">")
-				.append("<button class=\"btn btn-adequa\" data-toggle=\"collapse\" data-target=\"#collapse" + DigestUtils.sha1(menuInfo.getGroup()) + count + "\" aria-expanded=\"false\" aria-controls=\"collapse" + DigestUtils.sha1(menuInfo.getGroup()) + count + "\">" + menuInfo.getGroup() + "</button>")
-				.append("</div>")
-				.append("<div id=\"collapse" + DigestUtils.sha1(menuInfo.getGroup()) + count + "\" class=\"collapse\" aria-labelledby=\"heading"  + DigestUtils.sha1(menuInfo.getGroup()) + count + "\" data-parent=\"#accordion" + count + "\">")
-				.append("<div class=\"card-body\">")
-				.append("<ul class=\"list-group\">");
-				collapseContent.append("<li class=\"list-group-item\">" + menuInfo.getNom() + "</li>");
+					.append("<div class=\"card card-adequat\">")
+					.append("<div class=\"card-header\" id=\"heading" + (DigestUtils.sha1Hex(menuInfo.getGroup()) + count) + "\">")
+					.append("<button class=\"btn btn-adequa\" data-toggle=\"collapse\" data-target=\"#collapse" + (DigestUtils.sha1Hex(menuInfo.getGroup()) + count) + "\" aria-expanded=\"false\" aria-controls=\"collapse" + (DigestUtils.sha1Hex(menuInfo.getGroup()) + count) + "\">" + menuInfo.getGroup() + "</button>")
+					.append("</div>")
+					.append("<div id=\"collapse" + (DigestUtils.sha1Hex(menuInfo.getGroup()) + count) + "\" class=\"collapse\" aria-labelledby=\"heading" + (DigestUtils.sha1Hex(menuInfo.getGroup()) + count) + "\" data-parent=\"#accordion" + count + "\">")
+					.append("<div class=\"card-body\">")
+					.append("<ul class=\"list-group\">");
+				collapseContent = new StringBuilder("<li class=\"list-group-item\">" + menuInfo.getNom() + "</li>");
 				lastMenuGroup = menuInfo.getGroup();
 			} else {
 				collapseContent.append("<li class=\"list-group-item\">" + menuInfo.getNom() + "</li>");

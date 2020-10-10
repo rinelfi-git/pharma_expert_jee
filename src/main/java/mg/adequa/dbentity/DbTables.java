@@ -4,7 +4,7 @@ public class DbTables {
 	private final String personne = "personne";
 	private final String poste = "poste";
 	private final String personnel = "personnel";
-	private final String utilisateur = "Utilisateur";
+	private final String utilisateur = "utilisateur";
 	private final String telephone = "telephone";
 	private final String fournisseur = "fournisseur";
 	private final String journalDeSession = "journal_de_session";

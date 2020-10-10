@@ -1,5 +1,6 @@
 package mg.adequa.services.dao.postgresql;
 
+import lib.querybuilder.QueryBuilder;
 import lib.querybuilder.clauses.OrderBy;
 import lib.querybuilder.exceptions.InvalidExpressionException;
 import lib.querybuilder.exceptions.NoConnectionException;
@@ -40,11 +41,9 @@ public class MAutorisation implements DAutorisation {
 				this.tables.getPoste() + ".nom"
 		};
 		query.select(transposition).select(new String[]{
-			this.tables.getAutorisation() + ".id",
-			"nom",
+			this.tables.getPersonne() + ".nom",
 			"prenom"
 		})
-			.select(this.tables.getServiceHospitalier() + ".libelle", "service ")
 			.from(this.tables.getPersonne())
 			.join(this.tables.getPersonnel() + ".personne", this.tables.getPersonne() + ".id")
 			.join(this.tables.getUtilisateur() + ".personnel", this.tables.getPersonnel() + ".numero")
@@ -54,8 +53,8 @@ public class MAutorisation implements DAutorisation {
 				.orILike("prenom", "%" + constraints.getSearch().getValue() + "%")
 				.orILike(this.tables.getPoste() + ".nom", "%" + constraints.getSearch().getValue() + "%");
 		}
-		if (constraints.getOrderColumn() != -1) return query.orderBy(colonne[constraints.getOrderColumn()], constraints.getOrderDirection());
-		else return query.orderBy(this.tables.getPoste() + ".nom, prenom", OrderBy.ASC);
+		if (constraints.getOrderColumn() != -1) return (PostgreSQL) query.orderBy(colonne[constraints.getOrderColumn()], constraints.getOrderDirection());
+		else return (PostgreSQL) query.orderBy(this.tables.getPoste() + ".nom, prenom", OrderBy.ASC);
 	}
 	
 	@Override
@@ -63,10 +62,11 @@ public class MAutorisation implements DAutorisation {
 		ArrayList<TAutorisation> makeDatatable = new ArrayList<>();
 		if (constraints.getLimitLength() != -1) queryBuilder.limit(constraints.getLimitLength(), constraints.getLimitStart());
 		ResultSet resultSet = null;
+		
 		resultSet = queryBuilder.get().result();
 		while (resultSet.next()) {
 			TAutorisation autorisation = new TAutorisation();
-			autorisation.setId(resultSet.getInt("id"));
+			autorisation.setId(resultSet.getInt("id_utilisateur"));
 			autorisation.setNom(resultSet.getString("nom") + " " + resultSet.getString("prenom") + " (" + resultSet.getString("nom_poste") + ")");
 			autorisation.setList(this.selectAutorisations(resultSet.getInt("id_utilisateur")));
 			makeDatatable.add(autorisation);
@@ -97,6 +97,7 @@ public class MAutorisation implements DAutorisation {
 			temporary.setId(resultSet.getInt("id"));
 			temporary.setMenu(resultSet.getString("menu"));
 			temporary.setUtilisateur(utilisateur);
+			select.add(temporary);
 		}
 		return select;
 	}

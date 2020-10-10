@@ -44,7 +44,7 @@ public class MMenu implements DMenu {
 	public BMenu selectMenuOfAutorisation(String lien) throws SQLException, NoSpecifiedTableException, NoConnectionException {
 		QueryBuilder query = new PostgreSQL(this.dao.getConnection());
 		BMenu selectMenuOf = null;
-		ResultSet resultSet = query.select(new String[]{"meu_group", "nom"}).from(this.tables.getMenu()).where("lien", lien).get().result();
+		ResultSet resultSet = query.select(new String[]{"menu_group", "nom"}).from(this.tables.getMenu()).where("lien", lien).get().result();
 		if (resultSet.next()){
 			selectMenuOf = new BMenu();
 			selectMenuOf.setGroup(resultSet.getString("menu_group"));

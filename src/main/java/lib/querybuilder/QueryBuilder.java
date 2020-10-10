@@ -7,10 +7,10 @@ import lib.querybuilder.clauses.Pair;
 import lib.querybuilder.exceptions.InvalidExpressionException;
 import lib.querybuilder.exceptions.NoConnectionException;
 import lib.querybuilder.exceptions.NoSpecifiedTableException;
-import lib.querybuilder.implementations.PostgreSQL;
 import lib.querybuilder.utils.PreparedStatementDataset;
 
 import java.sql.*;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -111,7 +111,7 @@ public abstract class QueryBuilder {
 		return this.preparedStatement.executeUpdate() > 0;
 	}
 	
-	public boolean delete(String table) throws InvalidExpressionException, SQLException {
+	public boolean delete(String table) throws SQLException {
 		this.query = "DELETE FROM " + table;
 		if (!(this.whereClauses.size() == 0 && this.orWhereClauses.size() == 0 && this.likeClauses.size() == 0 && this.orLikeClauses.size() == 0)) {
 			this.checkAndPrepareClauses();
@@ -358,12 +358,12 @@ public abstract class QueryBuilder {
 	}
 	
 	public int count(String table) throws SQLException {
-		int count = 0;
 		this.query = "SELECT COUNT(*) AS count FROM " + table;
+		int count = 0;
 		ResultSet resultSet = this.connection
 			                      .createStatement()
 			                      .executeQuery(this.query);
-		if (resultSet.next()) count = resultSet.getInt(0);
+		if(resultSet.next()) count = resultSet.getInt("count");
 		return count;
 	}
 	
@@ -449,7 +449,7 @@ public abstract class QueryBuilder {
 			else if (keyValue.getValue() instanceof Character) this.preparedStatement.setString(++index, (String) keyValue.getValue());
 			else if (keyValue.getValue() instanceof Boolean) this.preparedStatement.setBoolean(++index, (Boolean) keyValue.getValue());
 			else if (keyValue.getValue() instanceof Timestamp) this.preparedStatement.setTimestamp(++index, (Timestamp) keyValue.getValue());
-			else if (keyValue.getValue() instanceof java.util.Date) this.preparedStatement.setDate(++index, new java.sql.Date(((java.util.Date) keyValue.getValue()).getTime()));
+			else if (keyValue.getValue() instanceof Date) this.preparedStatement.setDate(++index, new java.sql.Date(((java.util.Date) keyValue.getValue()).getTime()));
 		}
 	}
 }

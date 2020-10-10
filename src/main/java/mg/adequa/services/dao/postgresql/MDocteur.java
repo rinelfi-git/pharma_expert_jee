@@ -45,8 +45,8 @@ public class MDocteur implements DDocteur {
 				.orILike("prenom", "%" + constraints.getSearch().getValue() + "%")
 				.orILike("libelle", "%" + constraints.getSearch().getValue() + "%");
 		}
-		if (constraints.getOrderColumn() != -1) return query.orderBy(colonne[constraints.getOrderColumn()], constraints.getOrderDirection());
-		else return query.orderBy("nom, prenom", OrderBy.ASC);
+		if (constraints.getOrderColumn() != -1) return (PostgreSQL) query.orderBy(colonne[constraints.getOrderColumn()], constraints.getOrderDirection());
+		else return (PostgreSQL) query.orderBy("nom, prenom", OrderBy.ASC);
 	}
 	
 	@Override
