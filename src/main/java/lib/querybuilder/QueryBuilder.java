@@ -10,8 +10,8 @@ import lib.querybuilder.exceptions.NoSpecifiedTableException;
 import lib.querybuilder.utils.PreparedStatementDataset;
 
 import java.sql.*;
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -70,6 +70,13 @@ public abstract class QueryBuilder {
 	
 	public <V> QueryBuilder set(String field, V value) {
 		this.setValues.add(new Pair(field, value));
+		return this;
+	}
+	
+	public <V> QueryBuilder set(Map<String, V> pair) {
+		for (String key: pair.keySet()) {
+			this.setValues.add(new Pair(key, pair.get(key)));
+		}
 		return this;
 	}
 	

@@ -68,4 +68,7 @@ public class PostgreSQL implements DaoFactory {
 	
 	@Override
 	public DMenu getMenu() {return new MMenu(this);}
+	
+	@Override
+	public DFournisseur getFournisseur() {return new MFournisseur(this);}
 }
