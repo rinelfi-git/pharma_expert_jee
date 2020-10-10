@@ -48,6 +48,7 @@ public class STableauDeBord extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		UriUtils uriUtils = new UriUtils(request.getRequestURI());
+		String[] arrayUri = uriUtils.toArray();
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
 		response.addHeader("Access-Control-Allow-Origin", "*");
@@ -55,8 +56,8 @@ public class STableauDeBord extends HttpServlet {
 		response.addHeader("Access-Control-Allow-Headers", "X-Requested-With,Cache-Control,content-type,Accept,DNT,X-CustomHeader,Keep-Alive,User-Agent");
 		response.addHeader("Access-Control-Allow-Credentials", "true");
 		response.addHeader("Access-Control-Max-Age", "1728000");
-		switch (uriUtils.toArray()[1]) {
-			case "dernier-bilan":
+		switch (arrayUri[2]) {
+			case "dernier_bilan":
 				response.getWriter().print(new Gson().toJson(this.dernierBilan(request)));
 				break;
 		}
@@ -65,6 +66,7 @@ public class STableauDeBord extends HttpServlet {
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		UriUtils uriUtils = new UriUtils(request.getRequestURI());
+		String[] arrayUri = uriUtils.toArray();
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
 		response.addHeader("Access-Control-Allow-Origin", "*");
@@ -72,7 +74,7 @@ public class STableauDeBord extends HttpServlet {
 		response.addHeader("Access-Control-Allow-Headers", "X-Requested-With,Cache-Control,content-type,Accept,DNT,X-CustomHeader,Keep-Alive,User-Agent");
 		response.addHeader("Access-Control-Allow-Credentials", "true");
 		response.addHeader("Access-Control-Max-Age", "1728000");
-		switch (uriUtils.toArray()[1]) {
+		switch (arrayUri[2]) {
 			case "evolution-du-compte-financier":
 				response.getWriter().print(new Gson().toJson(this.evolutionCompteFinancier(request)));
 				break;
