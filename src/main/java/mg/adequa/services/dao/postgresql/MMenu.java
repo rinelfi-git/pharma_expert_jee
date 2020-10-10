@@ -26,7 +26,7 @@ public class MMenu implements DMenu {
 	public ArrayList<String> selectGroup() throws SQLException, NoSpecifiedTableException, NoConnectionException {
 		QueryBuilder query = new PostgreSQL(this.dao.getConnection());
 		ArrayList<String> selectGroup = new ArrayList<>();
-		ResultSet resultSet = query.select().from(this.tables.getMenuGroup()).get().result();
+		ResultSet resultSet = query.select().from(this.tables.getMenuGroup()).orderBy("nom").get().result();
 		while (resultSet.next()) selectGroup.add(resultSet.getString("nom"));
 		return  selectGroup;
 	}
@@ -52,5 +52,14 @@ public class MMenu implements DMenu {
 			selectMenuOf.setNom(resultSet.getString("nom"));
 		}
 		return  selectMenuOf;
+	}
+	
+	@Override
+	public ArrayList<BMenu> selectMenuOfGroup(String group) throws SQLException, NoSpecifiedTableException, NoConnectionException {
+		QueryBuilder query = new PostgreSQL(this.dao.getConnection());
+		ArrayList<BMenu> selectMenuOfGroup = new ArrayList<>();
+		ResultSet resultSet = query.select(new String[]{"nom", "lien"}).from(this.tables.getMenu()).where("menu_group", group).get().result();
+		while (resultSet.next()) selectMenuOfGroup.add(new BMenu(resultSet.getString("nom"), resultSet.getString("lien"), group));
+		return  selectMenuOfGroup;
 	}
 }

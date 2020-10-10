@@ -55,6 +55,10 @@
 		<servlet-name>Fournisseur</servlet-name>
 		<servlet-class>mg.adequa.servlets.SFournisseur</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>Menu</servlet-name>
+		<servlet-class>mg.adequa.servlets.SMenu</servlet-class>
+	</servlet>
 	
 	
 	<servlet-mapping>
@@ -133,5 +137,11 @@
 		<servlet-name>Fournisseur</servlet-name>
 		<url-pattern>/fournisseur</url-pattern>
 		<url-pattern>/fournisseur/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>Menu</servlet-name>
+		<url-pattern>/menu</url-pattern>
+		<url-pattern>/menu/*</url-pattern>
 	</servlet-mapping>
 </web-app>
