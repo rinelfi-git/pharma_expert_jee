@@ -213,7 +213,7 @@ public abstract class QueryBuilder {
 	}
 	
 	public QueryBuilder rightJoin(String table1, String table2) {
-		this.joins.add(new Join(Join.LEFT, table1.split("\\.")[0], table2.split("\\.")[0], table1.split("\\.")[1], table2.split("\\.")[1]));
+		this.joins.add(new Join(Join.RIGHT, table1.split("\\.")[0], table2.split("\\.")[0], table1.split("\\.")[1], table2.split("\\.")[1]));
 		return this;
 	}
 	
