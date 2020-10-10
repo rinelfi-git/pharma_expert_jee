@@ -66,10 +66,33 @@ public class SJournalDeSession extends HttpServlet {
 				}
 				break;
 			case "insert":
-				response.getWriter().print(new Gson().toJson(this.insert(request)));
+				try {
+					response.getWriter().print(new Gson().toJson(this.insert(request)));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				break;
+		}
+	}
+	
+	@Override
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json");
+		response.addHeader("Access-Control-Allow-Origin", "*");
+		response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
+		response.addHeader("Access-Control-Allow-Headers", "X-Requested-With,Cache-Control,content-type,Accept,DNT,X-CustomHeader,Keep-Alive,User-Agent");
+		response.addHeader("Access-Control-Allow-Credentials", "true");
+		response.addHeader("Access-Control-Max-Age", "1728000");
+		UriUtils uriUtils = new UriUtils(request.getRequestURI());
+		String[] arrayUri = uriUtils.toArray();
+		switch (arrayUri[2]) {
 			case "delete":
-				response.getWriter().print(new Gson().toJson(this.delete()));
+				try {
+					response.getWriter().print(new Gson().toJson(this.delete()));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				break;
 		}
 	}
@@ -100,7 +123,7 @@ public class SJournalDeSession extends HttpServlet {
 		return presentation;
 	}
 	
-	private MethodResponse insert(HttpServletRequest request) throws IOException {
+	private MethodResponse insert(HttpServletRequest request) throws Exception {
 		PJournalDeSession pJournalDeSession = new Gson().fromJson(request.getReader(), PJournalDeSession.class);
 		MethodResponse insert = new MethodResponse();
 		Transaction transaction = new Transaction(this.dao);
@@ -108,33 +131,22 @@ public class SJournalDeSession extends HttpServlet {
 		BJournalDeSession journalDeSession = new BJournalDeSession();
 		journalDeSession.setComptePersonnel(pJournalDeSession.getComptePersonnel());
 		journalDeSession.setAction(pJournalDeSession.getAction());
-		try {
-			if (this.dJournalDeSession.insert(journalDeSession)) transaction.commit();
-			else {
-				transaction.rollback();
-				insert.setRequestState(false).appendTable("journal_de_session");
-			}
-		} catch (Exception e) {
+		if (this.dJournalDeSession.insert(journalDeSession)) transaction.commit();
+		else {
 			transaction.rollback();
 			insert.setRequestState(false).appendTable("journal_de_session");
-			e.printStackTrace();
 		}
 		return insert.validate();
 	}
 	
-	private MethodResponse delete() {
+	private MethodResponse delete() throws Exception {
 		MethodResponse delete = new MethodResponse();
 		Transaction transaction = new Transaction(this.dao);
 		transaction.begin();
-		try {
-			if (this.dJournalDeSession.delete()) transaction.commit();
-			else {
-				transaction.rollback();
-				delete.setRequestState(false).appendTable("journal_de_session");
-			}
-			return delete.validate();
-		} catch (Exception e) {
-			e.printStackTrace();
+		if (this.dJournalDeSession.delete()) transaction.commit();
+		else {
+			transaction.rollback();
+			delete.setRequestState(false).appendTable("journal_de_session");
 		}
 		return delete.validate();
 	}

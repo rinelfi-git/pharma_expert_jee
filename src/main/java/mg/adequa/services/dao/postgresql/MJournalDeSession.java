@@ -41,7 +41,7 @@ public class MJournalDeSession implements DJournalDeSession {
 		qeryBuilder
 			.select(new String[]{
 				this.tables.getJournalDeSession() + ".id",
-				"nom",
+				this.tables.getPersonne() + ".nom",
 				"prenom",
 				"action"
 			})
@@ -49,9 +49,10 @@ public class MJournalDeSession implements DJournalDeSession {
 			.from(this.tables.getJournalDeSession())
 			.join(this.tables.getUtilisateur() + ".id", this.tables.getJournalDeSession() + ".compte_personnel")
 			.join(this.tables.getPersonnel() + ".numero", this.tables.getUtilisateur() + ".personnel")
+			.join(this.tables.getPersonne() + ".id", this.tables.getPersonnel() + ".personne")
 			.join(this.tables.getPoste() + ".id", this.tables.getPersonnel() + ".poste");
 		if (constraints.getSearch() != null && constraints.getSearch().getValue() != null) {
-			qeryBuilder.iLike("nom", "%" + constraints.getSearch().getValue() + "%")
+			qeryBuilder.iLike(this.tables.getPersonne() + ".nom", "%" + constraints.getSearch().getValue() + "%")
 			           .orLike("prenom", "%" + constraints.getSearch().getValue() + "%")
 			           .orLike(this.tables.getPoste() + ".nom", "%" + constraints.getSearch().getValue() + "%")
 			           .orLike("to_char(date, 'DD Month YYYY HH24:MI:SS')", "%" + constraints.getSearch().getValue() + "%")
@@ -74,8 +75,6 @@ public class MJournalDeSession implements DJournalDeSession {
 			journalDeSession.setTache(resultSet.getString("action"));
 			makeDatatable.add(journalDeSession);
 		}
-		if (resultSet != null) resultSet.close();
-		query.close();
 		return makeDatatable;
 	}
 	
