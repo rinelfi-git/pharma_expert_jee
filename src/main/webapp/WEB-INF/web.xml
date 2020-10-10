@@ -59,6 +59,10 @@
 		<servlet-name>Menu</servlet-name>
 		<servlet-class>mg.adequa.servlets.SMenu</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>ServerDate</servlet-name>
+		<servlet-class>mg.adequa.servlets.SServerDate</servlet-class>
+	</servlet>
 	
 	
 	<servlet-mapping>
@@ -143,5 +147,10 @@
 		<servlet-name>Menu</servlet-name>
 		<url-pattern>/menu</url-pattern>
 		<url-pattern>/menu/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>ServerDate</servlet-name>
+		<url-pattern>/server_date/datetime</url-pattern>
 	</servlet-mapping>
 </web-app>
