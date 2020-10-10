@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -33,8 +34,9 @@ public class STableauDeBord extends HttpServlet {
 	}
 	
 	@Override
-	public void doOptions(HttpServletRequest request, HttpServletResponse response) {
-		response.setCharacterEncoding("UTF-8");
+	public void doOptions(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+		response.setCharacterEncoding("utf8");
+		request.setCharacterEncoding("utf8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
 		response.addHeader("Access-Control-Allow-Headers", "X-Requested-With,Cache-Control,content-type,Accept,DNT,X-CustomHeader,Keep-Alive,User-Agent");
@@ -47,7 +49,8 @@ public class STableauDeBord extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		UriUtils uriUtils = new UriUtils(request.getRequestURI());
 		String[] arrayUri = uriUtils.toArray();
-		response.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("utf8");
+		request.setCharacterEncoding("utf8");
 		response.setContentType("application/json");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
@@ -65,7 +68,8 @@ public class STableauDeBord extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		UriUtils uriUtils = new UriUtils(request.getRequestURI());
 		String[] arrayUri = uriUtils.toArray();
-		response.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("utf8");
+		request.setCharacterEncoding("utf8");
 		response.setContentType("application/json");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");

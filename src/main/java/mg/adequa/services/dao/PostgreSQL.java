@@ -30,7 +30,8 @@ public class PostgreSQL implements DaoFactory {
 	
 	@Override
 	public Connection getConnection() throws SQLException {
-		if (this.connection == null || this.connection.isClosed()) this.connection = DriverManager.getConnection("jdbc:postgresql://" + this.host + "/" + this.database, this.username, this.password);
+		this.connection = null;
+		this.connection = DriverManager.getConnection("jdbc:postgresql://" + this.host + "/" + this.database, this.username, this.password);
 		return this.connection;
 	}
 	

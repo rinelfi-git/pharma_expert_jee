@@ -12,9 +12,7 @@ import java.util.ArrayList;
 
 public interface DJournalDeSession {
 	// Datatables
-	QueryBuilder makeQuery(DatatableParameter constraints) throws SQLException;
-	
-	ArrayList<TJournalDeSession> makeDatatable(QueryBuilder query, DatatableParameter constraints) throws SQLException, NoSpecifiedTableException, NoConnectionException;
+	ArrayList<TJournalDeSession> makeDatatable(DatatableParameter constraints) throws SQLException, NoSpecifiedTableException, NoConnectionException;
 	
 	int dataRecordsTotal() throws NoSpecifiedTableException, SQLException, NoConnectionException;
 	

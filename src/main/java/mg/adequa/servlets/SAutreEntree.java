@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,7 +55,11 @@ public class SAutreEntree extends HttpServlet {
 				break;
 			case "insert":
 				response.setContentType("application/json");
-				response.getWriter().print(new Gson().toJson(this.insert(request)));
+				try {
+					response.getWriter().print(new Gson().toJson(this.insert(request)));
+				} catch (SQLException throwables) {
+					throwables.printStackTrace();
+				}
 				break;
 		}
 	}
@@ -103,7 +108,7 @@ public class SAutreEntree extends HttpServlet {
 		return presentation;
 	}
 	
-	private MethodResponse insert(HttpServletRequest request) throws IOException {
+	private MethodResponse insert(HttpServletRequest request) throws IOException, SQLException {
 		PAutreEntree post = new Gson().fromJson(request.getReader(), PAutreEntree.class);
 		MethodResponse methodResponse = new MethodResponse();
 		

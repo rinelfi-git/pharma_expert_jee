@@ -5,8 +5,7 @@ import java.sql.PreparedStatement;
 public class PreparedStatementDataset<T> {
 	private T value;
 	
-	public PreparedStatementDataset() {
-	}
+	public PreparedStatementDataset() {}
 	
 	public PreparedStatementDataset(T value) {
 		this.value = value;

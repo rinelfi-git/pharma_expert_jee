@@ -53,8 +53,6 @@ public class MFournisseur implements DFournisseur {
 			temporary.setDescription(resultSet.getString("information_complementaire"));
 			makeDatatable.add(temporary);
 		}
-		if(resultSet != null) resultSet.close();
-		query.close();
 		return makeDatatable;
 	}
 	
@@ -77,8 +75,6 @@ public class MFournisseur implements DFournisseur {
 			temporary.setInformationComplementaire(resultSet.getString("information_complementaire"));
 			select.add(temporary);
 		}
-		if(resultSet != null) resultSet.close();
-		query.close();
 		return select;
 	}
 	
@@ -94,8 +90,6 @@ public class MFournisseur implements DFournisseur {
 			select.setLocalisation(resultSet.getString("localisation"));
 			select.setInformationComplementaire(resultSet.getString("information_complementaire"));
 		}
-		if(resultSet != null) resultSet.close();
-		query.close();
 		return select;
 	}
 	

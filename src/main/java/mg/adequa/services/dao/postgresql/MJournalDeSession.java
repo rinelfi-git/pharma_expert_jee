@@ -28,8 +28,9 @@ public class MJournalDeSession implements DJournalDeSession {
 	}
 	
 	@Override
-	public QueryBuilder makeQuery(DatatableParameter constraints) throws SQLException {
-		PostgreSQL qeryBuilder = new PostgreSQL(this.dao.getConnection());
+	public ArrayList<TJournalDeSession> makeDatatable(DatatableParameter constraints) throws SQLException, NoSpecifiedTableException, NoConnectionException {
+		ArrayList<TJournalDeSession> makeDatatable = new ArrayList<>();
+		PostgreSQL query = new PostgreSQL(this.dao.getConnection());
 		String[] colonne = new String[]{
 			"to_char(date, 'DD Month YYYY HH24:MI:SS')",
 			"nom, prenom, " + this.tables.getPoste() + ".nom",
@@ -38,7 +39,7 @@ public class MJournalDeSession implements DJournalDeSession {
 		Map<String, String> transposition = new HashMap<>();
 		transposition.put(this.tables.getPoste() + ".nom", "poste");
 		transposition.put("to_char(date, 'DD Month YYYY HH24:MI:SS')", "date");
-		qeryBuilder
+		query
 			.select(new String[]{
 				this.tables.getJournalDeSession() + ".id",
 				this.tables.getPersonne() + ".nom",
@@ -52,19 +53,14 @@ public class MJournalDeSession implements DJournalDeSession {
 			.join(this.tables.getPersonne() + ".id", this.tables.getPersonnel() + ".personne")
 			.join(this.tables.getPoste() + ".id", this.tables.getPersonnel() + ".poste");
 		if (constraints.getSearch() != null && constraints.getSearch().getValue() != null) {
-			qeryBuilder.iLike(this.tables.getPersonne() + ".nom", "%" + constraints.getSearch().getValue() + "%")
-			           .orLike("prenom", "%" + constraints.getSearch().getValue() + "%")
-			           .orLike(this.tables.getPoste() + ".nom", "%" + constraints.getSearch().getValue() + "%")
-			           .orLike("to_char(date, 'DD Month YYYY HH24:MI:SS')", "%" + constraints.getSearch().getValue() + "%")
-			           .orLike("action", "%" + constraints.getSearch().getValue() + "%");
+			query.iLike(this.tables.getPersonne() + ".nom", "%" + constraints.getSearch().getValue() + "%")
+				.orLike("prenom", "%" + constraints.getSearch().getValue() + "%")
+				.orLike(this.tables.getPoste() + ".nom", "%" + constraints.getSearch().getValue() + "%")
+				.orLike("to_char(date, 'DD Month YYYY HH24:MI:SS')", "%" + constraints.getSearch().getValue() + "%")
+				.orLike("action", "%" + constraints.getSearch().getValue() + "%");
 		}
-		if (constraints.getOrderColumn() != -1) return qeryBuilder.orderBy(colonne[constraints.getOrderColumn()], constraints.getOrderDirection());
-		else return qeryBuilder.orderBy("date", OrderBy.DESC);
-	}
-	
-	@Override
-	public ArrayList<TJournalDeSession> makeDatatable(QueryBuilder query, DatatableParameter constraints) throws SQLException, NoSpecifiedTableException, NoConnectionException {
-		ArrayList<TJournalDeSession> makeDatatable = new ArrayList<>();
+		if (constraints.getOrderColumn() != -1) query.orderBy(colonne[constraints.getOrderColumn()], constraints.getOrderDirection());
+		else query.orderBy("date", OrderBy.DESC);
 		if (constraints.getLimitLength() != -1) query.limit(constraints.getLimitLength(), constraints.getLimitStart());
 		ResultSet resultSet;
 		resultSet = query.get().result();
@@ -75,13 +71,17 @@ public class MJournalDeSession implements DJournalDeSession {
 			journalDeSession.setTache(resultSet.getString("action"));
 			makeDatatable.add(journalDeSession);
 		}
+		if(resultSet != null) resultSet.close();
+		query.close();
 		return makeDatatable;
 	}
 	
 	@Override
 	public int dataRecordsTotal() throws SQLException{
 		QueryBuilder queryBuilder = new PostgreSQL(this.dao.getConnection());
-		return queryBuilder.count(this.tables.getJournalDeSession());
+		int dataRecordsTotal = queryBuilder.count(this.tables.getJournalDeSession());
+		queryBuilder.close();
+		return dataRecordsTotal;
 	}
 	
 	@Override

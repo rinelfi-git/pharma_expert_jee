@@ -134,7 +134,7 @@ public class SDocteur extends HttpServlet {
 		return select;
 	}
 	
-	private MethodResponse insert(HttpServletRequest request) throws IOException {
+	private MethodResponse insert(HttpServletRequest request) throws IOException, SQLException {
 		PDocteur pDocteur = new Gson().fromJson(request.getReader(), PDocteur.class);
 		MethodResponse insert = new MethodResponse();
 		Transaction transaction = new Transaction(this.daoFactory);
@@ -167,7 +167,7 @@ public class SDocteur extends HttpServlet {
 		return insert.validate();
 	}
 	
-	private MethodResponse update(HttpServletRequest request, int id) throws IOException {
+	private MethodResponse update(HttpServletRequest request, int id) throws IOException, SQLException {
 		PDocteur pDocteur = new Gson().fromJson(request.getReader(), PDocteur.class);
 		MethodResponse update = new MethodResponse();
 		Transaction transaction = new Transaction(this.daoFactory);

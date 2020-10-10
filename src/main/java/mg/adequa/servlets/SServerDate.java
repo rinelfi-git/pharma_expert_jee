@@ -23,7 +23,8 @@ public class SServerDate extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UriUtils uriUtils = new UriUtils(request.getRequestURI());
 		String[] arrayUri = uriUtils.toArray();
-		response.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("utf8");
+		request.setCharacterEncoding("utf8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
 		response.addHeader("Access-Control-Allow-Headers", "X-Requested-With,Cache-Control,content-type,Accept,DNT,X-CustomHeader,Keep-Alive,User-Agent");

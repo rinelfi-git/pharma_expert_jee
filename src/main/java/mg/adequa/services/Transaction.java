@@ -11,45 +11,28 @@ public class Transaction {
 	
 	public Transaction(DaoFactory daoFactory) {this.daoFactory = daoFactory;}
 	
-	public void begin() {
-		try {
-			this.daoFactory.getConnection().createStatement().executeUpdate("BEGIN;");
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
-		}
+	public void begin() throws SQLException {
+		Connection connection = this.daoFactory.getConnection();
+		Statement statement = connection.createStatement();
+		statement.executeUpdate("BEGIN;");
+		if (statement != null) statement.close();
+		if (connection != null) connection.close();
 	}
 	
-	public void rollback() {
-		Connection connection = null;
-		Statement statement = null;
-		try {
-			connection = this.daoFactory.getConnection();
-			connection.createStatement().executeUpdate("ROLLBACK;");
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
-		} finally {
-			try {
-				if (connection != null) connection.close();
-			} catch (SQLException throwables) {
-				throwables.printStackTrace();
-			}
-		}
+	public void rollback() throws SQLException {
+		Connection connection = this.daoFactory.getConnection();
+		Statement statement = connection.createStatement();
+		statement.executeUpdate("ROLLBACK;");
+		if (statement != null) statement.close();
+		if (connection != null) connection.close();
 	}
 	
-	public void commit() {
-		Connection connection = null;
-		try {
-			connection = this.daoFactory.getConnection();
-			connection.createStatement().executeUpdate("COMMIT;");
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
-		} finally {
-			try {
-				if (connection != null) connection.close();
-			} catch (SQLException throwables) {
-				throwables.printStackTrace();
-			}
-		}
+	public void commit() throws SQLException {
+		Connection connection = this.daoFactory.getConnection();
+		Statement statement = connection.createStatement();
+		statement.executeUpdate("COMMIT;");
+		if (statement != null) statement.close();
+		if (connection != null) connection.close();
 	}
 	
 }

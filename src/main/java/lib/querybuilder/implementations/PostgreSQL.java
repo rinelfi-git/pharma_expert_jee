@@ -1,10 +1,6 @@
 package lib.querybuilder.implementations;
 
 import lib.querybuilder.QueryBuilder;
-import lib.querybuilder.clauses.Join;
-import lib.querybuilder.clauses.Limit;
-import lib.querybuilder.clauses.OrderBy;
-import lib.querybuilder.clauses.Pair;
 import lib.querybuilder.exceptions.InvalidExpressionException;
 import lib.querybuilder.exceptions.NoConnectionException;
 import lib.querybuilder.exceptions.NoSpecifiedTableException;
@@ -13,7 +9,6 @@ import lib.querybuilder.utils.PreparedStatementDataset;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 public class PostgreSQL extends QueryBuilder {
@@ -57,11 +52,11 @@ public class PostgreSQL extends QueryBuilder {
 		return this;
 	}
 	
-	public <V> PostgreSQL iLike(Map<String, V> where) {
-		for (String key : where.keySet()) {
+	public <V> PostgreSQL iLike(Map<String, V> clause) {
+		clause.forEach((key, value) -> {
 			this.iLikeClauses.add(key + " ILIKE ?");
-			this.iLikeDataSet.add(new PreparedStatementDataset<V>(where.get(key)));
-		}
+			this.iLikeDataSet.add(new PreparedStatementDataset<V>(value));
+		});
 		return this;
 	}
 	
@@ -72,11 +67,11 @@ public class PostgreSQL extends QueryBuilder {
 		return this;
 	}
 	
-	public <V> PostgreSQL orILike(Map<String, V> orLike) {
-		for (String key : orLike.keySet()) {
+	public <V> PostgreSQL orILike(Map<String, V> clause) {
+		clause.forEach((key, value) -> {
 			this.orILikeClauses.add(key + " LIKE ?");
-			this.orILikeDataSet.add(new PreparedStatementDataset<V>(orLike.get(key)));
-		}
+			this.orILikeDataSet.add(new PreparedStatementDataset<V>(value));
+		});
 		return this;
 	}
 	
@@ -91,8 +86,8 @@ public class PostgreSQL extends QueryBuilder {
 	}
 	
 	@Override
-	public void combineAndCompileClauses() throws SQLException {
-		super.combineAndCompileClauses();
+	public void prepareClauses() throws SQLException {
+		super.prepareClauses();
 		for (PreparedStatementDataset e : this.iLikeDataSet) {
 			if (e.getValue() instanceof String) this.preparedStatement.setString(++index, (String) e.getValue());
 			else if (e.getValue() instanceof Integer) this.preparedStatement.setInt(++index, (Integer) e.getValue());
@@ -118,7 +113,7 @@ public class PostgreSQL extends QueryBuilder {
 	}
 	
 	@Override
-	protected void checkAndPrepareClauses() {
+	protected void compileClauses() {
 		if (this.whereClauses.size() > 0 || this.orWhereClauses.size() > 0 || this.likeClauses.size() > 0 || this.orLikeClauses.size() > 0 || this.orILikeClauses.size() > 0 || this.iLikeClauses.size() > 0) this.query += " WHERE";
 		if (this.whereClauses.size() > 0) this.compileWhereClause();
 		if (this.orWhereClauses.size() > 0) this.compileOrWhereClause();
@@ -137,7 +132,7 @@ public class PostgreSQL extends QueryBuilder {
 		if (this.connection == null) throw new NoConnectionException();
 		this.compileSelect();
 		this.preparedStatement = connection.prepareStatement(this.query);
-		this.combineAndCompileClauses();
+		this.prepareClauses();
 		return this;
 	}
 }

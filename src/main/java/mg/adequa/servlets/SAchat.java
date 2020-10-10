@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -33,7 +34,8 @@ public class SAchat extends HttpServlet {
 	
 	@Override
 	public void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("utf8");
+		request.setCharacterEncoding("utf8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
 		response.addHeader("Access-Control-Allow-Headers", "X-Requested-With,Cache-Control,content-type,Accept,DNT,X-CustomHeader,Keep-Alive,User-Agent");
@@ -44,16 +46,18 @@ public class SAchat extends HttpServlet {
 	
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UriUtils uriUtils = new UriUtils(request.getRequestURI());
-		response.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("utf8");
+		request.setCharacterEncoding("utf8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
 		response.addHeader("Access-Control-Allow-Headers", "X-Requested-With,Cache-Control,content-type,Accept,DNT,X-CustomHeader,Keep-Alive,User-Agent");
 		response.addHeader("Access-Control-Allow-Credentials", "true");
 		response.addHeader("Access-Control-Max-Age", "1728000");
-		switch (uriUtils.toArray()[1]) {
+		UriUtils uriUtils = new UriUtils(request.getRequestURI());
+		String[] uriArray = uriUtils.toArray();
+		switch (uriArray[2]) {
 			case "select":
-				if(uriUtils.toArray().length > 2) response.getWriter().print(new Gson().toJson(this.select(uriUtils.toArray()[2])));
+				if(uriArray[3] != null) response.getWriter().print(new Gson().toJson(this.select(uriArray[3])));
 				else response.getWriter().print(new Gson().toJson(this.select()));
 				break;
 		}
@@ -62,7 +66,8 @@ public class SAchat extends HttpServlet {
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		UriUtils uriUtils = new UriUtils(request.getRequestURI());
-		response.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("utf8");
+		request.setCharacterEncoding("utf8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
 		response.addHeader("Access-Control-Allow-Headers", "X-Requested-With,Cache-Control,content-type,Accept,DNT,X-CustomHeader,Keep-Alive,User-Agent");
@@ -74,7 +79,11 @@ public class SAchat extends HttpServlet {
 				response.getWriter().print(new Gson().toJson(this.makeDatatable(request)));
 				break;
 			case "insert":
-				response.getWriter().print(new Gson().toJson(this.insert(request)));
+				try {
+					response.getWriter().print(new Gson().toJson(this.insert(request)));
+				} catch (SQLException throwables) {
+					throwables.printStackTrace();
+				}
 				break;
 		}
 	}
@@ -140,7 +149,7 @@ public class SAchat extends HttpServlet {
 		return this.dAchat.select();
 	}
 	
-	private MethodResponse insert(HttpServletRequest request) throws IOException {
+	private MethodResponse insert(HttpServletRequest request) throws IOException, SQLException {
 		PAchat pAchat = new Gson().fromJson(request.getReader(), PAchat.class);
 		MethodResponse methodResponse = new MethodResponse();
 		
@@ -156,7 +165,7 @@ public class SAchat extends HttpServlet {
 		return methodResponse.validate();
 	}
 	
-	private MethodResponse update(HttpServletRequest request) throws IOException {
+	private MethodResponse update(HttpServletRequest request) throws IOException, SQLException {
 		Type achatPlArray = new TypeToken<PAchat[]>(){}.getType();
 		PAchat[] pAchat = new Gson().fromJson(request.getReader(), achatPlArray);
 		MethodResponse methodResponse = new MethodResponse();

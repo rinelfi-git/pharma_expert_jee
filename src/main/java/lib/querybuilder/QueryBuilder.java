@@ -11,7 +11,6 @@ import lib.querybuilder.utils.PreparedStatementDataset;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -74,56 +73,42 @@ public abstract class QueryBuilder {
 	}
 	
 	public <V> QueryBuilder set(Map<String, V> pair) {
-		for (String key: pair.keySet()) {
-			this.setValues.add(new Pair(key, pair.get(key)));
-		}
+		pair.forEach((key, value) -> this.setValues.add(new Pair(key, value)));
 		return this;
 	}
 	
 	public boolean insert(String table) throws InvalidExpressionException, SQLException {
 		if (this.setValues.size() == 0) throw new InvalidExpressionException();
-		int valueSize = this.setValues.size();
 		this.query = "INSERT INTO";
 		this.query += " " + table + "(";
-		for (int i = 0; i < valueSize; i++) {
-			this.query += this.setValues
-				              .get(i)
-				              .getKey()
-				              .toString() + ", ";
-		}
+		this.setValues.forEach(clause -> this.query += clause.getKey() + ", ");
 		this.query = this.query.substring(0, this.query.length() - 2) + ")";
 		this.query += " VALUES(";
-		for (int i = 0; i < valueSize; i++) {
-			this.query += "?, ";
-		}
+		for (Pair setValue : this.setValues) this.query += "?, ";
 		this.query = this.query.substring(0, this.query.length() - 2) + ")";
 		this.preparedStatement = this.connection.prepareStatement(this.query);
-		this.compileSet();
+		this.prepareSets();
 		return this.preparedStatement.executeUpdate() > 0;
 	}
 	
 	public boolean update(String table) throws InvalidExpressionException, SQLException {
 		if (this.setValues.size() == 0) throw new InvalidExpressionException("Aucun champ n'est specifié");
-		int valueSize = this.setValues.size();
 		this.query = "UPDATE " + table + " SET ";
-		for (int i = 0; i < valueSize; i++) {
-			this.query += this.setValues
-				              .get(i)
-				              .getKey()
-				              .toString() + " = ?, ";
-		}
+		this.setValues.forEach(clause -> this.query += clause.getKey() + " = ?, ");
 		this.query = this.query.substring(0, this.query.length() - 2);
+		this.compileClauses();
 		this.preparedStatement = this.connection.prepareStatement(this.query);
-		this.compileSet();
+		this.prepareSets();
+		this.prepareClauses();
 		return this.preparedStatement.executeUpdate() > 0;
 	}
 	
 	public boolean delete(String table) throws SQLException {
 		this.query = "DELETE FROM " + table;
 		if (!(this.whereClauses.size() == 0 && this.orWhereClauses.size() == 0 && this.likeClauses.size() == 0 && this.orLikeClauses.size() == 0)) {
-			this.checkAndPrepareClauses();
+			this.compileClauses();
 			this.preparedStatement = this.connection.prepareStatement(this.query);
-			this.combineAndCompileClauses();
+			this.prepareClauses();
 		} else this.preparedStatement = this.connection.prepareStatement(this.query);
 		return this.preparedStatement.executeUpdate() > 0;
 	}
@@ -178,10 +163,10 @@ public abstract class QueryBuilder {
 	}
 	
 	public <V> QueryBuilder where(Map<String, V> where) {
-		for (String key : where.keySet()) {
+		where.forEach((key, value) -> {
 			this.whereClauses.add(key + " = ?");
-			this.whereDataSet.add(new PreparedStatementDataset<V>(where.get(key)));
-		}
+			this.whereDataSet.add(new PreparedStatementDataset<V>(value));
+		});
 		return this;
 	}
 	
@@ -192,10 +177,10 @@ public abstract class QueryBuilder {
 	}
 	
 	public <V> QueryBuilder orWhere(Map<String, V> orWhere) {
-		for (String key : orWhere.keySet()) {
+		orWhere.forEach((key, value) -> {
 			this.orWhereClauses.add(key + " = ?");
-			this.orWhereDataSet.add(new PreparedStatementDataset<V>(orWhere.get(key)));
-		}
+			this.orWhereDataSet.add(new PreparedStatementDataset<V>(value));
+		});
 		return this;
 	}
 	
@@ -231,10 +216,10 @@ public abstract class QueryBuilder {
 	}
 	
 	public <V> QueryBuilder like(Map<String, V> where) {
-		for (String key : where.keySet()) {
+		where.forEach((key, value) -> {
 			this.likeClauses.add(key + " LIKE ?");
-			this.likeDataSet.add(new PreparedStatementDataset<V>(where.get(key)));
-		}
+			this.likeDataSet.add(new PreparedStatementDataset<V>(value));
+		});
 		return this;
 	}
 	
@@ -245,10 +230,10 @@ public abstract class QueryBuilder {
 	}
 	
 	public <V> QueryBuilder orLike(Map<String, V> orLike) {
-		for (String key : orLike.keySet()) {
+		orLike.forEach((key, value) -> {
 			this.orLikeClauses.add(key + " LIKE ?");
-			this.orLikeDataSet.add(new PreparedStatementDataset<V>(orLike.get(key)));
-		}
+			this.orLikeDataSet.add(new PreparedStatementDataset<V>(value));
+		});
 		return this;
 	}
 	
@@ -262,7 +247,7 @@ public abstract class QueryBuilder {
 	 *
 	 * */
 	
-	public void combineAndCompileClauses() throws SQLException {
+	public void prepareClauses() throws SQLException {
 		for (PreparedStatementDataset a : this.whereDataSet) {
 			if (a.getValue() instanceof String) this.preparedStatement.setString(++index, (String) a.getValue());
 			else if (a.getValue() instanceof Integer) this.preparedStatement.setInt(++index, (Integer) a.getValue());
@@ -350,9 +335,9 @@ public abstract class QueryBuilder {
 	
 	public int rowCount(String table) throws SQLException, NoSpecifiedTableException, NoConnectionException {
 		this.query = "SELECT COUNT(*) as count FROM " + table;
-		this.checkAndPrepareClauses();
+		this.compileClauses();
 		this.preparedStatement = this.connection.prepareStatement(this.query);
-		this.combineAndCompileClauses();
+		this.prepareClauses();
 		ResultSet resultSet = this.preparedStatement.executeQuery();
 		int rowCount = 0;
 		while (resultSet.next()) rowCount = resultSet.getInt("count");
@@ -366,10 +351,11 @@ public abstract class QueryBuilder {
 			                      .createStatement()
 			                      .executeQuery(this.query);
 		if(resultSet.next()) count = resultSet.getInt("count");
+		if(resultSet != null) resultSet.close();
 		return count;
 	}
 	
-	protected void checkAndPrepareClauses() {
+	protected void compileClauses() {
 		if (this.whereClauses.size() > 0 || this.orWhereClauses.size() > 0 || this.likeClauses.size() > 0 || this.orLikeClauses.size() > 0) this.query += " WHERE";
 		if (this.whereClauses.size() > 0) this.compileWhereClause();
 		if (this.orWhereClauses.size() > 0) this.compileOrWhereClause();
@@ -391,7 +377,7 @@ public abstract class QueryBuilder {
 		this.query += " FROM ";
 		this.query += this.table;
 		if (this.joins.size() > 0) for (Join join : this.joins) this.query += " " + join;
-		this.checkAndPrepareClauses();
+		this.compileClauses();
 		if (this.orderBy.size() > 0) {
 			this.query += " ORDER BY ";
 			for (OrderBy orderBy : this.orderBy) this.query += orderBy.getField() + " " + orderBy.getOrdering() + ", ";
@@ -437,11 +423,11 @@ public abstract class QueryBuilder {
 		if (this.connection == null) throw new NoConnectionException();
 		this.compileSelect();
 		this.preparedStatement = connection.prepareStatement(this.query);
-		this.combineAndCompileClauses();
+		this.prepareClauses();
 		return this;
 	}
 	
-	protected void compileSet() throws SQLException {
+	protected void prepareSets() throws SQLException {
 		for (Pair keyValue : this.setValues) {
 			if (keyValue.getValue() instanceof String) this.preparedStatement.setString(++index, (String) keyValue.getValue());
 			else if (keyValue.getValue() instanceof Integer) this.preparedStatement.setInt(++index, (Integer) keyValue.getValue());

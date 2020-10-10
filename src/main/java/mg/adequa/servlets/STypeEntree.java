@@ -21,7 +21,8 @@ public class STypeEntree extends HttpServlet {
 	
 	@Override
 	public void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("utf8");
+		request.setCharacterEncoding("utf8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
 		response.addHeader("Access-Control-Allow-Headers", "X-Requested-With,Cache-Control,content-type,Accept,DNT,X-CustomHeader,Keep-Alive,User-Agent");
@@ -32,7 +33,8 @@ public class STypeEntree extends HttpServlet {
 	
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		response.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("utf8");
+		request.setCharacterEncoding("utf8");
 		response.setContentType("application/json");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
@@ -47,7 +49,8 @@ public class STypeEntree extends HttpServlet {
 	
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		response.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("utf8");
+		request.setCharacterEncoding("utf8");
 		response.setContentType("application/json");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");

@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -38,8 +39,9 @@ public class SAutorisation extends HttpServlet {
 	}
 	
 	@Override
-	public void doOptions(HttpServletRequest request, HttpServletResponse response) {
-		response.setCharacterEncoding("UTF-8");
+	public void doOptions(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+		response.setCharacterEncoding("utf8");
+		request.setCharacterEncoding("utf8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
 		response.addHeader("Access-Control-Allow-Headers", "X-Requested-With,Cache-Control,content-type,Accept,DNT,X-CustomHeader,Keep-Alive,User-Agent");
@@ -50,7 +52,8 @@ public class SAutorisation extends HttpServlet {
 	
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		response.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("utf8");
+		request.setCharacterEncoding("utf8");
 		response.setContentType("application/json");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");

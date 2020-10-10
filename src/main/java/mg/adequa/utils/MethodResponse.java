@@ -1,14 +1,16 @@
 package mg.adequa.utils;
 
+import java.util.ArrayList;
+
 public class MethodResponse {
 	private boolean status;
 	private String message;
-	private String[] tables;
+	private ArrayList<String> tables;
 	
 	public MethodResponse() {
 		this.status = true;
 		this.message = "";
-		this.tables = new String[]{};
+		this.tables = new ArrayList<>();
 	}
 	
 	public MethodResponse setRequestState(boolean state) {
@@ -21,27 +23,20 @@ public class MethodResponse {
 	}
 	
 	public MethodResponse appendTable(String table) {
-		final int oldLength = this.tables.length;
-		String[] oldTables = this.tables.clone();
-		this.tables = new String[oldLength + 1];
-		for(int i = 0; i < (oldLength + 1); i++) {
-			this.tables[i] = oldTables[i];
-		}
-		this.tables[oldLength] = table;
+		this.tables.add(table);
 		return this;
 	}
 	
 	public MethodResponse validate() {
-		if(!this.status) {
+		if (!this.status) {
 			this.message = "Des erreurs ont pu être trouvés dans les tables suivantes : {\n";
-			int tableLength = this.tables.length;
-			for(int i = 0; i < tableLength; i++) {
-				this.message += "  -  [" + this.tables[i] + "];\n";
+			int tableLength = this.tables.size();
+			for (String table : this.tables) {
+				this.message += "  -  [" + table + "];\n";
 			}
 			this.message = this.message.substring(0, this.message.length() - 2);
 			this.message += "\n}\n";
-		}
-		else this.message = "Aucune erreur n'a été trouvé";
+		} else this.message = "Aucune erreur n'a été trouvé";
 		return this;
 	}
 }

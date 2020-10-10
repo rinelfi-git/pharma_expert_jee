@@ -71,8 +71,6 @@ public class MAutorisation implements DAutorisation {
 			autorisation.setList(this.selectAutorisations(resultSet.getInt("id_utilisateur")));
 			makeDatatable.add(autorisation);
 		}
-		if (resultSet != null) resultSet.close();
-		queryBuilder.close();
 		return makeDatatable;
 	}
 	

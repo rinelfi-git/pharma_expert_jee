@@ -63,14 +63,6 @@ public class MAchat implements DAchat {
 			}
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
-		} finally {
-			try {
-				if (resultSet != null) resultSet.close();
-				if (statement != null) statement.close();
-				if (connection != null) connection.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		}
 		return output;
 	}
@@ -91,14 +83,6 @@ public class MAchat implements DAchat {
 			if (resultSet.next()) output = resultSet.getInt("total_records");
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
-		} finally {
-			try {
-				if (resultSet != null) resultSet.close();
-				if (statement != null) statement.close();
-				if (connection != null) connection.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		}
 		return output;
 	}

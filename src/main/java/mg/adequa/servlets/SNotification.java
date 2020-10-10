@@ -48,7 +48,13 @@ public class SNotification extends HttpServlet {
 				response.getWriter().print(new Gson().toJson(this.getLast(Integer.valueOf(arrayUri[3]), Integer.valueOf(arrayUri[4]))));
 				break;
 			case "clean":
-				response.getWriter().print(new Gson().toJson(this.clean(Integer.valueOf(arrayUri[3]))));
+				try {
+					response.getWriter().print(new Gson().toJson(this.clean(Integer.valueOf(arrayUri[3]))));
+				} catch (SQLException throwables) {
+					throwables.printStackTrace();
+				} catch (InvalidExpressionException e) {
+					e.printStackTrace();
+				}
 				break;
 		}
 	}
@@ -68,21 +74,13 @@ public class SNotification extends HttpServlet {
 		return getLast;
 	}
 	
-	private Map<String, Object> clean(int poste) throws IOException {
+	private Map<String, Object> clean(int poste) throws IOException, SQLException, InvalidExpressionException {
 		Map<String, Object> clean = new HashMap<>();
 		Transaction transaction = new Transaction(this.dao);
-		try {
-			transaction.begin();
-			this.dNotification.clean(poste);
-			clean.put("counter", 0);
-			clean.put("notifications", new ArrayList<>());
-		} catch (SQLException throwables) {
-			transaction.rollback();
-			throwables.printStackTrace();
-		} catch (InvalidExpressionException e) {
-			transaction.rollback();
-			e.printStackTrace();
-		}
+		transaction.begin();
+		this.dNotification.clean(poste);
+		clean.put("counter", 0);
+		clean.put("notifications", new ArrayList<>());
 		return clean;
 	}
 }
