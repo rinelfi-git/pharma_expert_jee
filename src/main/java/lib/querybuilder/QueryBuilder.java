@@ -202,23 +202,18 @@ public abstract class QueryBuilder {
 		return this;
 	}
 	
-	public QueryBuilder join(String type, String table1, String table2) {
-		this.joins.add(new Join(type, table1.split("\\.")[0], table2.split("\\.")[0], table1.split("\\.")[1], table2.split("\\.")[1]));
-		return this;
-	}
-	
-	public QueryBuilder join(String type, int index1, String field1, int index2, String field2) {
-		this.joins.add(new Join(type, this.tables[index1], this.tables[index2], field1, field2));
-		return this;
-	}
-	
 	public QueryBuilder join(String table1, String table2) {
-		this.joins.add(new Join(table1.split("\\.")[0], table2.split("\\.")[0], table1.split("\\.")[1], table2.split("\\.")[1]));
+		this.joins.add(new Join(Join.INNER, table1.split("\\.")[0], table2.split("\\.")[0], table1.split("\\.")[1], table2.split("\\.")[1]));
 		return this;
 	}
 	
-	public QueryBuilder join(int index1, String field1, int index2, String field2) {
-		this.joins.add(new Join(this.tables[index1], this.tables[index2], field1, field2));
+	public QueryBuilder leftJoin(String table1, String table2) {
+		this.joins.add(new Join(Join.LEFT, table1.split("\\.")[0], table2.split("\\.")[0], table1.split("\\.")[1], table2.split("\\.")[1]));
+		return this;
+	}
+	
+	public QueryBuilder rightJoin(String table1, String table2) {
+		this.joins.add(new Join(Join.LEFT, table1.split("\\.")[0], table2.split("\\.")[0], table1.split("\\.")[1], table2.split("\\.")[1]));
 		return this;
 	}
 	

@@ -72,7 +72,11 @@ public class SLogin extends HttpServlet {
 				response.getWriter().print(new Gson().toJson(this.isTokenAlive(request)));
 				break;
 			case "create_session":
-				response.getWriter().print(new Gson().toJson(this.createSession(request)));
+				try {
+					response.getWriter().print(new Gson().toJson(this.createSession(request)));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				break;
 			case "sign_out":
 				response.getWriter().print(new Gson().toJson(this.signOut(request)));
@@ -136,36 +140,20 @@ public class SLogin extends HttpServlet {
 		return null;
 	}
 	
-	private BSession<BUtilisateur> createSession(HttpServletRequest request) throws IOException {
+	private BSession<BUtilisateur> createSession(HttpServletRequest request) throws Exception {
 		PUtilisateur user = new Gson().fromJson(request.getReader(), PUtilisateur.class);
-		BUtilisateur utilisateur = null;
-		BSession<BUtilisateur> session = null;
 		Transaction transaction = new Transaction(this.daoFactory);
 		transaction.begin();
-		try {
-			utilisateur = this.dLogin.getData(user.getLogin());
-			long currentTimestamp = System.currentTimeMillis();
-			session = new BSession<>();
-			session.setId(BCrypt.hashpw(String.valueOf(currentTimestamp), BCrypt.gensalt()));
-			session.setType(BSession.SESSION);
-			session.setDateCreation(new Date(currentTimestamp));
-			session.setDateExpiration(new Date(currentTimestamp + BSession.DEFAULT_TIMER * 1000));
-			session.setContenu(utilisateur);
-			if (this.dSession.insert(session)) transaction.commit();
-			else transaction.rollback();
-		} catch (SQLException throwables) {
-			transaction.rollback();
-			throwables.printStackTrace();
-		} catch (NoSpecifiedTableException e) {
-			transaction.rollback();
-			e.printStackTrace();
-		} catch (NoConnectionException e) {
-			transaction.rollback();
-			e.printStackTrace();
-		} catch (Exception e) {
-			transaction.rollback();
-			e.printStackTrace();
-		}
+		BUtilisateur utilisateur = this.dLogin.getData(user.getLogin());
+		long currentTimestamp = System.currentTimeMillis();
+		BSession<BUtilisateur> session = new BSession<>();
+		session.setId(BCrypt.hashpw(String.valueOf(currentTimestamp), BCrypt.gensalt()));
+		session.setType(BSession.SESSION);
+		session.setDateCreation(new Date(currentTimestamp));
+		session.setDateExpiration(new Date(currentTimestamp + BSession.DEFAULT_TIMER * 1000));
+		session.setContenu(utilisateur);
+		if (this.dSession.insert(session)) transaction.commit();
+		else transaction.rollback();
 		return session;
 	}
 	

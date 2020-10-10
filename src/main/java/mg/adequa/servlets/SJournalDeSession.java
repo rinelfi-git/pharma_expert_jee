@@ -55,7 +55,15 @@ public class SJournalDeSession extends HttpServlet {
 		String[] arrayUri = uriUtils.toArray();
 		switch (arrayUri[2]) {
 			case "make_datatable":
-				response.getWriter().print(new Gson().toJson(this.makeDatatable(request)));
+				try {
+					response.getWriter().print(new Gson().toJson(this.makeDatatable(request)));
+				} catch (SQLException throwables) {
+					throwables.printStackTrace();
+				} catch (NoConnectionException e) {
+					e.printStackTrace();
+				} catch (NoSpecifiedTableException e) {
+					e.printStackTrace();
+				}
 				break;
 			case "insert":
 				response.getWriter().print(new Gson().toJson(this.insert(request)));
@@ -66,7 +74,7 @@ public class SJournalDeSession extends HttpServlet {
 		}
 	}
 	
-	private DatatablePresentation makeDatatable(HttpServletRequest request) {
+	private DatatablePresentation makeDatatable(HttpServletRequest request) throws SQLException, NoConnectionException, NoSpecifiedTableException {
 		DatatableParameter constraints = new DatatableParameter();
 		DatatablePresentation presentation = new DatatablePresentation();
 		constraints.setDraw(Integer.valueOf(request.getParameter("draw")));
@@ -76,12 +84,7 @@ public class SJournalDeSession extends HttpServlet {
 		constraints.setOrderDirection(request.getParameter("order[0][dir]"));
 		constraints.setSearch(new DatatableSearch(request.getParameter("search[value]"), Boolean.valueOf(request.getParameter("search[regex]"))));
 		
-		ArrayList<TJournalDeSession> incomingData = new ArrayList<>();
-		try {
-			incomingData = dJournalDeSession.makeDatatable(dJournalDeSession.makeQuery(constraints), constraints);
-		} catch (SQLException | NoSpecifiedTableException | NoConnectionException throwables) {
-			throwables.printStackTrace();
-		}
+		ArrayList<TJournalDeSession> incomingData = dJournalDeSession.makeDatatable(dJournalDeSession.makeQuery(constraints), constraints);
 		ArrayList<String[]> data = new ArrayList<>();
 		for (TJournalDeSession retrievedData : incomingData) {
 			data.add(new String[]{
@@ -91,11 +94,7 @@ public class SJournalDeSession extends HttpServlet {
 			});
 		}
 		presentation.setDraw(constraints.getDraw());
-		try {
-			presentation.setRecordsTotal(this.dJournalDeSession.dataRecordsTotal());
-		} catch (NoSpecifiedTableException | SQLException | NoConnectionException throwables) {
-			throwables.printStackTrace();
-		}
+		presentation.setRecordsTotal(this.dJournalDeSession.dataRecordsTotal());
 		presentation.setRecordsFiltered(data.size());
 		presentation.setData(data);
 		return presentation;
@@ -128,7 +127,7 @@ public class SJournalDeSession extends HttpServlet {
 		Transaction transaction = new Transaction(this.dao);
 		transaction.begin();
 		try {
-			if(this.dJournalDeSession.delete()) transaction.commit();
+			if (this.dJournalDeSession.delete()) transaction.commit();
 			else {
 				transaction.rollback();
 				delete.setRequestState(false).appendTable("journal_de_session");

@@ -2,7 +2,6 @@ package mg.adequa.servlets;
 
 import com.google.gson.Gson;
 import mg.adequa.beans.BilanTableauDeBord;
-import mg.adequa.services.dao.postgresql.SessionManager;
 import mg.adequa.payloads.PEvolutionDeCompteFinancierConstraint;
 import mg.adequa.services.dao.DaoFactory;
 import mg.adequa.services.dao.PostgreSQL;
@@ -31,7 +30,6 @@ public class STableauDeBord extends HttpServlet {
 		this.daoFactory = PostgreSQL.getInstance();
 		this.dBilan = this.daoFactory.getBilan();
 		this.journalEntreeSortieDao = this.daoFactory.getJournalEntreeSortie();
-		new SessionManager();
 	}
 	
 	@Override
