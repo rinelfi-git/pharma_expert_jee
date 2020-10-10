@@ -38,7 +38,7 @@ public class SAutorisation extends HttpServlet {
 	}
 	
 	@Override
-	public void doOptions(HttpServletRequest request, HttpServletResponse response){
+	public void doOptions(HttpServletRequest request, HttpServletResponse response) {
 		response.setCharacterEncoding("UTF-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
@@ -61,18 +61,40 @@ public class SAutorisation extends HttpServlet {
 		String[] arrayUri = uriUtils.toArray();
 		switch (arrayUri[2]) {
 			case "make_datatable":
-				response.getWriter().print(new Gson().toJson(this.makeDatatable(request)));
+				try {
+					response.getWriter().print(new Gson().toJson(this.makeDatatable(request)));
+				} catch (SQLException throwables) {
+					throwables.printStackTrace();
+				} catch (NoConnectionException e) {
+					e.printStackTrace();
+				} catch (NoSpecifiedTableException e) {
+					e.printStackTrace();
+				}
 				break;
 			case "set_authorization":
-				response.getWriter().print(new Gson().toJson(this.setAuthorization(request)));
+				try {
+					response.getWriter().print(new Gson().toJson(this.setAuthorization(request)));
+				} catch (InvalidExpressionException e) {
+					e.printStackTrace();
+				} catch (SQLException throwables) {
+					throwables.printStackTrace();
+				}
 				break;
 			case "select_authorized_menu":
-				response.getWriter().print(new Gson().toJson(this.autorisedMenu(request)));
+				try {
+					response.getWriter().print(new Gson().toJson(this.autorisedMenu(request)));
+				} catch (NoConnectionException e) {
+					e.printStackTrace();
+				} catch (SQLException throwables) {
+					throwables.printStackTrace();
+				} catch (NoSpecifiedTableException e) {
+					e.printStackTrace();
+				}
 				break;
 		}
 	}
 	
-	private DatatablePresentation makeDatatable(HttpServletRequest request) {
+	private DatatablePresentation makeDatatable(HttpServletRequest request) throws SQLException, NoConnectionException, NoSpecifiedTableException {
 		DatatableParameter constraints = new DatatableParameter();
 		DatatablePresentation presentation = new DatatablePresentation();
 		constraints.setDraw(Integer.valueOf(request.getParameter("draw")));
@@ -82,17 +104,9 @@ public class SAutorisation extends HttpServlet {
 		constraints.setOrderDirection(request.getParameter("order[0][dir]"));
 		constraints.setSearch(new DatatableSearch(request.getParameter("search[value]"), Boolean.valueOf(request.getParameter("search[regex]"))));
 		
-		ArrayList<TAutorisation> incomingData = new ArrayList<>();
-		try {
-			incomingData = dAutorisation.makeDatatable(dAutorisation.makeQuery(constraints), constraints);
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
-		} catch (NoConnectionException e) {
-			e.printStackTrace();
-		} catch (NoSpecifiedTableException e) {
-			e.printStackTrace();
-		}
+		ArrayList<TAutorisation> incomingData = dAutorisation.makeDatatable(dAutorisation.makeQuery(constraints), constraints);
 		ArrayList<String[]> data = new ArrayList<>();
+		TAutorisation.initCount();
 		for (TAutorisation retrievedData : incomingData) {
 			data.add(new String[]{
 				retrievedData.getNom(),
@@ -101,30 +115,18 @@ public class SAutorisation extends HttpServlet {
 			});
 		}
 		presentation.setDraw(constraints.getDraw());
-		try {
-			presentation.setRecordsTotal(this.dAutorisation.dataRecordsTotal());
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
-		}
+		presentation.setRecordsTotal(this.dAutorisation.dataRecordsTotal());
 		presentation.setRecordsFiltered(data.size());
 		presentation.setData(data);
 		return presentation;
 	}
 	
-	private ArrayList<BMenuGroup> autorisedMenu(HttpServletRequest request) throws IOException {
-		Type postType = new TypeToken<HashMap<String, Integer>>(){}.getType();
+	private ArrayList<BMenuGroup> autorisedMenu(HttpServletRequest request) throws IOException, NoConnectionException, SQLException, NoSpecifiedTableException {
+		Type postType = new TypeToken<HashMap<String, Integer>>() {}.getType();
 		Map<String, Integer> post = new Gson().fromJson(request.getReader(), postType);
 		ArrayList<BMenuGroup> autorisedMenu = new ArrayList<>();
 		ArrayList<BMenu> menus = null;
-		try {
-			menus = this.dAutorisation.selectMenus(post.get("utilisateur"));
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
-		} catch (NoSpecifiedTableException e) {
-			e.printStackTrace();
-		} catch (NoConnectionException e) {
-			e.printStackTrace();
-		}
+		menus = this.dAutorisation.selectMenus(post.get("utilisateur"));
 		for (BMenu menu : menus) {
 			String groupName = menu.getGroup();
 			if (autorisedMenu.size() > 0) {
@@ -148,33 +150,23 @@ public class SAutorisation extends HttpServlet {
 		return autorisedMenu;
 	}
 	
-	private MethodResponse setAuthorization(HttpServletRequest request) throws IOException {
+	private MethodResponse setAuthorization(HttpServletRequest request) throws IOException, InvalidExpressionException, SQLException {
 		PAutorisation inAutorisation = new Gson().fromJson(request.getReader(), PAutorisation.class);
 		MethodResponse response = new MethodResponse();
 		Transaction transaction = new Transaction(this.dao);
 		transaction.begin();
-		try {
-			if(this.dAutorisation.clear(inAutorisation.getUtilisateur())) {
-				for(BMenu menu: inAutorisation.getMenus()) {
-					if(!this.dAutorisation.add(inAutorisation.getUtilisateur(), menu.getLien())) {
-						transaction.rollback();
-						response.appendTable("autorisation").setRequestState(false);
-					}
+		if (this.dAutorisation.clear(inAutorisation.getUtilisateur())) {
+			for (BMenu menu : inAutorisation.getMenus()) {
+				if (!this.dAutorisation.add(inAutorisation.getUtilisateur(), menu.getLien())) {
+					transaction.rollback();
+					response.appendTable("autorisation").setRequestState(false);
 				}
-			}else {
-				transaction.rollback();
-				response.appendTable("autorisation").setRequestState(false);
 			}
-		} catch (SQLException throwables) {
+		} else {
 			transaction.rollback();
 			response.appendTable("autorisation").setRequestState(false);
-			throwables.printStackTrace();
-		} catch (InvalidExpressionException e) {
-			transaction.rollback();
-			response.appendTable("autorisation").setRequestState(false);
-			e.printStackTrace();
 		}
-		if(response.hasRequestSuccess()) transaction.commit();
+		if (response.hasRequestSuccess()) transaction.commit();
 		return response.validate();
 	}
 }

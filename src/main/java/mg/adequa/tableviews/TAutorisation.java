@@ -71,4 +71,6 @@ public class TAutorisation {
 		collapseContent.append("</ul></div></div></div></div>");
 		this.list = formattedAutorisation.append(collapseContent.toString()).toString();
 	}
+	
+	public static void initCount() {TAutorisation.round = 0;}
 }

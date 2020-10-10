@@ -1,23 +1,23 @@
 package mg.adequa.utils;
 
 public class MethodResponse {
-	private boolean requestSuccess;
+	private boolean status;
 	private String message;
 	private String[] tables;
 	
 	public MethodResponse() {
-		this.requestSuccess = true;
+		this.status = true;
 		this.message = "";
 		this.tables = new String[]{};
 	}
 	
 	public MethodResponse setRequestState(boolean state) {
-		this.requestSuccess = state;
+		this.status = state;
 		return this;
 	}
 	
 	public boolean hasRequestSuccess() {
-		return this.requestSuccess;
+		return this.status;
 	}
 	
 	public MethodResponse appendTable(String table) {
@@ -32,7 +32,7 @@ public class MethodResponse {
 	}
 	
 	public MethodResponse validate() {
-		if(!this.requestSuccess) {
+		if(!this.status) {
 			this.message = "Des erreurs ont pu être trouvés dans les tables suivantes : {\n";
 			int tableLength = this.tables.length;
 			for(int i = 0; i < tableLength; i++) {
