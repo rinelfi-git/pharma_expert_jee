@@ -40,8 +40,8 @@ public class MPersonne implements DPersonne {
 	}
 	
 	@Override
-	public boolean update(BPersonne personne, int reference) throws Exception {
+	public boolean update(int id, BPersonne personne) throws Exception {
 		QueryBuilder query = new PostgreSQL(this.dao.getConnection());
-		return query.set("nom", personne.getNom()).set("prenom", personne.getPrenom()).where("id", reference).update(this.tables.getPersonne());
+		return query.set("nom", personne.getNom()).set("prenom", personne.getPrenom()).where("id", id).update(this.tables.getPersonne());
 	}
 }

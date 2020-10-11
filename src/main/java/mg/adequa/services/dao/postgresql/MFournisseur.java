@@ -50,6 +50,7 @@ public class MFournisseur implements DFournisseur {
 			TFournisseur temporary = new TFournisseur();
 			temporary.setId(resultSet.getInt("id"));
 			temporary.setNom(resultSet.getString("nom"));
+			temporary.setLocalisation(resultSet.getString("localisation"));
 			temporary.setDescription(resultSet.getString("information_complementaire"));
 			makeDatatable.add(temporary);
 		}

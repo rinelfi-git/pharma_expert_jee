@@ -176,7 +176,7 @@ public class SDocteur extends HttpServlet {
 		personne.setNom(pDocteur.getNom());
 		personne.setPrenom(pDocteur.getPrenom());
 		try {
-			if (this.dPersonne.update(personne, id)) {
+			if (this.dPersonne.update(id, personne)) {
 				
 				BDocteur docteur = new BDocteur();
 				docteur.setIdPersonne(this.dPersonne.lastId());

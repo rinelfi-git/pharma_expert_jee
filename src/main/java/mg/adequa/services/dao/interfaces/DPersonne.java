@@ -8,7 +8,8 @@ import java.sql.SQLException;
 
 public interface DPersonne {
 	boolean insert(BPersonne personne) throws Exception;
+	
 	int lastId() throws SQLException, NoSpecifiedTableException, NoConnectionException;
 	
-	boolean update(BPersonne personne, int reference) throws Exception;
+	boolean update(int id, BPersonne personne) throws Exception;
 }

@@ -14,6 +14,6 @@ public interface DSession {
 	boolean insert(BSession<BUtilisateur> session) throws Exception;
 	boolean delete(String id) throws SQLException, InvalidExpressionException;
 	boolean exists(String id) throws SQLException, NoSpecifiedTableException, NoConnectionException;
-	boolean addTimer(String id) throws SQLException, InvalidExpressionException;
+	boolean addTimer(BSession session) throws SQLException, InvalidExpressionException;
 	PSession<PUtilisateur> get(String id) throws SQLException, NoSpecifiedTableException, NoConnectionException;
 }

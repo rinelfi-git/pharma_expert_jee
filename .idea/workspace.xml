@@ -10,36 +10,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14fd4e27-a837-4fe7-b2d3-86afbdd55789" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/beans/BOng.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/dbentity/BPersonneOng.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/payloads/POng.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/payloads/PPersonneOng.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DOng.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DPersonneOng.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MOng.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MPersonneOng.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/tableviews/TOng.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/tableviews/TPersonneOng.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lib/querybuilder/QueryBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lib/querybuilder/QueryBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lib/querybuilder/implementations/PostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lib/querybuilder/implementations/PostgreSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lib/querybuilder/utils/PreparedStatementDataset.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lib/querybuilder/utils/PreparedStatementDataset.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/Transaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/beans/BSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/beans/BSession.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/DaoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/DaoFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/PostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/PostgreSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DJournalDeSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DJournalDeSession.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MAchat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MAchat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DPersonne.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DPersonne.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/interfaces/DSession.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MAutorisation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MAutorisation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MFournisseur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MFournisseur.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MJournalDeSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MJournalDeSession.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SAchat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SAchat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SAutorisation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SAutorisation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SAutreEntree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SAutreEntree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MPersonne.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MPersonne.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/services/dao/postgresql/MSession.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SDocteur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SDocteur.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SFournisseur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SFournisseur.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SJournalDeSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SJournalDeSession.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SNotification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SNotification.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SLogin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SOng.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SOng.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SPersonnelOng.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SPersonnelOng.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SPrixDeVente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SPrixDeVente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SRapportRumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SRapportRumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SRegularisationOng.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SRegularisationOng.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SServerDate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SServerDate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SSuiviBonDeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SSuiviBonDeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/STableauDeBord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/STableauDeBord.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/STypeDeSortie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/STypeDeSortie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/STypeEntree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/STypeEntree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SVirement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SVirement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/utils/MethodResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/utils/MethodResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SPersonnelOng.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mg/adequa/servlets/SPersonneOng.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -221,7 +216,9 @@
       <workItem from="1602309946504" duration="10520000" />
       <workItem from="1602328071411" duration="11197000" />
       <workItem from="1602343467344" duration="1409000" />
-      <workItem from="1602346551882" duration="507000" />
+      <workItem from="1602346551882" duration="9194000" />
+      <workItem from="1602378604320" duration="6549000" />
+      <workItem from="1602417485131" duration="27000" />
     </task>
     <servers />
   </component>
@@ -245,10 +242,10 @@
       <screen x="0" y="0" width="1366" height="735" />
     </state>
     <state x="418" y="172" width="529" height="394" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.735@0.0.1366.735" timestamp="1602315997713" />
-    <state x="491" y="56" width="384" height="630" key="#com.intellij.ide.util.MemberChooser" timestamp="1602331544444">
+    <state x="491" y="56" width="384" height="630" key="#com.intellij.ide.util.MemberChooser" timestamp="1602379154683">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state x="491" y="56" width="384" height="630" key="#com.intellij.ide.util.MemberChooser/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602274652756" />
+    <state x="491" y="56" width="384" height="630" key="#com.intellij.ide.util.MemberChooser/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602379154683" />
     <state x="491" y="56" width="380" height="623" key="#com.intellij.ide.util.MemberChooser/0.0.1366.735@0.0.1366.735" timestamp="1602331544444" />
     <state x="366" y="108" width="630" height="519" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1600855612570">
       <screen x="0" y="0" width="1366" height="735" />
@@ -262,10 +259,10 @@
       <screen x="0" y="0" width="1366" height="735" />
     </state>
     <state x="460" y="239" width="445" height="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1366.735@0.0.1366.735" timestamp="1602217744939" />
-    <state x="9" y="0" width="1366" height="720" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1602328678563">
+    <state x="0" y="0" width="1366" height="720" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1602383162275">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state x="0" y="0" width="1366" height="720" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602271335781" />
+    <state x="0" y="0" width="1366" height="720" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602383162275" />
     <state x="9" y="0" width="1339" height="732" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.735@0.0.1366.735" timestamp="1602328678563" />
     <state x="416" y="117" width="534" height="504" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1602316893586">
       <screen x="0" y="0" width="1366" height="735" />
@@ -275,78 +272,94 @@
       <screen x="0" y="0" width="1366" height="735" />
     </state>
     <state x="357" y="110" width="643" height="508" key="FileChooserDialogImpl/0.0.1366.735@0.0.1366.735" timestamp="1601818018765" />
-    <state width="998" height="136" key="GridCell.Tab.0.bottom" timestamp="1602346825429">
+    <state width="998" height="213" key="GridCell.Tab.0.bottom" timestamp="1602385172919">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state width="998" height="136" key="GridCell.Tab.0.bottom/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602346825429" />
+    <state width="998" height="213" key="GridCell.Tab.0.bottom/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602385172919" />
     <state width="998" height="202" key="GridCell.Tab.0.bottom/0.0.1366.735@0.0.1366.735" timestamp="1602340423539" />
     <state width="998" height="196" key="GridCell.Tab.0.bottom/0.0.1366.768/1366.0.1920.1080@0.0.1366.768" timestamp="1602278506689" />
-    <state width="998" height="136" key="GridCell.Tab.0.center" timestamp="1602346825429">
+    <state width="998" height="213" key="GridCell.Tab.0.center" timestamp="1602385172918">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state width="998" height="136" key="GridCell.Tab.0.center/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602346825429" />
+    <state width="998" height="213" key="GridCell.Tab.0.center/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602385172918" />
     <state width="998" height="202" key="GridCell.Tab.0.center/0.0.1366.735@0.0.1366.735" timestamp="1602340423538" />
     <state width="998" height="196" key="GridCell.Tab.0.center/0.0.1366.768/1366.0.1920.1080@0.0.1366.768" timestamp="1602278506688" />
-    <state width="998" height="136" key="GridCell.Tab.0.left" timestamp="1602346825428">
+    <state width="998" height="213" key="GridCell.Tab.0.left" timestamp="1602385172918">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state width="998" height="136" key="GridCell.Tab.0.left/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602346825428" />
+    <state width="998" height="213" key="GridCell.Tab.0.left/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602385172918" />
     <state width="998" height="202" key="GridCell.Tab.0.left/0.0.1366.735@0.0.1366.735" timestamp="1602340423537" />
     <state width="998" height="196" key="GridCell.Tab.0.left/0.0.1366.768/1366.0.1920.1080@0.0.1366.768" timestamp="1602278506688" />
-    <state width="998" height="136" key="GridCell.Tab.0.right" timestamp="1602346825429">
+    <state width="998" height="213" key="GridCell.Tab.0.right" timestamp="1602385172919">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state width="998" height="136" key="GridCell.Tab.0.right/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602346825429" />
+    <state width="998" height="213" key="GridCell.Tab.0.right/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602385172919" />
     <state width="998" height="202" key="GridCell.Tab.0.right/0.0.1366.735@0.0.1366.735" timestamp="1602340423538" />
     <state width="998" height="196" key="GridCell.Tab.0.right/0.0.1366.768/1366.0.1920.1080@0.0.1366.768" timestamp="1602278506688" />
-    <state width="998" height="136" key="GridCell.Tab.1.bottom" timestamp="1602346825430">
+    <state width="998" height="213" key="GridCell.Tab.1.bottom" timestamp="1602385172919">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state width="998" height="136" key="GridCell.Tab.1.bottom/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602346825430" />
+    <state width="998" height="213" key="GridCell.Tab.1.bottom/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602385172919" />
     <state width="998" height="202" key="GridCell.Tab.1.bottom/0.0.1366.735@0.0.1366.735" timestamp="1602340423540" />
     <state width="998" height="196" key="GridCell.Tab.1.bottom/0.0.1366.768/1366.0.1920.1080@0.0.1366.768" timestamp="1602278506689" />
-    <state width="998" height="136" key="GridCell.Tab.1.center" timestamp="1602346825430">
+    <state width="998" height="213" key="GridCell.Tab.1.center" timestamp="1602385172919">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state width="998" height="136" key="GridCell.Tab.1.center/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602346825430" />
+    <state width="998" height="213" key="GridCell.Tab.1.center/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602385172919" />
     <state width="998" height="202" key="GridCell.Tab.1.center/0.0.1366.735@0.0.1366.735" timestamp="1602340423540" />
     <state width="998" height="196" key="GridCell.Tab.1.center/0.0.1366.768/1366.0.1920.1080@0.0.1366.768" timestamp="1602278506689" />
-    <state width="998" height="136" key="GridCell.Tab.1.left" timestamp="1602346825430">
+    <state width="998" height="213" key="GridCell.Tab.1.left" timestamp="1602385172919">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state width="998" height="136" key="GridCell.Tab.1.left/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602346825430" />
+    <state width="998" height="213" key="GridCell.Tab.1.left/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602385172919" />
     <state width="998" height="202" key="GridCell.Tab.1.left/0.0.1366.735@0.0.1366.735" timestamp="1602340423540" />
     <state width="998" height="196" key="GridCell.Tab.1.left/0.0.1366.768/1366.0.1920.1080@0.0.1366.768" timestamp="1602278506689" />
-    <state width="998" height="136" key="GridCell.Tab.1.right" timestamp="1602346825430">
+    <state width="998" height="213" key="GridCell.Tab.1.right" timestamp="1602385172919">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state width="998" height="136" key="GridCell.Tab.1.right/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602346825430" />
+    <state width="998" height="213" key="GridCell.Tab.1.right/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602385172919" />
     <state width="998" height="202" key="GridCell.Tab.1.right/0.0.1366.735@0.0.1366.735" timestamp="1602340423540" />
     <state width="998" height="196" key="GridCell.Tab.1.right/0.0.1366.768/1366.0.1920.1080@0.0.1366.768" timestamp="1602278506689" />
-    <state width="998" height="136" key="GridCell.Tab.2.bottom" timestamp="1602346825429">
+    <state width="998" height="213" key="GridCell.Tab.2.bottom" timestamp="1602385172919">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state width="998" height="136" key="GridCell.Tab.2.bottom/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602346825429" />
+    <state width="998" height="213" key="GridCell.Tab.2.bottom/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602385172919" />
     <state width="998" height="202" key="GridCell.Tab.2.bottom/0.0.1366.735@0.0.1366.735" timestamp="1602340423540" />
     <state width="998" height="196" key="GridCell.Tab.2.bottom/0.0.1366.768/1366.0.1920.1080@0.0.1366.768" timestamp="1602278506689" />
-    <state width="998" height="136" key="GridCell.Tab.2.center" timestamp="1602346825429">
+    <state width="998" height="213" key="GridCell.Tab.2.center" timestamp="1602385172919">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state width="998" height="136" key="GridCell.Tab.2.center/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602346825429" />
+    <state width="998" height="213" key="GridCell.Tab.2.center/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602385172919" />
     <state width="998" height="202" key="GridCell.Tab.2.center/0.0.1366.735@0.0.1366.735" timestamp="1602340423539" />
     <state width="998" height="196" key="GridCell.Tab.2.center/0.0.1366.768/1366.0.1920.1080@0.0.1366.768" timestamp="1602278506689" />
-    <state width="998" height="136" key="GridCell.Tab.2.left" timestamp="1602346825429">
+    <state width="998" height="213" key="GridCell.Tab.2.left" timestamp="1602385172919">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state width="998" height="136" key="GridCell.Tab.2.left/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602346825429" />
+    <state width="998" height="213" key="GridCell.Tab.2.left/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602385172919" />
     <state width="998" height="202" key="GridCell.Tab.2.left/0.0.1366.735@0.0.1366.735" timestamp="1602340423539" />
     <state width="998" height="196" key="GridCell.Tab.2.left/0.0.1366.768/1366.0.1920.1080@0.0.1366.768" timestamp="1602278506689" />
-    <state width="998" height="136" key="GridCell.Tab.2.right" timestamp="1602346825429">
+    <state width="998" height="213" key="GridCell.Tab.2.right" timestamp="1602385172919">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
-    <state width="998" height="136" key="GridCell.Tab.2.right/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602346825429" />
+    <state width="998" height="213" key="GridCell.Tab.2.right/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602385172919" />
     <state width="998" height="202" key="GridCell.Tab.2.right/0.0.1366.735@0.0.1366.735" timestamp="1602340423539" />
     <state width="998" height="196" key="GridCell.Tab.2.right/0.0.1366.768/1366.0.1920.1080@0.0.1366.768" timestamp="1602278506689" />
+    <state width="998" height="213" key="GridCell.Tab.4.bottom" timestamp="1602383591887">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state width="998" height="213" key="GridCell.Tab.4.bottom/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602383591887" />
+    <state width="998" height="213" key="GridCell.Tab.4.center" timestamp="1602383591887">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state width="998" height="213" key="GridCell.Tab.4.center/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602383591887" />
+    <state width="998" height="213" key="GridCell.Tab.4.left" timestamp="1602383591887">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state width="998" height="213" key="GridCell.Tab.4.left/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602383591887" />
+    <state width="998" height="213" key="GridCell.Tab.4.right" timestamp="1602383591887">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state width="998" height="213" key="GridCell.Tab.4.right/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602383591887" />
     <state x="266" y="113" width="834" height="512" key="IDE.errors.dialog" timestamp="1602134207352">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
@@ -359,9 +372,10 @@
       <screen x="0" y="0" width="1366" height="735" />
     </state>
     <state x="166" y="0" width="1030" height="734" key="SettingsEditor/0.0.1366.735@0.0.1366.735" timestamp="1602192253158" />
-    <state width="498" height="445" key="SwitcherDM" timestamp="1602329423541">
+    <state width="498" height="445" key="SwitcherDM" timestamp="1602384316358">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
+    <state width="498" height="445" key="SwitcherDM/0.0.1366.735/1366.0.1920.1080@0.0.1366.735" timestamp="1602384316358" />
     <state width="498" height="445" key="SwitcherDM/0.0.1366.735@0.0.1366.735" timestamp="1602329423541" />
     <state x="182" y="106" width="1001" height="629" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1602337011794">
       <screen x="0" y="0" width="1366" height="735" />

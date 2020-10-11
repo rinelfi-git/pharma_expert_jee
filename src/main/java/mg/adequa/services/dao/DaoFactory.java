@@ -31,4 +31,6 @@ public interface DaoFactory {
 	DMenu getMenu();
 	
 	DFournisseur getFournisseur();
+	DOng getOng();
+	DPersonneOng getPersonneOng();
 }

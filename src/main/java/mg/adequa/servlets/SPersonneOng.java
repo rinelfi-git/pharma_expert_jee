@@ -4,17 +4,16 @@ import com.google.gson.Gson;
 import lib.querybuilder.exceptions.InvalidExpressionException;
 import lib.querybuilder.exceptions.NoConnectionException;
 import lib.querybuilder.exceptions.NoSpecifiedTableException;
-import mg.adequa.beans.BFournisseur;
-import mg.adequa.beans.BOng;
-import mg.adequa.payloads.PFournisseur;
-import mg.adequa.payloads.POng;
+import mg.adequa.beans.BPersonne;
+import mg.adequa.dbentity.BPersonneOng;
+import mg.adequa.payloads.PPersonneOng;
 import mg.adequa.services.Transaction;
 import mg.adequa.services.dao.DaoFactory;
 import mg.adequa.services.dao.PostgreSQL;
-import mg.adequa.services.dao.interfaces.DOng;
+import mg.adequa.services.dao.interfaces.DPersonne;
+import mg.adequa.services.dao.interfaces.DPersonneOng;
 import mg.adequa.tableviews.TAutorisation;
-import mg.adequa.tableviews.TFournisseur;
-import mg.adequa.tableviews.TOng;
+import mg.adequa.tableviews.TPersonneOng;
 import mg.adequa.utils.*;
 
 import javax.servlet.ServletException;
@@ -25,15 +24,17 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class SOng extends HttpServlet {
-	private DaoFactory dao;
-	private DOng ongDao;
+public class SPersonneOng extends HttpServlet {
+	private DaoFactory daoFactory;
+	private DPersonneOng personneOngDao;
+	private DPersonne personneDao;
 	
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		this.dao = PostgreSQL.getInstance();
-		this.ongDao = this.dao.getOng();
+		this.daoFactory = PostgreSQL.getInstance();
+		this.personneOngDao = this.daoFactory.getPersonneOng();
+		this.personneDao = this.daoFactory.getPersonne();
 	}
 	
 	@Override
@@ -75,10 +76,8 @@ public class SOng extends HttpServlet {
 			case "insert":
 				try {
 					response.getWriter().print(new Gson().toJson(this.insert(request)));
-				} catch (InvalidExpressionException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
-				} catch (SQLException throwables) {
-					throwables.printStackTrace();
 				}
 				break;
 			case "update":
@@ -88,6 +87,8 @@ public class SOng extends HttpServlet {
 					e.printStackTrace();
 				} catch (SQLException throwables) {
 					throwables.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 				break;
 		}
@@ -107,7 +108,7 @@ public class SOng extends HttpServlet {
 		String[] arrayUri = uriUtils.toArray();
 		switch (arrayUri[2]) {
 			case "select":
-				if (arrayUri.length >  3) {
+				if (arrayUri.length > 3) {
 					try {
 						response.getWriter().print(new Gson().toJson(this.select(Integer.valueOf(arrayUri[3]))));
 					} catch (NoConnectionException e) {
@@ -129,7 +130,7 @@ public class SOng extends HttpServlet {
 						e.printStackTrace();
 					}
 				}
-				break;
+					break;
 		}
 	}
 	
@@ -143,61 +144,72 @@ public class SOng extends HttpServlet {
 		constraints.setOrderDirection(request.getParameter("order[0][dir]"));
 		constraints.setSearch(new DatatableSearch(request.getParameter("search[value]"), Boolean.valueOf(request.getParameter("search[regex]"))));
 		
-		ArrayList<TOng> incomingData = this.ongDao.makeDatatable(constraints);
+		ArrayList<TPersonneOng> incomingData = this.personneOngDao.makeDatatable(constraints);
 		ArrayList<String[]> data = new ArrayList<>();
-		for (TOng retrievedData : incomingData) {
+		TAutorisation.initCount();
+		for (TPersonneOng retrievedData : incomingData) {
 			data.add(new String[]{
-				retrievedData.getLibelle(),
-				retrievedData.getDescription(),
+				retrievedData.getNomPrenom(),
+				retrievedData.getOng(),
 				retrievedData.getAction()
 			});
 		}
 		presentation.setDraw(constraints.getDraw());
-		presentation.setRecordsTotal(this.ongDao.dataRecordsTotal());
+		presentation.setRecordsTotal(this.personneOngDao.dataRecordsTotal());
 		presentation.setRecordsFiltered(data.size());
 		presentation.setData(data);
 		return presentation;
 	}
 	
-	private MethodResponse insert(HttpServletRequest request) throws IOException, InvalidExpressionException, SQLException {
+	private MethodResponse insert(HttpServletRequest request) throws Exception {
 		MethodResponse insert = new MethodResponse();
-		BOng ongPayload = new Gson().fromJson(request.getReader(), BOng.class);
-		Transaction transaction = new Transaction(this.dao);
+		PPersonneOng personneOngPayload = new Gson().fromJson(request.getReader(), PPersonneOng.class);
+		Transaction transaction = new Transaction(this.daoFactory);
 		
-		BOng ong = new BOng();
-		ong.setLibelle(ongPayload.getLibelle());
-		ong.setDescription(ongPayload.getDescription());
+		BPersonne personne = new BPersonne();
+		personne.setNom(personneOngPayload.getNom());
+		personne.setPrenom(personneOngPayload.getPrenom());
 		transaction.begin();
-		if (this.ongDao.insert(ong)) transaction.commit();
-		else {
-			transaction.rollback();
-			insert.setRequestState(false).appendTable("ong");
-		}
+		if (this.personneDao.insert(personne)) {
+			BPersonneOng personneOng = new BPersonneOng();
+			personneOng.setId(this.personneDao.lastId());
+			personneOng.setOng(personneOngPayload.getOng());
+			if (!this.personneOngDao.insert(personneOng)) insert.setRequestState(false).appendTable("persone ong");
+		} else insert.setRequestState(false).appendTable("personne");
+		
+		if (insert.hasRequestSuccess()) transaction.commit();
+		else transaction.rollback();
+		
 		return insert.validate();
 	}
 	
-	private MethodResponse update(HttpServletRequest request) throws IOException, InvalidExpressionException, SQLException {
+	private MethodResponse update(HttpServletRequest request) throws Exception {
 		MethodResponse update = new MethodResponse();
-		POng ongPayload = new Gson().fromJson(request.getReader(), POng.class);
-		Transaction transaction = new Transaction(this.dao);
+		PPersonneOng personneOngPayload = new Gson().fromJson(request.getReader(), PPersonneOng.class);
+		Transaction transaction = new Transaction(this.daoFactory);
 		
-		BOng ong = new BOng();
-		ong.setLibelle(ongPayload.getLibelle());
-		ong.setDescription(ongPayload.getDescription());
+		BPersonne personne = new BPersonne();
+		personne.setNom(personneOngPayload.getNom());
+		personne.setPrenom(personneOngPayload.getPrenom());
 		transaction.begin();
-		if (this.ongDao.update(ongPayload.getId(), ong)) transaction.commit();
-		else {
-			transaction.rollback();
-			update.setRequestState(false).appendTable("ong");
-		}
+		if (this.personneDao.update(personneOngPayload.getId(), personne)) {
+			BPersonneOng personneOng = new BPersonneOng();
+			personneOng.setId(personneOngPayload.getId());
+			personneOng.setOng(personneOngPayload.getOng());
+			if (!this.personneOngDao.update(personneOngPayload.getId(), personneOng)) update.setRequestState(false).appendTable("persone ong");
+		} else update.setRequestState(false).appendTable("personne");
+		
+		if (update.hasRequestSuccess()) transaction.commit();
+		else transaction.rollback();
+		
 		return update.validate();
 	}
 	
-	private ArrayList<POng> select() throws NoConnectionException, SQLException, NoSpecifiedTableException {
-		return this.ongDao.select();
+	private ArrayList<PPersonneOng> select() throws NoConnectionException, SQLException, NoSpecifiedTableException {
+		return this.personneOngDao.select();
 	}
 	
-	private POng select(int id) throws NoConnectionException, SQLException, NoSpecifiedTableException {
-		return this.ongDao.select(id);
+	private PPersonneOng select(int id) throws NoConnectionException, SQLException, NoSpecifiedTableException {
+		return this.personneOngDao.select(id);
 	}
 }

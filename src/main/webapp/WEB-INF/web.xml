@@ -63,6 +63,14 @@
 		<servlet-name>ServerDate</servlet-name>
 		<servlet-class>mg.adequa.servlets.SServerDate</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>Ong</servlet-name>
+		<servlet-class>mg.adequa.servlets.SOng</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>PersonneOng</servlet-name>
+		<servlet-class>mg.adequa.servlets.SPersonneOng</servlet-class>
+	</servlet>
 	
 	
 	<servlet-mapping>
@@ -152,5 +160,17 @@
 	<servlet-mapping>
 		<servlet-name>ServerDate</servlet-name>
 		<url-pattern>/server_date/datetime</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>Ong</servlet-name>
+		<url-pattern>/ong</url-pattern>
+		<url-pattern>/ong/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>PersonneOng</servlet-name>
+		<url-pattern>/personne_ong</url-pattern>
+		<url-pattern>/personne_ong/*</url-pattern>
 	</servlet-mapping>
 </web-app>

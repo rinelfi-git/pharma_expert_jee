@@ -22,6 +22,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -69,7 +71,17 @@ public class SLogin extends HttpServlet {
 				response.getWriter().print(new Gson().toJson(this.matchPassword(request)));
 				break;
 			case "check_token":
-				response.getWriter().print(new Gson().toJson(this.isTokenAlive(request)));
+				try {
+					response.getWriter().print(new Gson().toJson(this.isTokenAlive(request)));
+				} catch (NoConnectionException e) {
+					e.printStackTrace();
+				} catch (SQLException throwables) {
+					throwables.printStackTrace();
+				} catch (NoSpecifiedTableException e) {
+					e.printStackTrace();
+				} catch (InvalidExpressionException e) {
+					e.printStackTrace();
+				}
 				break;
 			case "create_session":
 				try {
@@ -149,42 +161,35 @@ public class SLogin extends HttpServlet {
 		BSession<BUtilisateur> session = new BSession<>();
 		session.setId(BCrypt.hashpw(String.valueOf(currentTimestamp), BCrypt.gensalt()));
 		session.setType(BSession.SESSION);
-		session.setDateCreation(new Date(currentTimestamp));
-		session.setDateExpiration(new Date(currentTimestamp + BSession.DEFAULT_TIMER * 1000));
+		session.setDateCreation(new Timestamp(currentTimestamp));
+		session.setDateExpiration(new Timestamp(currentTimestamp + (session.getDefaultTimer() * 1000)));
 		session.setContenu(utilisateur);
 		if (this.dSession.insert(session)) transaction.commit();
 		else transaction.rollback();
 		return session;
 	}
 	
-	private boolean isTokenAlive(HttpServletRequest request) throws IOException {
+	private boolean isTokenAlive(HttpServletRequest request) throws IOException, NoConnectionException, SQLException, NoSpecifiedTableException, InvalidExpressionException {
 		HashMap post = new Gson().fromJson(request.getReader(), HashMap.class);
-		try {
-			PSession<PUtilisateur> session = this.dSession.get(post.get("token").toString());
-			if (session != null) {
+			PSession<PUtilisateur> sessionPayload = this.dSession.get(post.get("token").toString());
+			BSession<BUtilisateur> session = new BSession<>();
+			if (sessionPayload != null) {
+				session.setId(sessionPayload.getId());
+				session.setType(sessionPayload.getType());
 				long currentTimestamp = System.currentTimeMillis();
-				if (session.getDateExpiration().getTime() <= currentTimestamp) {
+				if (sessionPayload.getDateExpiration().getTime() <= currentTimestamp) {
 					Transaction transaction = new Transaction(this.daoFactory);
 					transaction.begin();
-					if (this.dSession.delete(session.getId())) transaction.commit();
+					if (this.dSession.delete(sessionPayload.getId())) transaction.commit();
 					else transaction.rollback();
 				} else {
 					Transaction transaction = new Transaction(this.daoFactory);
 					transaction.begin();
-					if (this.dSession.addTimer(session.getId())) transaction.commit();
+					if (this.dSession.addTimer(session)) transaction.commit();
 					else transaction.rollback();
 				}
-				return this.dSession.exists(session.getId());
+				return this.dSession.exists(sessionPayload.getId());
 			}
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
-		} catch (NoSpecifiedTableException e) {
-			e.printStackTrace();
-		} catch (NoConnectionException e) {
-			e.printStackTrace();
-		} catch (InvalidExpressionException e) {
-			e.printStackTrace();
-		}
 		return false;
 	}
 }

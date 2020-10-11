@@ -57,12 +57,9 @@ public class MSession implements DSession {
 	}
 	
 	@Override
-	public boolean addTimer(String id) throws SQLException, InvalidExpressionException {
+	public boolean addTimer(BSession session) throws SQLException, InvalidExpressionException {
 		QueryBuilder query = new PostgreSQL(this.dao.getConnection());
-		return query
-			       .where("id", id)
-			       .set("date_expiration", new Timestamp(System.currentTimeMillis() + BSession.DEFAULT_TIMER * 1000))
-			       .update(this.tables.getSession());
+		return query.where("id", session.getId()).set("date_expiration", new Timestamp(System.currentTimeMillis() + session.getDefaultTimer() * 1000)).update(this.tables.getSession());
 	}
 	
 	@Override

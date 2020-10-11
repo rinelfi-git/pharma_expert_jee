@@ -72,4 +72,10 @@ public class PostgreSQL implements DaoFactory {
 	
 	@Override
 	public DFournisseur getFournisseur() {return new MFournisseur(this);}
+	
+	@Override
+	public DOng getOng() {return new MOng(this);}
+	
+	@Override
+	public DPersonneOng getPersonneOng() {return new MPersonneOng(this);}
 }

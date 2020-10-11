@@ -110,10 +110,7 @@ public class MAutorisation implements DAutorisation {
 				"menu_group",
 				"lien"
 			}
-		)
-			                      .from(this.tables.getMenu())
-														.join(this.tables.getAutorisation() + ".menu", this.tables.getMenu() + ".lien")
-			                      .where("utilisateur", utilisateur)
+		).from(this.tables.getMenu()).join(this.tables.getAutorisation() + ".menu", this.tables.getMenu() + ".lien").where("utilisateur", utilisateur)
 			                      .orderBy("menu_group", OrderBy.ASC)
 			                      .get().result();
 		while (resultSet.next()) {
