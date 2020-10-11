@@ -19,18 +19,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MJournalDeSession implements DJournalDeSession {
-	private DaoFactory dao;
+	private DaoFactory daoFactory;
 	private DbTables tables;
 	
-	public MJournalDeSession(DaoFactory dao) {
-		this.dao = dao;
+	public MJournalDeSession(DaoFactory daoFactory) {
+		this.daoFactory = daoFactory;
 		this.tables = new DbTables();
 	}
 	
 	@Override
 	public ArrayList<TJournalDeSession> makeDatatable(DatatableParameter constraints) throws SQLException, NoSpecifiedTableException, NoConnectionException {
 		ArrayList<TJournalDeSession> makeDatatable = new ArrayList<>();
-		PostgreSQL query = new PostgreSQL(this.dao.getConnection());
+		
+		//query field
+		PostgreSQL queryBuilder = new PostgreSQL(this.daoFactory.getConnection());
 		String[] colonne = new String[]{
 			"to_char(date, 'DD Month YYYY HH24:MI:SS')",
 			"nom, prenom, " + this.tables.getPoste() + ".nom",
@@ -39,7 +41,7 @@ public class MJournalDeSession implements DJournalDeSession {
 		Map<String, String> transposition = new HashMap<>();
 		transposition.put(this.tables.getPoste() + ".nom", "poste");
 		transposition.put("to_char(date, 'DD Month YYYY HH24:MI:SS')", "date");
-		query
+		queryBuilder
 			.select(new String[]{
 				this.tables.getJournalDeSession() + ".id",
 				this.tables.getPersonne() + ".nom",
@@ -53,17 +55,20 @@ public class MJournalDeSession implements DJournalDeSession {
 			.join(this.tables.getPersonne() + ".id", this.tables.getPersonnel() + ".personne")
 			.join(this.tables.getPoste() + ".id", this.tables.getPersonnel() + ".poste");
 		if (constraints.getSearch() != null && constraints.getSearch().getValue() != null) {
-			query.iLike(this.tables.getPersonne() + ".nom", "%" + constraints.getSearch().getValue() + "%")
-				.orLike("prenom", "%" + constraints.getSearch().getValue() + "%")
-				.orLike(this.tables.getPoste() + ".nom", "%" + constraints.getSearch().getValue() + "%")
-				.orLike("to_char(date, 'DD Month YYYY HH24:MI:SS')", "%" + constraints.getSearch().getValue() + "%")
-				.orLike("action", "%" + constraints.getSearch().getValue() + "%");
+			queryBuilder.iLike(this.tables.getPersonne() + ".nom", "%" + constraints.getSearch().getValue() + "%")
+				.orILike("prenom", "%" + constraints.getSearch().getValue() + "%")
+				.orILike(this.tables.getPoste() + ".nom", "%" + constraints.getSearch().getValue() + "%")
+				.orILike("to_char(date, 'DD Month YYYY HH24:MI:SS')", "%" + constraints.getSearch().getValue() + "%")
+				.orILike("action", "%" + constraints.getSearch().getValue() + "%");
 		}
-		if (constraints.getOrderColumn() != -1) query.orderBy(colonne[constraints.getOrderColumn()], constraints.getOrderDirection());
-		else query.orderBy("date", OrderBy.DESC);
-		if (constraints.getLimitLength() != -1) query.limit(constraints.getLimitLength(), constraints.getLimitStart());
-		ResultSet resultSet;
-		resultSet = query.get().result();
+		if (constraints.getOrderColumn() != -1) queryBuilder.orderBy(colonne[constraints.getOrderColumn()], constraints.getOrderDirection());
+		else queryBuilder.orderBy("date", OrderBy.DESC);
+		// limite
+		if (constraints.getLimitLength() != -1) queryBuilder.limit(constraints.getLimitLength(), constraints.getLimitStart());
+		// limite
+		//query field
+		
+		ResultSet resultSet = queryBuilder.get().result();
 		while (resultSet.next()) {
 			TJournalDeSession journalDeSession = new TJournalDeSession();
 			journalDeSession.setDateHeure(resultSet.getString("date"));
@@ -71,29 +76,68 @@ public class MJournalDeSession implements DJournalDeSession {
 			journalDeSession.setTache(resultSet.getString("action"));
 			makeDatatable.add(journalDeSession);
 		}
-		if(resultSet != null) resultSet.close();
-		query.close();
+		if (resultSet != null) resultSet.close();
+		queryBuilder.close();
 		return makeDatatable;
 	}
 	
 	@Override
-	public int dataRecordsTotal() throws SQLException{
-		QueryBuilder queryBuilder = new PostgreSQL(this.dao.getConnection());
+	public int dataRecordsTotal() throws SQLException {
+		QueryBuilder queryBuilder = new PostgreSQL(this.daoFactory.getConnection());
 		int dataRecordsTotal = queryBuilder.count(this.tables.getJournalDeSession());
 		queryBuilder.close();
 		return dataRecordsTotal;
 	}
 	
 	@Override
+	public int recordFiltered(DatatableParameter constraints) throws SQLException, NoSpecifiedTableException, NoConnectionException {
+		//query field
+		PostgreSQL queryBuilder = new PostgreSQL(this.daoFactory.getConnection());
+		String[] colonne = new String[]{
+			"to_char(date, 'DD Month YYYY HH24:MI:SS')",
+			"nom, prenom, " + this.tables.getPoste() + ".nom",
+			"action"
+		};
+		Map<String, String> transposition = new HashMap<>();
+		transposition.put(this.tables.getPoste() + ".nom", "poste");
+		transposition.put("to_char(date, 'DD Month YYYY HH24:MI:SS')", "date");
+		queryBuilder
+			.select(new String[]{
+				this.tables.getJournalDeSession() + ".id",
+				this.tables.getPersonne() + ".nom",
+				"prenom",
+				"action"
+			})
+			.select(transposition)
+			.from(this.tables.getJournalDeSession())
+			.join(this.tables.getUtilisateur() + ".id", this.tables.getJournalDeSession() + ".compte_personnel")
+			.join(this.tables.getPersonnel() + ".numero", this.tables.getUtilisateur() + ".personnel")
+			.join(this.tables.getPersonne() + ".id", this.tables.getPersonnel() + ".personne")
+			.join(this.tables.getPoste() + ".id", this.tables.getPersonnel() + ".poste");
+		if (constraints.getSearch() != null && constraints.getSearch().getValue() != null) {
+			queryBuilder.iLike(this.tables.getPersonne() + ".nom", "%" + constraints.getSearch().getValue() + "%")
+				.orILike("prenom", "%" + constraints.getSearch().getValue() + "%")
+				.orILike(this.tables.getPoste() + ".nom", "%" + constraints.getSearch().getValue() + "%")
+				.orILike("to_char(date, 'DD Month YYYY HH24:MI:SS')", "%" + constraints.getSearch().getValue() + "%")
+				.orILike("action", "%" + constraints.getSearch().getValue() + "%");
+		}
+		if (constraints.getOrderColumn() != -1) queryBuilder.orderBy(colonne[constraints.getOrderColumn()], constraints.getOrderDirection());
+		else queryBuilder.orderBy("date", OrderBy.DESC);
+		//query field
+		int recordFiltered = queryBuilder.get().rowCount();
+		queryBuilder.close();
+		return recordFiltered;
+	}
+	
+	@Override
 	public boolean insert(BJournalDeSession journal) throws Exception {
-		QueryBuilder queryBuilder = new PostgreSQL(this.dao.getConnection());
-		return queryBuilder.set("compte_personnel", journal.getComptePersonnel())
-			.set("action", journal.getAction()).insert(this.tables.getJournalDeSession());
+		QueryBuilder queryBuilder = new PostgreSQL(this.daoFactory.getConnection());
+		return queryBuilder.set("compte_personnel", journal.getComptePersonnel()).set("action", journal.getAction()).insert(this.tables.getJournalDeSession());
 	}
 	
 	@Override
 	public boolean delete() throws Exception {
-		QueryBuilder queryBuilder = new PostgreSQL(this.dao.getConnection());
+		QueryBuilder queryBuilder = new PostgreSQL(this.daoFactory.getConnection());
 		return queryBuilder.delete(this.tables.getJournalDeSession());
 	}
 }

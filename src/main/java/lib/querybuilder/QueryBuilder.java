@@ -333,7 +333,15 @@ public abstract class QueryBuilder {
 		return this.preparedStatement.executeQuery();
 	}
 	
-	public int rowCount(String table) throws SQLException, NoSpecifiedTableException, NoConnectionException {
+	public int rowCount() throws SQLException {
+		int rowCount = 0;
+		ResultSet resultSet = this.preparedStatement.executeQuery();
+		while(resultSet.next()) rowCount++;
+		resultSet.close();
+		return rowCount;
+	}
+	
+	public int rowCount(String table) throws SQLException {
 		this.query = "SELECT COUNT(*) as count FROM " + table;
 		this.compileClauses();
 		this.preparedStatement = this.connection.prepareStatement(this.query);
@@ -424,6 +432,7 @@ public abstract class QueryBuilder {
 		this.compileSelect();
 		this.preparedStatement = connection.prepareStatement(this.query);
 		this.prepareClauses();
+		System.out.println(preparedStatement);
 		return this;
 	}
 	

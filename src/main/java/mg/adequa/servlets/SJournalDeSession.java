@@ -1,6 +1,7 @@
 package mg.adequa.servlets;
 
 import com.google.gson.Gson;
+import lib.querybuilder.QueryBuilder;
 import lib.querybuilder.exceptions.NoConnectionException;
 import lib.querybuilder.exceptions.NoSpecifiedTableException;
 import mg.adequa.beans.BJournalDeSession;
@@ -23,13 +24,13 @@ import java.util.ArrayList;
 
 public class SJournalDeSession extends HttpServlet {
 	private DaoFactory dao;
-	private DJournalDeSession dJournalDeSession;
+	private DJournalDeSession journalDeSessionDao;
 	
 	@Override
 	public void init() throws ServletException {
 		super.init();
 		this.dao = PostgreSQL.getInstance();
-		this.dJournalDeSession = this.dao.getJournalDeSession();
+		this.journalDeSessionDao = this.dao.getJournalDeSession();
 	}
 	
 	@Override
@@ -111,7 +112,7 @@ public class SJournalDeSession extends HttpServlet {
 		constraints.setOrderDirection(request.getParameter("order[0][dir]"));
 		constraints.setSearch(new DatatableSearch(request.getParameter("search[value]"), Boolean.valueOf(request.getParameter("search[regex]"))));
 		
-		ArrayList<TJournalDeSession> incomingData = dJournalDeSession.makeDatatable(constraints);
+		ArrayList<TJournalDeSession> incomingData = journalDeSessionDao.makeDatatable(constraints);
 		ArrayList<String[]> data = new ArrayList<>();
 		for (TJournalDeSession retrievedData : incomingData) {
 			data.add(new String[]{
@@ -121,8 +122,8 @@ public class SJournalDeSession extends HttpServlet {
 			});
 		}
 		presentation.setDraw(constraints.getDraw());
-		presentation.setRecordsTotal(this.dJournalDeSession.dataRecordsTotal());
-		presentation.setRecordsFiltered(data.size());
+		presentation.setRecordsTotal(this.journalDeSessionDao.dataRecordsTotal());
+		presentation.setRecordsFiltered(this.journalDeSessionDao.recordFiltered(constraints));
 		presentation.setData(data);
 		return presentation;
 	}
@@ -135,7 +136,7 @@ public class SJournalDeSession extends HttpServlet {
 		BJournalDeSession journalDeSession = new BJournalDeSession();
 		journalDeSession.setComptePersonnel(pJournalDeSession.getComptePersonnel());
 		journalDeSession.setAction(pJournalDeSession.getAction());
-		if (this.dJournalDeSession.insert(journalDeSession)) transaction.commit();
+		if (this.journalDeSessionDao.insert(journalDeSession)) transaction.commit();
 		else {
 			transaction.rollback();
 			insert.setRequestState(false).appendTable("journal_de_session");
@@ -147,7 +148,7 @@ public class SJournalDeSession extends HttpServlet {
 		MethodResponse delete = new MethodResponse();
 		Transaction transaction = new Transaction(this.dao);
 		transaction.begin();
-		if (this.dJournalDeSession.delete()) transaction.commit();
+		if (this.journalDeSessionDao.delete()) transaction.commit();
 		else {
 			transaction.rollback();
 			delete.setRequestState(false).appendTable("journal_de_session");
